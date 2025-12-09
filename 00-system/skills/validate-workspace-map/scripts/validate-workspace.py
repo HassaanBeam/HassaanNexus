@@ -85,32 +85,43 @@ def parse_workspace_map(map_path: Path) -> Dict:
     folders = set()
     descriptions = {}
 
-    # Method 1: Find folders in tree structure (├──, └──)
-    tree_pattern = r'[├└]──\s+(\w[\w-]*/)'
-    for match in re.finditer(tree_pattern, content):
-        folder_name = match.group(1)
-        folders.add(folder_name)
+    # Extract ONLY the "Your Workspace Structure" section
+    structure_match = re.search(
+        r'## Your Workspace Structure\s*\n```(.*?)```',
+        content,
+        re.DOTALL
+    )
 
-    # Method 2: Find folder headings (### FolderName/)
-    heading_pattern = r'###\s+(\w[\w-]*/)'
-    for match in re.finditer(heading_pattern, content):
-        folder_name = match.group(1)
-        folders.add(folder_name)
+    if structure_match:
+        structure_section = structure_match.group(1)
 
-        # Extract description (next line after heading)
-        start_pos = match.end()
-        next_lines = content[start_pos:start_pos+500]
-        desc_match = re.search(r'\n([^\n#]+)', next_lines)
-        if desc_match:
-            descriptions[folder_name] = desc_match.group(1).strip()
-
-    # Method 3: Find any folder mentions with trailing slash
-    mention_pattern = r'\b(\w[\w-]*/)\b'
-    for match in re.finditer(mention_pattern, content):
-        folder_name = match.group(1)
-        # Only add if it looks like a folder name (not a date or other pattern)
-        if not re.match(r'\d+/', folder_name):  # Skip "2024/" etc
+        # Method 1: Find folders in tree structure (├──, └──)
+        tree_pattern = r'[├└]──\s+(\w[\w-]*/)'
+        for match in re.finditer(tree_pattern, structure_section):
+            folder_name = match.group(1)
             folders.add(folder_name)
+
+    # Method 2: Find folder headings in "Folder Descriptions" section ONLY
+    # This prevents false positives from example text
+    desc_section_match = re.search(
+        r'## Folder Descriptions(.*?)(?=^##|\Z)',
+        content,
+        re.DOTALL | re.MULTILINE
+    )
+
+    if desc_section_match:
+        desc_section = desc_section_match.group(1)
+        heading_pattern = r'###\s+\*\*(\w[\w-]*/)\*\*|###\s+(\w[\w-]*/)'
+        for match in re.finditer(heading_pattern, desc_section):
+            folder_name = match.group(1) or match.group(2)
+            folders.add(folder_name)
+
+            # Extract description (next line after heading)
+            start_pos = match.end()
+            next_lines = desc_section[start_pos:start_pos+500]
+            desc_match = re.search(r'\n([^\n#]+)', next_lines)
+            if desc_match:
+                descriptions[folder_name] = desc_match.group(1).strip()
 
     return {
         "folders": sorted(list(folders)),
