@@ -92,6 +92,33 @@ This creates transparency and allows progress tracking.
 
 ---
 
+### Step N-1: Share to Team (Optional but Recommended)
+
+After your skill is ready, consider sharing it with the team via Notion:
+
+**Benefits of sharing:**
+- Team discovers and reuses your work
+- Collaborative improvement (others can update)
+- Centralized skill library for the company
+
+**To share:**
+Say "export this skill to Notion" or use the `export-skill-to-notion` skill.
+
+**What happens:**
+1. AI packages the skill (or uses existing .skill file)
+2. AI infers Team (General/Solutions/Engineering/Sales)
+3. You confirm metadata before pushing
+4. Skill appears in "Beam Nexus Skills" database with full .skill file attached
+5. Teammates can query and import with `query-notion-db` and `import-skill-to-nexus`
+
+**Skip this if:**
+- Skill is personal/experimental/not ready to share
+- Contains sensitive or client-specific info
+
+**Mark this todo complete after deciding (share or skip).**
+
+---
+
 ### Final Step: Close Session
 
 Once the workflow is complete, **automatically trigger the close-session skill**:

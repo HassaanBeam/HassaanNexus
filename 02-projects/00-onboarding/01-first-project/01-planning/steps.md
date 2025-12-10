@@ -109,6 +109,38 @@ python nexus-loader.py --project 01
   - I confirm: "✅ Workspace created with [list folders]"
   - Time: 30 seconds
 
+- [ ] **Task 2.4.5**: Update workspace-map.md with actual structure (MANDATORY)
+  - **CRITICAL**: This task is REQUIRED - workspace map must always be updated
+  - I read: 04-workspace/workspace-map.md (template with {{VARIABLES}})
+  - I expand template variables:
+    - {{LAST_UPDATED_DATE}} → Today's date (YYYY-MM-DD format)
+    - {{WORKSPACE_TREE}} → Actual folder tree structure (3-7 folders created)
+    - {{FOLDER_DESCRIPTIONS}} → For each folder: name, purpose, contains, when-to-use
+    - {{NAVIGATION_RULES}} → AI routing rules based on user's domain/work
+  - Example expansion for consultant:
+    ```
+    {{WORKSPACE_TREE}}:
+    ├── clients/              # Client project files
+    ├── templates/            # Reusable proposals, contracts
+    ├── research/             # Industry research, insights
+    └── admin/                # Business operations
+
+    {{FOLDER_DESCRIPTIONS}}:
+    ### **clients/**
+    **Purpose**: Organize client project files and deliverables
+    **Contains**: Client folders, project docs, deliverables
+    **When to use**: Any client-specific work
+
+    {{NAVIGATION_RULES}}:
+    - "client work" → clients/
+    - "proposal" or "contract" → templates/
+    - "research" → research/
+    ```
+  - I save: Updated workspace-map.md with all variables expanded
+  - I validate: No {{VARIABLES}} remain in file
+  - I confirm: "✅ Workspace map updated - AI can now navigate your folders"
+  - Time: 45 seconds
+
 - [ ] **Task 2.5**: File structure walkthrough (NEW - ORIENTATION)
   - Say: "Let me show you how to navigate your new workspace."
   - Step 1: Show folder tree
@@ -320,6 +352,8 @@ python nexus-loader.py --project 01
 - [ ] I loaded goals.md + roadmap.md successfully
 - [ ] I created 04-workspace/ with 3-7 folders
 - [ ] Folders match your goals/domain
+- [ ] **MANDATORY**: I updated workspace-map.md with actual folder structure (Task 2.4.5)
+- [ ] **MANDATORY**: All {{VARIABLES}} in workspace-map.md are expanded
 - [ ] I designed workspace BEFORE explaining framework
 - [ ] You understand Projects vs Skills framework (grounded in your workspace)
 - [ ] You understand just-in-time organization

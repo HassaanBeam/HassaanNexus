@@ -26,14 +26,18 @@ This is an atomic building block that takes skill content (from Notion or other 
 
 Before ANY import operation, verify Notion setup:
 
+```bash
+python ../../notion-master/scripts/check_notion_config.py
 ```
-🔍 Pre-flight check...
 
-1. API Key:     [.env → NOTION_API_KEY]
-2. Database ID: [.env → NOTION_SKILLS_DB_ID]
+**If configuration missing:**
+- Option A: Run setup wizard: `python ../../notion-master/scripts/setup_notion.py`
+- Option B: See [../../notion-master/references/setup-guide.md](../../notion-master/references/setup-guide.md)
 
-❌ Missing config? → Run "First-Time Setup" (see export-skill-to-notion)
-✅ All configured? → Proceed with import
+**Expected output if configured:**
+```
+✅ ALL CHECKS PASSED
+You're ready to use Notion skills
 ```
 
 ### Content Validation
@@ -114,23 +118,19 @@ What would you like to do?
 
 ### Step 3: Download Skill File
 
-**Get file URL from Notion page:**
+**Use the download script:**
 ```bash
-curl -s "https://api.notion.com/v1/pages/{page_id}" \
-  -H "Authorization: Bearer ${NOTION_API_KEY}" \
-  -H "Notion-Version: 2022-06-28"
+python ../../notion-master/scripts/download_skill.py <page_id> --output-dir /tmp
 ```
 
-**Extract file URL from response:**
-```python
-file_url = page["properties"]["Skill"]["files"][0]["file"]["url"]
-```
+**Manual download (if needed):**
 
-**Download the file:**
-```bash
-# Get the filename from the response (usually {skill-name}-SKILL.txt)
-curl -L -o /tmp/{filename} "{file_url}"
-```
+See [../../notion-master/references/api-reference.md](../../notion-master/references/api-reference.md) for file download API patterns.
+
+**The script handles:**
+1. Fetching page properties
+2. Extracting file URL from Skill property
+3. Downloading the file to specified directory
 
 ### Step 4: Extract and Create Skill
 
@@ -243,12 +243,17 @@ AI: ✅ Overwrote beam-list-agents with version from Notion
 
 ## Error Handling
 
+**Common errors:**
+
 | Error | Cause | Solution |
 |-------|-------|----------|
 | No file attached | Notion page has no Skill file | Ask user to attach file in Notion first |
 | Invalid SKILL.md | Missing YAML header | Create minimal header from Notion properties |
 | Download failed | Expired URL or network issue | Retry with fresh page query |
 | Extract failed | Corrupt zip or wrong format | Check file format, try manual download |
+
+**For detailed troubleshooting:**
+- See [../../notion-master/references/error-handling.md](../../notion-master/references/error-handling.md)
 
 ### Auto-Recovery: Create SKILL.md from Notion Properties
 

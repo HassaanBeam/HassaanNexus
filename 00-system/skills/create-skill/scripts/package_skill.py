@@ -82,6 +82,37 @@ def package_skill(skill_path, output_dir=None):
                     print(f"  Added: {arcname}")
 
         print(f"\n[OK] Successfully packaged skill to: {skill_filename}")
+
+        # Check Notion export readiness
+        try:
+            from validate_for_notion import validate_for_notion
+            print("\n[CHECK] Checking Notion export readiness...")
+            is_ready, warnings, suggestions = validate_for_notion(skill_path)
+
+            if warnings:
+                print("\n⚠️  Notion Export Warnings:")
+                for w in warnings:
+                    print(f"  {w}")
+
+            if suggestions:
+                print("")
+                for s in suggestions:
+                    print(f"  {s}")
+
+            print("\n" + "="*60)
+            print("📤 SHARE WITH TEAM")
+            print("="*60)
+            print("\nWould you like to export this skill to Notion?")
+            print("  → Makes skill discoverable by your team")
+            print("  → Enables collaborative improvement")
+            print("  → Recommended for production-ready skills")
+            print("\nTo export, say: 'export this skill to Notion'")
+            print("="*60)
+
+        except ImportError:
+            # validate_for_notion not available, skip check
+            pass
+
         return skill_filename
 
     except Exception as e:

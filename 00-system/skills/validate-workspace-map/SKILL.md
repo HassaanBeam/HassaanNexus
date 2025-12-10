@@ -1,232 +1,151 @@
 ---
 name: validate-workspace-map
-description: Validate workspace-map.md accuracy against actual 04-workspace/ structure
-trigger: User says "validate workspace map", "check workspace map", or from close-session
+description: Validate workspace-map.md accuracy against actual 04-workspace/ structure (3 levels deep). Load when user says "validate workspace map", "check workspace map", or from close-session. Ensures deep structure validation with comprehensive documentation.
 ---
 
 # Validate Workspace Map
 
-Ensure workspace-map.md stays synchronized with actual 04-workspace/ folder structure.
+Ensure workspace-map.md stays synchronized with actual 04-workspace/ folder structure up to 3 levels deep.
 
 ## Purpose
 
-The workspace-map.md file helps AI understand your custom folder organization in 04-workspace/. When it becomes stale (folders added/removed but not documented), AI navigation becomes unreliable.
+The workspace-map.md file helps AI understand your custom folder organization in 04-workspace/. When it becomes stale (folders added/removed/reorganized but not documented), AI navigation becomes unreliable.
 
 This skill:
-- Compares actual folders with documented folders
-- Identifies mismatches (missing or extra folders)
-- Guides you through updates
-- Validates accuracy
+- Scans workspace structure **3 levels deep** (root → level 1 → level 2 → level 3)
+- Compares actual folders with documented folders at all levels
+- Identifies mismatches (missing or extra folders, incorrect nesting)
+- Provides detailed structure report with depth indicators
+- Guides you through comprehensive updates
+- Validates accuracy after changes
+
+**Improvements over v1**:
+- ✅ **3-layer deep scanning** (vs 1 layer)
+- ✅ **Hierarchical validation** (parent-child relationships)
+- ✅ **File detection** (warns about files that should be documented)
+- ✅ **Depth indicators** in reports (├──, │  ├──, │  │  ├──)
+- ✅ **Comprehensive documentation** prompts for nested structures
 
 **When to use**:
 - You reorganized 04-workspace/ folders
 - You notice AI can't find your folders
 - During onboarding (Project 03, Task 5.6)
-- As part of regular maintenance
+- As part of regular maintenance (via close-session)
 
 ---
 
 ## Workflow
 
-### Step 1: Scan Actual Workspace Structure
+### Step 1: Scan Actual Workspace Structure (3 Levels Deep)
 
-**List all folders in 04-workspace/**:
+**Scan workspace recursively** (up to 3 levels):
 ```bash
-ls -d 04-workspace/*/
+find 04-workspace -maxdepth 3 -type d | sort
 ```
 
-**Store**: ACTUAL_FOLDERS = ["Clients/", "Templates/", "Research/"]
+**Parse into hierarchical structure**:
+```
+04-workspace/
+├── input/
+│   ├── skills/
+│   │   ├── examples/
+│   │   └── templates/
+│   └── docs/
+├── clients/
+│   ├── acme/
+│   │   ├── deliverables/
+│   │   └── notes/
+│   └── globex/
+└── templates/
+```
+
+**Also scan for important files** (for documentation warnings):
+```bash
+find 04-workspace -maxdepth 3 -type f -name "*.md" -o -name "README*" | sort
+```
+
+**Store**:
+- ACTUAL_STRUCTURE (tree with 3 levels)
+- IMPORTANT_FILES (markdown/README files)
 
 **Exclude**:
-- Hidden folders (starting with .)
-- Files (only directories)
+- Hidden folders (., .., .git, .DS_Store)
 - workspace-map.md itself
+- System folders
 
-**Time**: 5 seconds
+**Time**: 10 seconds
 
 ---
 
-### Step 2: Parse workspace-map.md
+### Step 2: Parse workspace-map.md (3 Levels Deep)
 
 **Read**: 04-workspace/workspace-map.md
 
-**Extract documented folders**:
-- Look in "Your Workspace Structure" section
-- Look in "Folder Descriptions" section
-- Parse folder names from tree structure and descriptions
+**Extract documented structure**:
+1. **From tree structure** (in "Your Workspace Structure" section):
+   - Parse lines with `├──`, `│  ├──`, `│  │  ├──` (depth indicators)
+   - Build hierarchical tree from indentation
+   - Capture folder descriptions (inline comments with `#`)
 
-**Store**: MAPPED_FOLDERS = ["Clients/", "Templates/", "Research/"]
+2. **From folder descriptions** (in "Folder Descriptions" section):
+   - Parse `###` headers (level 1 folders)
+   - Parse `####` headers (level 2 folders)
+   - Parse `#####` headers (level 3 folders)
+   - Extract purpose, contents, and notes
 
-**Time**: 5 seconds
+3. **Cross-reference** both sections for completeness
+
+**Store**:
+- MAPPED_STRUCTURE (tree with 3 levels)
+- MAPPED_DESCRIPTIONS (folder purposes and details)
+
+**Time**: 10 seconds
 
 ---
 
-### Step 3: Compare Structures
+### Step 3: Deep Comparison (Hierarchical)
 
-**Compare**: ACTUAL_FOLDERS vs MAPPED_FOLDERS
+**Compare at each level**:
+
+**Level 1** (04-workspace/ direct children):
+- Missing from map
+- Extra in map (stale)
+- Matches
+
+**Level 2** (within each level 1 folder):
+- For each level 1 folder, compare children
+- Track parent-child relationships
+- Identify orphaned level 2 folders (parent missing)
+
+**Level 3** (within each level 2 folder):
+- For each level 2 folder, compare children
+- Validate full path accuracy
+- Identify deeply nested mismatches
 
 **Identify**:
-- **Missing from map**: Folders that exist but aren't documented
-- **Extra in map**: Folders documented but don't exist (stale entries)
-- **Perfect match**: All folders accounted for
-
-**Time**: 2 seconds
-
----
-
-### Step 4: Report Results
-
-#### If Perfect Match ✅
-
-```
-✅ workspace-map.md is accurate!
-
-All 04-workspace/ folders are properly documented:
-• Clients/
-• Templates/
-• Research/
-
-No action needed.
-```
-
-**Time**: 5 seconds
-**Exit**: Skill complete
-
----
-
-#### If Mismatches Found ⚠️
-
-```
-⚠️ workspace-map.md needs updating
-
-Discrepancies found:
-
-Missing from map (exist but not documented):
-• Projects/
-• Notes/
-
-Extra in map (documented but don't exist):
-• OldClients/ (stale entry)
-
-Would you like me to help update workspace-map.md now?
-
-Options:
-• "yes" - Update now (interactive, 2-3 min)
-• "no" - Skip for now
-• "later" - Remind me next session
-```
-
-**Wait for user response**
-
-**Time**: 10 seconds
-
----
-
-### Step 5: Update workspace-map.md (If user says "yes")
-
-#### For each MISSING folder:
-
-```
-I see you have a "Projects/" folder in 04-workspace/.
-
-What should I note about this folder? (1-2 sentences)
-> [User describes purpose]
-```
-
-**Capture**: Folder description
-**Time**: 30 seconds per folder
-
----
-
-#### For each EXTRA folder:
-
-```
-"OldClients/" is documented in workspace-map.md but doesn't exist anymore.
-
-I'll remove it from the map.
-```
-
-**Action**: Remove stale entry
-**Time**: 5 seconds per folder
-
----
-
-#### Update the file:
-
-**1. Update "Your Workspace Structure" section**:
-```markdown
-04-workspace/
-├── Clients/
-├── Templates/
-├── Research/
-├── Projects/        # NEW
-└── Notes/           # NEW
-```
-
-**2. Add "Folder Descriptions"**:
-```markdown
-### Projects/
-[User-provided description]
-- [Additional details if provided]
-
-### Notes/
-[User-provided description]
-- [Additional details if provided]
-```
-
-**3. Remove stale entries**:
-- Delete entire section for OldClients/
-
-**4. Update timestamp**:
-```markdown
-**Last Updated**: 2024-03-15 14:30:00
-```
-
-**Time**: 30 seconds
-
----
-
-#### Validate Update:
-
-**Re-read**: workspace-map.md
-**Re-scan**: 04-workspace/
-**Re-compare**: Verify perfect match
-
-**Display**:
-```
-✅ workspace-map.md updated and validated!
-
-Updated sections:
-• Added: Projects/, Notes/
-• Removed: OldClients/ (stale)
-
-workspace-map.md now accurately reflects your 04-workspace/ structure.
-```
-
-**Time**: 10 seconds
-
----
-
-### If User Says "no" or "later":
-
-```
-Noted! workspace-map.md needs updating.
-
-To update later, say:
-• "validate workspace map"
-• Or run this skill manually
-
-Remember: Accurate workspace-map.md helps me navigate your folders correctly.
-```
+- **Missing folders** (at each level)
+- **Extra folders** (stale documentation at each level)
+- **Hierarchy issues** (documented under wrong parent)
+- **Undocumented files** (important .md files with no description)
+- **Perfect match** (all levels accurate)
 
 **Time**: 5 seconds
 
 ---
 
-## Total Time
+### Step 4: Generate Comprehensive Report
 
-- **Perfect match**: ~12 seconds
-- **With updates**: 2-4 minutes (depends on number of folders)
+Show detailed validation results at all 3 levels with clear depth indicators and actionable feedback.
+
+---
+
+## Total Time Estimates
+
+**Scenarios**:
+- **Perfect match** (3 levels): ~20 seconds
+- **Minor updates** (1-2 folders): 2-3 minutes  
+- **Major reorganization** (5+ folders): 5-7 minutes
+- **Deep restructure** (many level 2-3 changes): 8-10 minutes
 
 ---
 
@@ -234,110 +153,8 @@ Remember: Accurate workspace-map.md helps me navigate your folders correctly.
 
 ### close-session Integration
 
-This skill is automatically triggered during close-session (Step 5b). See:
-- [close-session workflow.md](../close-session/references/workflow.md#step-5b-validate-workspace-mapmd-new---auto-validate)
-
-**Automatic behavior**:
-- close-session calls this skill
-- If perfect match: Silent (no output)
-- If mismatches: Prompts user to update
+This skill is automatically triggered during close-session. If mismatches found, prompts user to update.
 
 ---
 
-## Technical Notes
-
-### Folder Detection
-
-**Include**:
-- All directories in 04-workspace/
-- Visible folders only
-
-**Exclude**:
-- Hidden folders (., .., .git, etc.)
-- Files (workspace-map.md, README.md, etc.)
-- System folders
-
-### Parsing workspace-map.md
-
-**Look for folder mentions in**:
-1. Tree structure (lines with `├──`, `└──`)
-2. Folder descriptions (lines starting with `###`)
-3. Any section mentioning folder names with `/` suffix
-
-**Edge cases**:
-- Handle empty workspace (no folders)
-- Handle missing workspace-map.md (create template)
-- Handle malformed workspace-map.md (rebuild)
-
-### Error Handling
-
-**Missing workspace-map.md**:
-```
-⚠️ workspace-map.md not found!
-
-Creating template workspace-map.md...
-[Create from template]
-✅ Created! Now documenting your existing folders...
-```
-
-**Empty 04-workspace/**:
-```
-✅ 04-workspace/ is empty
-
-No folders to validate. workspace-map.md is accurate.
-```
-
----
-
-## Best Practices
-
-**For Users**:
-- Run this after reorganizing folders
-- Keep descriptions brief (1-2 sentences)
-- Update immediately (while folder purpose is fresh)
-
-**For AI**:
-- Always validate before claiming "workspace organized"
-- If map is stale, fix it immediately
-- Don't assume folder structure—verify
-
----
-
-## Example Session
-
-```
-You: "validate workspace map"
-
-AI: Validating workspace-map.md...
-
-⚠️ workspace-map.md needs updating
-
-Discrepancies found:
-
-Missing from map (exist but not documented):
-• Projects/
-
-Extra in map (documented but don't exist):
-• OldClients/
-
-Would you like me to help update workspace-map.md now?
-> yes
-
-I see you have a "Projects/" folder in 04-workspace/.
-What should I note about this folder?
-> Active client projects and deliverables
-
-"OldClients/" is documented but doesn't exist. I'll remove it.
-
-✅ workspace-map.md updated and validated!
-
-Updated sections:
-• Added: Projects/ (Active client projects and deliverables)
-• Removed: OldClients/ (stale)
-
-workspace-map.md now accurately reflects your 04-workspace/ structure.
-```
-
----
-
-**Remember**: Accurate workspace-map.md = Reliable AI navigation!
+**Remember**: Deep 3-level validation = Comprehensive AI navigation!

@@ -433,7 +433,91 @@ If validation fails, the script will report the errors and exit without creating
 
 If using Nexus-v3 framework: Skills placed in `03-skills/` (user) or `00-system/skills/` (system) auto-integrate. The framework's loader scans YAML metadata on startup—no manual registration needed. Skills work standalone or in Nexus without modification.
 
+**After successful packaging**, the packaging script will check if the skill is ready for Notion export and display:
+
+```
+📤 SHARE WITH TEAM
+Would you like to export this skill to Notion?
+  → Makes skill discoverable by your team
+  → Enables collaborative improvement
+  → Recommended for production-ready skills
+
+To export, say: 'export this skill to Notion'
+```
+
 **Mark this todo complete before proceeding.**
+
+### Step 6.5: Share to Team (Optional but Recommended)
+
+After packaging your skill, consider sharing it with the team via Notion. This makes your work discoverable and enables collaborative improvement.
+
+**Benefits of sharing:**
+- Team members can discover and reuse your work
+- Others can collaboratively improve the skill
+- Builds a centralized company skills library
+- Skills are stored with full .skill file (scripts, references, assets included)
+
+**To share:**
+
+Simply say "export this skill to Notion" or use the `export-skill-to-notion` skill directly.
+
+**What happens during export:**
+
+1. **AI packages the skill** (if not already packaged) into a .skill file
+2. **AI infers the Team** (General/Solutions/Engineering/Sales) based on skill content
+3. **You confirm metadata** before pushing:
+   - Skill Name
+   - Description
+   - Purpose
+   - Team assignment
+   - Integration tags
+   - Owner (from user-config.yaml)
+4. **Skill uploads to Notion** database with full .skill file attached (not just SKILL.md)
+5. **Teammates can discover it** using `query-notion-db` and import using `import-skill-to-nexus`
+
+**The workflow looks like:**
+```
+You: "Export this skill to Notion"
+
+AI: Based on the skill's purpose, I suggest Team: "General"
+    (This is a utility skill for [description])
+    Is this correct? (yes/no)
+
+You: "yes"
+
+AI: 📤 Ready to push skill to Notion:
+    Skill Name: my-skill
+    Team: General
+    Owner: Your Name
+    File: my-skill.skill (includes scripts/, references/, assets/)
+
+    Push to Notion? (yes/no)
+
+You: "yes"
+
+AI: ✅ Skill pushed to Notion!
+    🔗 https://notion.so/...
+```
+
+**Skip this step if:**
+- Skill is personal/experimental/not ready to share
+- Contains sensitive or client-specific information
+- Still in active development phase
+
+**Notion export validation:**
+
+The packaging script automatically checks Notion-readiness:
+- ✅ Purpose section exists (used for Notion Purpose field)
+- ✅ Description is specific (not generic)
+- ✅ Integration tags detected (helps with Team inference)
+- ⚠️ Warnings about missing elements (won't block export)
+
+**For more details:**
+- See [export-skill-to-notion](../export-skill-to-notion/SKILL.md) for export workflow
+- See [query-notion-db](../query-notion-db/SKILL.md) for browsing shared skills
+- See [import-skill-to-nexus](../import-skill-to-nexus/SKILL.md) for importing teammate skills
+
+**Mark this todo complete after deciding (share or skip).**
 
 ### Step 7: Iterate
 

@@ -475,6 +475,7 @@ User Skills:
 System Skills:
 • create-project → "create new project for [goal]"
 • create-skill → "create skill for [workflow]"
+• validate-workspace-map → "validate workspace map" (3-level deep scan)
 • close-session → "close session" or "done"
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -483,7 +484,7 @@ System Skills:
 **Formatting Rules:**
 - Two sections: "User Skills" (03-skills/) and "System Skills" (system)
 - User skills: max 6 shown (if more: "...and X more")
-- System skills: create-project, create-skill, close-session only
+- System skills: create-project, create-skill, validate-workspace-map, close-session
 - Compact format: skill-name → "trigger example"
 - No verbose descriptions
 
@@ -649,6 +650,7 @@ Or just tell me naturally what you want to work on.
 **Items NOW SHOWN** (core workflow commands):
 - ✅ `create-project` - Essential for starting new work
 - ✅ `create-skill` - Essential for workflow automation
+- ✅ `validate-workspace-map` - Keep AI navigation accurate (3-level validation)
 - ✅ `close-session` - Essential session management
 
 **Rationale**: Show essential commands users need regularly. Hide maintenance/advanced features.

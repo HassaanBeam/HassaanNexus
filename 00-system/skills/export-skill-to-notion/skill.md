@@ -45,15 +45,18 @@ This skill takes a local skill from `03-skills/` and creates a new entry in the 
 
 Before ANY export operation, verify Notion setup:
 
+```bash
+python ../../notion-master/scripts/check_notion_config.py
 ```
-🔍 Pre-flight check...
 
-1. API Key:     [.env → NOTION_API_KEY]
-2. Database ID: [.env → NOTION_SKILLS_DB_ID]
-3. User ID:     [user-config.yaml → notion_user_id]
+**If configuration missing:**
+- Option A: Run setup wizard: `python ../../notion-master/scripts/setup_notion.py`
+- Option B: See [../../notion-master/references/setup-guide.md](../../notion-master/references/setup-guide.md)
 
-❌ Missing config? → Run "First-Time Setup" below
-✅ All configured? → Proceed with export
+**Expected output if configured:**
+```
+✅ ALL CHECKS PASSED
+You're ready to use Notion skills
 ```
 
 ### Smart Duplicate Detection
@@ -98,57 +101,6 @@ Proceed with update? (yes/no)
 | Delete any skill | ❌ Blocked | Must use Notion UI |
 | Bulk push | ❌ Blocked | One at a time only |
 
----
-
-## First-Time Setup
-
-**If Notion config is missing, guide the user:**
-
-```
-🔧 Notion Setup Required
-
-I'll help you set up Notion integration:
-
-Step 1: Get API Key (choose one option)
-   Option A: Use the shared team API key
-      → Ask your team admin for the NOTION_API_KEY
-      → This is the simplest option for most users
-
-   Option B: Create your own (admin only)
-      → Go to https://www.notion.so/my-integrations
-      → Click "New integration" → Name: "Nexus"
-      → Copy the "Internal Integration Secret"
-      → Note: Only workspace admins can create integrations
-
-Step 2: Add to .env
-   → I'll create/update your .env file with:
-     NOTION_API_KEY=your-key-here
-     NOTION_SKILLS_DB_ID=2bc2cadf-bbbc-80be-af8a-d45dfc8dfa2e
-
-Step 3: Connect Database (if using your own key)
-   → Open "Beam Nexus Skills" database in Notion
-   → Click "..." → "Connections" → Add your integration
-   → Skip this if using the shared team key (already connected)
-
-Step 4: Get Your User ID
-   → I'll query Notion API for your user info
-   → Save to user-config.yaml (for Owner tracking)
-
-Ready? (yes/no)
-```
-
-**Note on shared API keys**: Using a shared team key is fine because ownership is tracked via the `notion_user_id` in user-config.yaml, not the API key. Each user's skills will show their name as Owner.
-
-### Validate Setup
-```bash
-# Test connection
-curl -s "https://api.notion.com/v1/users/me" \
-  -H "Authorization: Bearer ${NOTION_API_KEY}" \
-  -H "Notion-Version: 2022-06-28"
-
-# 401 = Invalid key
-# 200 = Success, save user info
-```
 
 ---
 
@@ -213,53 +165,31 @@ Do you want to push this to Notion? (yes/no/edit)
 
 **WAIT FOR USER CONFIRMATION BEFORE PROCEEDING**
 
-### Step 5: Create Notion Entry with File (3-step process)
+### Step 5: Create Notion Entry with File
 
-**Step 5a: Create File Upload Object**
+**Use the upload script:**
 ```bash
-curl -s -X POST "https://api.notion.com/v1/file_uploads" \
-  -H "Authorization: Bearer ${NOTION_API_KEY}" \
-  -H "Content-Type: application/json" \
-  -H "Notion-Version: 2022-06-28" \
-  -d '{}'
+python ../../notion-master/scripts/upload_skill.py 03-skills/{skill-name} --team General
 ```
-Save the returned `id` (e.g., `abc123-file-upload-id`).
 
-**Step 5b: Upload the File Content**
+**Optional parameters:**
 ```bash
-curl -s -X POST "https://api.notion.com/v1/file_uploads/{file_upload_id}/send" \
-  -H "Authorization: Bearer ${NOTION_API_KEY}" \
-  -H "Notion-Version: 2022-06-28" \
-  -F "file=@/tmp/{skill-name}-SKILL.txt"
-```
-Wait for `status: "uploaded"` in response.
+# With integrations
+python ../../notion-master/scripts/upload_skill.py 03-skills/my-skill --team General --integration "Beam AI,Linear"
 
-**Step 5c: Create Page with File Attachment**
-```bash
-curl -s -X POST "https://api.notion.com/v1/pages" \
-  -H "Authorization: Bearer ${NOTION_API_KEY}" \
-  -H "Content-Type: application/json" \
-  -H "Notion-Version: 2022-06-28" \
-  -d '{
-    "parent": {"database_id": "NOTION_SKILLS_DB_ID"},
-    "properties": {
-      "Skill Name": {"title": [{"text": {"content": "skill-name"}}]},
-      "Description": {"rich_text": [{"text": {"content": "description"}}]},
-      "Purpose": {"rich_text": [{"text": {"content": "purpose"}}]},
-      "Team": {"select": {"name": "General"}},
-      "Integration": {"multi_select": [{"name": "Notion"}]},
-      "Owner": {"people": [{"id": "notion_user_id"}]},
-      "Created": {"date": {"start": "2025-12-09"}},
-      "Skill": {
-        "files": [{
-          "type": "file_upload",
-          "file_upload": {"id": "file_upload_id"},
-          "name": "skill-name-SKILL.txt"
-        }]
-      }
-    }
-  }'
+# With custom file
+python ../../notion-master/scripts/upload_skill.py 03-skills/my-skill --team General --file /path/to/custom.txt
 ```
+
+**Manual upload (if needed):**
+
+See [../../notion-master/references/api-reference.md](../../notion-master/references/api-reference.md) for the 3-step file upload API process.
+
+**The script handles:**
+1. Reading SKILL.md metadata
+2. Creating file upload object
+3. Uploading file content
+4. Creating database entry with attachment
 
 ### Step 6: Confirm Success
 
@@ -278,6 +208,11 @@ The skill is now discoverable by anyone at Beam AI.
 ---
 
 ## Field Mapping
+
+**See complete database schema:**
+- [../../notion-master/references/database-schema.md](../../notion-master/references/database-schema.md)
+
+**Quick reference:**
 
 | Local (SKILL.md) | Notion Property | Type | Required | Notes |
 |------------------|-----------------|------|----------|-------|
@@ -374,6 +309,8 @@ AI: ✅ Skill pushed to Notion!
 
 ## Error Handling
 
+**Common errors:**
+
 | Error | Cause | Solution |
 |-------|-------|----------|
 | 401 Unauthorized | Invalid API key | Check NOTION_API_KEY in .env |
@@ -382,16 +319,14 @@ AI: ✅ Skill pushed to Notion!
 | Missing notion_user_id | Not in user-config.yaml | Prompt to add it |
 | Missing SKILL.md | Invalid skill path | Verify path |
 
+**For detailed troubleshooting:**
+- See [../../notion-master/references/error-handling.md](../../notion-master/references/error-handling.md)
+
 ### Check for Duplicates FIRST
 
-Before any push, query to check if skill exists:
-```python
-# If skill already exists, ask user what to do
-if existing:
-    print("⚠️ Skill already exists in Notion.")
-    print("1. Update existing entry")
-    print("2. Create new entry anyway")
-    print("3. Cancel")
+Before any push, use the query script to check if skill exists:
+```bash
+python ../../notion-master/scripts/query_db.py --name {skill-name}
 ```
 
 ---
@@ -405,8 +340,10 @@ if existing:
 
 ---
 
-## API Reference
+## Additional References
 
-**File Upload API** (for attaching files to database properties):
-- [Notion File Upload Docs](https://developers.notion.com/docs/uploading-small-files)
-- [File Upload Reference](https://developers.notion.com/reference/file-upload)
+**For more details:**
+- [../../notion-master/references/setup-guide.md](../../notion-master/references/setup-guide.md) - Initial setup
+- [../../notion-master/references/api-reference.md](../../notion-master/references/api-reference.md) - File upload API
+- [../../notion-master/references/database-schema.md](../../notion-master/references/database-schema.md) - Complete schema
+- [../../notion-master/references/error-handling.md](../../notion-master/references/error-handling.md) - Troubleshooting
