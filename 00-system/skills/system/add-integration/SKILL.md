@@ -28,13 +28,14 @@ The `add-integration` skill transforms API documentation into a complete, produc
 ┌─────────────────────────────────────────────────────────┐
 │                   ADD INTEGRATION                        │
 ├─────────────────────────────────────────────────────────┤
-│  Step 1: Ask which service to integrate                 │
-│  Step 2: Web search for API documentation               │
-│  Step 3: Parse and present available endpoints          │
-│  Step 4: User selects endpoints to implement            │
-│  Step 5: Gather authentication details                  │
-│  Step 6: Create integration project with full plan      │
-│  Step 7: Prompt user to close session & start project   │
+│  Step 1: Initialize TodoList                            │
+│  Step 2: Ask which service to integrate                 │
+│  Step 3: Web search for API documentation               │
+│  Step 4: Create integration project (saves progress)    │
+│  Step 5: Parse and present available endpoints          │
+│  Step 6: User selects endpoints to implement            │
+│  Step 7: Gather authentication details & finalize       │
+│  Step 8: Prompt user to close session & start project   │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -48,11 +49,11 @@ Create TodoWrite with all workflow steps:
 ```
 - [ ] Ask which service to integrate
 - [ ] Search for API documentation
+- [ ] Create integration project
 - [ ] Parse and present endpoints
 - [ ] User selects endpoints
-- [ ] Gather authentication details
-- [ ] Create integration project
-- [ ] Close session
+- [ ] Gather authentication details & finalize
+- [ ] Prompt close session
 ```
 
 **Mark tasks complete as you finish each step.**
@@ -120,10 +121,102 @@ Found:
 
 ---
 
-### Step 4: Parse and Present Endpoints
+### Step 4: Create Integration Project
 
-After fetching API docs, categorize and present:
+**Create project immediately after discovering API docs** to save progress.
 
+**Use create-project skill internally** to create:
+
+```
+02-projects/{next_id}-{service_slug}-integration/
+├── 01-planning/
+│   ├── overview.md          # Project metadata
+│   └── steps.md             # Implementation checklist (template)
+├── 02-resources/
+│   └── integration-config.json   # Will be populated as we go
+├── 03-working/
+└── 04-outputs/
+```
+
+**Initial overview.md**:
+```yaml
+---
+id: {next_id}-{service_slug}-integration
+name: {Service Name} Integration
+status: PLANNING
+description: Load when user mentions '{service_slug} integration', 'implement {service_slug}', 'build {service_slug} skills'
+created: {today}
+---
+
+# {Service Name} Integration
+
+Build complete {Service Name} integration following the master/connect/specialized pattern.
+
+## Discovery
+
+- **Service**: {Service Name}
+- **API Docs**: {api_docs_url}
+- **Auth Type**: {detected_auth_type}
+- **Base URL**: {detected_base_url}
+
+## Status
+
+Endpoints: Pending selection
+Configuration: In progress
+
+## References
+
+- Pattern: See 00-system/skills/system/add-integration/references/integration-architecture.md
+```
+
+**Initial integration-config.json** (partial, will be updated):
+```json
+{
+  "service_name": "{Service Name}",
+  "service_slug": "{service_slug}",
+  "base_url": "{detected_base_url}",
+  "auth_type": "{detected_auth_type}",
+  "api_docs_url": "{api_docs_url}",
+  "endpoints": [],
+  "status": "planning",
+  "created": "{timestamp}",
+  "created_by": "add-integration skill"
+}
+```
+
+**Display**:
+```
+Project created: 02-projects/{id}-{service_slug}-integration/
+
+Your progress is now being saved. Let's continue with endpoint selection...
+```
+
+---
+
+### Step 5: Parse and Present Endpoints
+
+After fetching API docs, categorize and present.
+
+**Save discovered endpoints to project** (`02-resources/discovered-endpoints.json`):
+```json
+{
+  "discovered_at": "{timestamp}",
+  "source": "{api_docs_url}",
+  "categories": [
+    {
+      "name": "Authentication",
+      "endpoints": [...]
+    },
+    {
+      "name": "Contacts",
+      "endpoints": [...]
+    }
+  ],
+  "total_count": {N}
+}
+```
+
+**Display to user**:
 ```
 I found {N} API endpoints for {Service}:
 
@@ -164,7 +257,44 @@ Options:
 
 ---
 
-### Step 5: Gather Authentication Details
+### Step 6: User Selects Endpoints
+
+**Process user selection**:
+- "all" → Select all endpoints
+- "1,3,5,8" → Select by number
+- "contacts, deals" → Select by category name
+- "core" → Select GET/POST for main resources
+
+**Update integration-config.json** with selected endpoints:
+```json
+{
+  "endpoints": [
+    {
+      "name": "List Contacts",
+      "slug": "list-contacts",
+      "method": "GET",
+      "path": "/contacts",
+      "description": "Retrieve all contacts",
+      "triggers": ["list contacts", "get contacts", "show contacts"]
+    },
+    ...
+  ]
+}
+```
+
+**Display confirmation**:
+```
+Selected {N} endpoints for implementation:
+• List Contacts (GET /contacts)
+• Create Contact (POST /contacts)
+• ...
+
+Saved to project. Now let's confirm the authentication setup...
+```
+
+---
+
+### Step 7: Gather Authentication Details & Finalize Project
 
 Based on API docs discovered:
 
@@ -193,25 +323,25 @@ I'll need this info for the integration config:
 
 **Wait for user confirmation/corrections.**
 
----
+**Finalize project files**:
 
-### Step 6: Create Integration Project
-
-**Use create-project skill internally** to create a project for implementation.
-
-**Project structure**:
+1. **Update integration-config.json** with confirmed values:
+```json
+{
+  "service_name": "{Service Name}",
+  "service_slug": "{service_slug}",
+  "base_url": "{confirmed_base_url}",
+  "auth_type": "{confirmed_auth_type}",
+  "env_key": "{ENV_KEY}",
+  "api_docs_url": "{api_docs_url}",
+  "endpoints": [...],
+  "status": "ready",
+  "created": "{timestamp}",
+  "created_by": "add-integration skill"
+}
 ```
-02-projects/{next_id}-{service_slug}-integration/
-├── 01-planning/
-│   ├── overview.md          # Project metadata
-│   └── steps.md             # Implementation checklist
-├── 02-resources/
-│   └── integration-config.json   # Captured configuration
-├── 03-working/
-└── 04-outputs/
-```
 
-**overview.md content**:
+2. **Update overview.md** with final scope:
 ```yaml
 ---
 id: {next_id}-{service_slug}-integration
@@ -245,7 +375,7 @@ Will create:
 - Pattern: See 00-system/skills/system/add-integration/references/integration-architecture.md
 ```
 
-**steps.md content**:
+3. **Generate steps.md** with implementation checklist:
 ```markdown
 # Implementation Steps
 
@@ -282,34 +412,9 @@ Will create:
 - [ ] Add usage examples
 ```
 
-**integration-config.json content**:
-```json
-{
-  "service_name": "{Service Name}",
-  "service_slug": "{service_slug}",
-  "base_url": "{base_url}",
-  "auth_type": "{auth_type}",
-  "env_key": "{ENV_KEY}",
-  "api_docs_url": "{api_docs_url}",
-  "endpoints": [
-    {
-      "name": "{Endpoint Name}",
-      "slug": "{endpoint-slug}",
-      "method": "GET|POST|PATCH|DELETE",
-      "path": "/api/path",
-      "description": "{description}",
-      "triggers": ["trigger phrase 1", "trigger phrase 2"],
-      "parameters": []
-    }
-  ],
-  "created": "{timestamp}",
-  "created_by": "add-integration skill"
-}
-```
-
 **Display confirmation**:
 ```
-Project Created!
+Project Finalized!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📁 02-projects/{id}-{service_slug}-integration/
@@ -329,7 +434,7 @@ The implementation will create:
 
 ---
 
-### Step 7: Prompt Close Session & Start Implementation
+### Step 8: Prompt Close Session & Start Implementation
 
 **Final message**:
 ```
