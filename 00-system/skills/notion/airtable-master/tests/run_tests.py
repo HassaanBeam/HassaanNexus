@@ -50,13 +50,20 @@ def run_script(script_name, args=None, timeout=60):
     if args:
         cmd.extend(args)
 
+    # Set PYTHONIOENCODING to handle Unicode on Windows
+    env = os.environ.copy()
+    env['PYTHONIOENCODING'] = 'utf-8'
+
     try:
         result = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
             timeout=timeout,
-            cwd=NEXUS_ROOT
+            cwd=NEXUS_ROOT,
+            env=env,
+            encoding='utf-8',
+            errors='replace'
         )
         return result.returncode, result.stdout, result.stderr
     except subprocess.TimeoutExpired:

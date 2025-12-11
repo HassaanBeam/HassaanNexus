@@ -1,108 +1,100 @@
-# Airtable Master - Test Suite
+# Airtable Master - Comprehensive Test Suite
 
-## Overview
+## Quick Start
 
-This test suite validates the airtable-master scripts work correctly with the Airtable API.
+```bash
+# Quick syntax validation
+python run_full_tests.py --quick
+
+# Full test suite (all tests)
+python run_full_tests.py --full
+
+# Individual modes
+python run_full_tests.py --unit         # Unit tests only
+python run_full_tests.py --integration  # Integration tests
+python run_full_tests.py --live         # Live API tests
+```
+
+## Test Architecture
+
+```
+tests/
+├── run_tests.py        # Quick validation (11 tests)
+├── run_full_tests.py   # Full orchestrator
+├── conftest.py         # Pytest fixtures
+├── test_unit.py        # Unit tests (25 tests)
+└── test_live_api.py    # Live API tests (10 tests)
+```
 
 ## Prerequisites
 
-1. **Airtable Personal Access Token** configured in `.env`:
+1. **Python 3.8+**
+2. **Dependencies**:
+   ```bash
+   pip install requests pyyaml pytest
    ```
+3. **API Key** (for live tests):
+   ```
+   # .env
    AIRTABLE_API_KEY=pat.xxxxx
    ```
 
-2. **At least one accessible base** in your Airtable workspace
-
-3. **Python dependencies**:
-   ```bash
-   pip install requests pyyaml
-   ```
-
-## Running Tests
-
-### Quick Validation (No API calls)
-```bash
-python run_tests.py --dry-run
-```
-
-### Full Test Suite
-```bash
-python run_tests.py
-```
-
-### Verbose Output
-```bash
-python run_tests.py --verbose
-```
-
-### Test Specific Script
-```bash
-python run_tests.py --script check_airtable_config
-python run_tests.py --script discover_bases
-python run_tests.py --script query_records
-python run_tests.py --script manage_records
-```
-
-## Test Coverage
-
-| Script | Tests | Description |
-|--------|-------|-------------|
-| `check_airtable_config.py` | 4 | Environment, config, API, base access |
-| `discover_bases.py` | 3 | List bases, schema discovery, caching |
-| `query_records.py` | 4 | List, filter, pagination, fields |
-| `manage_records.py` | 3 | Create, update, delete (uses test table) |
-
-## Test Data
-
-The `manage_records` tests use a **Test Table** that is created and cleaned up automatically:
-- Creates temporary test records
-- Validates CRUD operations
-- Deletes test records after completion
-
-**Warning**: Do NOT run manage_records tests against production data tables.
-
-## Expected Results
+## Expected Output
 
 ```
-=== Airtable Master Test Suite ===
+==================================================
+AIRTABLE MASTER - FULL TEST SUITE
+==================================================
 
-[1/4] Testing check_airtable_config.py...
-  ✓ Environment check passed
-  ✓ Config validation passed
-  ✓ API connection passed
-  ✓ Base access passed
+=== Syntax Validation ===
+  [PASS] check_airtable_config.py syntax
+  [PASS] discover_bases.py syntax
+  [PASS] query_records.py syntax
+  [PASS] manage_records.py syntax
 
-[2/4] Testing discover_bases.py...
-  ✓ List bases passed
-  ✓ Schema discovery passed
-  ✓ Cache creation passed
+=== Unit Tests ===
+  [PASS] Unit tests - All passed
 
-[3/4] Testing query_records.py...
-  ✓ List records passed
-  ✓ Filter records passed
-  ✓ Pagination passed
-  ✓ Field selection passed
+=== Integration Tests ===
+  [PASS] Config check runs
+  [PASS] Discovery JSON output - Found 96 bases
+  [PASS] Query help
+  [PASS] Manage help
 
-[4/4] Testing manage_records.py...
-  ✓ Create record passed
-  ✓ Update record passed
-  ✓ Delete record passed
+=== Live API Tests ===
+  [PASS] Live API tests - All passed
 
-=== Results ===
-Passed: 14/14
-Failed: 0
+==================================================
+TEST SUMMARY
+==================================================
+Duration: 34.68s
+Total:    10
+Passed:   10
+==================================================
+
+All tests passed!
 ```
+
+## Test Files
+
+| File | Tests | Network | Description |
+|------|-------|---------|-------------|
+| `run_tests.py` | 11 | Yes | Quick validation |
+| `test_unit.py` | 25 | No | Syntax, args, error handling |
+| `test_live_api.py` | 10 | Yes | Real API validation |
 
 ## Troubleshooting
 
+### "pytest not installed"
+```bash
+pip install pytest
+```
+
 ### "AIRTABLE_API_KEY not set"
-Add your PAT to `.env` file at Nexus root.
+Add PAT to `.env` at Nexus root.
 
-### "Could not find base"
-Run `discover_bases.py` first to cache your bases.
+### "Rate limited (429)"
+Wait 30 seconds. Scripts have exponential backoff.
 
-### "Rate limited"
-Wait 30 seconds and retry. Scripts have built-in backoff.
-
-### "Permission denied"
-Check your PAT scopes include the required permissions.
+### Tests timeout
+Increase timeout or use `--quick` for faster runs.

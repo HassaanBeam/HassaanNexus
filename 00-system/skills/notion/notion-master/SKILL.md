@@ -81,6 +81,7 @@ All 3 Notion skills reference these resources (progressive disclosure).
 - Tests API connection
 - Validates user-config.yaml
 - Returns actionable errors
+- **Supports `--json` flag** for structured AI-consumable output
 
 **[discover_databases.py](scripts/discover_databases.py)** - Database discovery
 - Finds all accessible databases
@@ -126,11 +127,67 @@ All 3 Notion skills reference these resources (progressive disclosure).
 - Automatic retry on 429/5xx errors
 - Usage: `from rate_limiter import make_request_with_retry`
 
-**[setup_notion.py](scripts/setup_notion.py)** - Interactive setup wizard (to be created)
+**[setup_notion.py](scripts/setup_notion.py)** - Interactive setup wizard
 - Guides through API key setup
 - Tests connection
-- Saves configuration
+- Saves configuration to `.env`
 - Gets user's Notion ID
+- Auto-runs database discovery
+
+---
+
+## Intelligent Error Detection Flow
+
+When a Notion skill fails due to missing configuration, the AI should:
+
+### Step 1: Run Config Check with JSON Output
+
+```bash
+python 00-system/skills/notion/notion-master/scripts/check_notion_config.py --json
+```
+
+### Step 2: Parse the `ai_action` Field
+
+The JSON output includes an `ai_action` field that tells the AI what to do:
+
+| ai_action | What to Do |
+|-----------|------------|
+| `proceed_with_operation` | Config OK, continue with the original operation |
+| `proceed_with_warning` | Partial config (can query/import but not export) |
+| `prompt_for_api_key` | Ask user: "I need your Notion API key. Get one at https://www.notion.so/my-integrations" |
+| `create_env_file` | Create `.env` file and ask user for API key |
+| `run_setup_wizard` | Run: `python 00-system/skills/notion/notion-master/scripts/setup_notion.py` |
+
+### Step 3: Help User Fix Issues
+
+If `ai_action` is `prompt_for_api_key`:
+
+1. Tell user: "Notion integration needs setup. I need your API key."
+2. Show them: "Get one at: https://www.notion.so/my-integrations"
+3. Ask: "Paste your Notion API key here:"
+4. Once they provide it, **write directly to `.env`**:
+   ```
+   # Edit .env file to add:
+   NOTION_API_KEY=secret_their_key_here
+   NOTION_SKILLS_DB_ID=2bc2cadf-bbbc-80be-af8a-d45dfc8dfa2e
+   ```
+5. Re-run config check to verify
+
+### JSON Output Structure
+
+```json
+{
+  "status": "not_configured",
+  "exit_code": 2,
+  "ai_action": "prompt_for_api_key",
+  "missing": [
+    {"item": "NOTION_API_KEY", "required": true, "location": ".env"}
+  ],
+  "fix_instructions": [...],
+  "env_template": "NOTION_API_KEY=secret_YOUR_API_KEY_HERE\nNOTION_SKILLS_DB_ID=...",
+  "setup_wizard": "python 00-system/skills/notion/notion-master/scripts/setup_notion.py"
+}
+```
 
 ---
 
@@ -176,9 +233,11 @@ Each skill loads shared resources **only when needed** (progressive disclosure):
 
 ---
 
-**Version**: 2.2
+**Version**: 2.4
 **Created**: 2025-12-10
 **Updated**: 2025-12-11
 **Status**: Production Ready
 
-**Changelog v2.3**: Renamed `query_database.py` to `search_skill_database.py` for clarity.
+**Changelog**:
+- v2.4: Added Intelligent Error Detection Flow with `--json` support for AI-guided setup
+- v2.3: Renamed `query_database.py` to `search_skill_database.py` for clarity
