@@ -10,6 +10,8 @@ Usage:
     python nexus-loader.py --list-projects     # Scan project metadata
     python nexus-loader.py --list-skills       # Scan skill metadata
     python nexus-loader.py --show-tokens       # Display token costs
+    python nexus-loader.py --check-update      # Check if upstream updates available
+    python nexus-loader.py --sync              # Sync system files from upstream
 """
 
 import os
@@ -17,10 +19,12 @@ import re
 import sys
 import yaml
 import json
+import shutil
 import argparse
+import subprocess
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Tuple
 
 # Token counting constants
 CHARS_PER_TOKEN = 4  # Rough estimate: 1 token ≈ 4 characters
@@ -32,6 +36,31 @@ BASH_OUTPUT_LIMIT = 30000  # Claude Code bash output truncation limit
 # These provide core system navigation and context
 MANDATORY_MAPS = [
     "00-system/system-map.md",              # System structure and navigation hub
+]
+
+# =============================================================================
+# UPSTREAM SYNC CONFIGURATION
+# =============================================================================
+
+# Default upstream repository URL (users can override in user-config.yaml)
+DEFAULT_UPSTREAM_URL = "https://github.com/DorianSchlede/nexus-template.git"
+
+# Paths to sync from upstream (system files only)
+SYNC_PATHS = [
+    "00-system/",
+    "CLAUDE.md",
+    "README.md",
+]
+
+# Paths to NEVER touch (user's personal data)
+PROTECTED_PATHS = [
+    "01-memory/",
+    "02-projects/",
+    "03-skills/",
+    "04-workspace/",
+    ".env",
+    ".claude/",
+    ".sync-backup/",
 ]
 
 # =============================================================================
@@ -696,7 +725,7 @@ def load_metadata(base_path: str = ".") -> Dict[str, Any]:
     return result
 
 
-def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mode: bool = False) -> Dict[str, Any]:
+def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mode: bool = False, check_updates: bool = True) -> Dict[str, Any]:
     """
     Load startup context and determine complete execution plan.
 
@@ -709,13 +738,14 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
         include_metadata: If True, include full project/skill metadata (default)
                          If False, return only core + instructions (use --metadata separately)
         resume_mode: If True, we're resuming after a context summary (skip menu display)
+        check_updates: If True, check for upstream updates (default). Set False for faster startup.
 
     Returns:
     - system_state: Classification of current state
     - memory_content: Dict of file contents (keyed by filename)
     - instructions: Complete execution plan with action, message, steps
     - metadata: All projects and skills (if include_metadata=True)
-    - stats: System statistics
+    - stats: System statistics (includes update_available if check_updates=True)
     """
     base = Path(base_path)
 
@@ -976,6 +1006,27 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
     # Detect built integrations (have master/connect skill pattern)
     configured_integrations = detect_configured_integrations(base_path)
 
+    # Check for updates (non-blocking - network errors won't fail startup)
+    update_info = {
+        'update_available': False,
+        'local_version': get_local_version(base_path),
+        'upstream_version': None,
+        'checked': False
+    }
+    if check_updates:
+        try:
+            update_result = check_for_updates(base_path)
+            update_info = {
+                'update_available': update_result.get('update_available', False),
+                'local_version': update_result.get('local_version', 'unknown'),
+                'upstream_version': update_result.get('upstream_version'),
+                'checked': update_result.get('checked', False),
+                'changes_count': update_result.get('changes_count', 0)
+            }
+        except Exception:
+            # Network/git errors should NOT fail startup
+            pass
+
     result['stats'] = {
         'files_embedded': len(result['memory_content']),
         'mandatory_maps_loaded': mandatory_maps_found,
@@ -990,6 +1041,8 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
         'integrations_configured': integrations_configured,
         'configured_integrations': configured_integrations,  # List of built integrations
         'learning_completed': learning_completed,
+        'update_available': update_info['update_available'],
+        'update_info': update_info,
     }
 
     return result
@@ -1173,6 +1226,291 @@ def load_skill(skill_name: str, base_path: str = ".") -> Dict[str, Any]:
 # and project metadata. No directives needed!
 
 
+# =============================================================================
+# UPSTREAM SYNC FUNCTIONS
+# =============================================================================
+
+def run_git_command(args: List[str], cwd: str = None) -> Tuple[bool, str]:
+    """
+    Run a git command and return (success, output).
+
+    Args:
+        args: Git command arguments (e.g., ['status', '--porcelain'])
+        cwd: Working directory (default: current directory)
+
+    Returns:
+        Tuple of (success: bool, output: str)
+    """
+    try:
+        result = subprocess.run(
+            ['git'] + args,
+            cwd=cwd,
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
+        output = result.stdout.strip() or result.stderr.strip()
+        return result.returncode == 0, output
+    except subprocess.TimeoutExpired:
+        return False, "Git command timed out"
+    except FileNotFoundError:
+        return False, "Git is not installed"
+    except Exception as e:
+        return False, str(e)
+
+
+def get_local_version(base_path: str) -> str:
+    """Read local version from 00-system/VERSION file."""
+    version_file = Path(base_path) / "00-system" / "VERSION"
+    try:
+        if version_file.exists():
+            return version_file.read_text(encoding='utf-8').strip()
+        return "unknown"
+    except Exception:
+        return "unknown"
+
+
+def get_upstream_url(base_path: str) -> str:
+    """
+    Get upstream URL from user-config.yaml or use default.
+    """
+    config_path = Path(base_path) / "01-memory" / "user-config.yaml"
+
+    if config_path.exists():
+        try:
+            content = config_path.read_text(encoding='utf-8')
+            if content.startswith('---'):
+                parts = content.split('---', 2)
+                if len(parts) >= 2:
+                    config = yaml.safe_load(parts[1])
+                    if config and 'sync' in config:
+                        url = config['sync'].get('upstream_url')
+                        if url:
+                            return url
+        except Exception:
+            pass
+
+    return DEFAULT_UPSTREAM_URL
+
+
+def ensure_upstream_remote(base_path: str) -> Tuple[bool, str]:
+    """
+    Ensure 'upstream' remote exists. Add it if missing.
+
+    Returns:
+        Tuple of (success, message)
+    """
+    # Check if upstream already exists
+    success, output = run_git_command(['remote', 'get-url', 'upstream'], cwd=base_path)
+
+    if success:
+        return True, output  # Already configured
+
+    # Add upstream remote
+    upstream_url = get_upstream_url(base_path)
+    success, output = run_git_command(['remote', 'add', 'upstream', upstream_url], cwd=base_path)
+
+    if success:
+        return True, upstream_url
+    else:
+        return False, f"Failed to add upstream: {output}"
+
+
+def check_for_updates(base_path: str) -> Dict[str, Any]:
+    """
+    Check if updates are available from upstream.
+
+    This is designed to be FAST - called on every startup.
+    Only fetches refs, doesn't download content.
+
+    Returns:
+        Dict with update status and version info
+    """
+    result = {
+        'checked': True,
+        'update_available': False,
+        'local_version': get_local_version(base_path),
+        'upstream_version': None,
+        'error': None
+    }
+
+    # Pre-flight: Check if we're in a git repo
+    success, _ = run_git_command(['rev-parse', '--git-dir'], cwd=base_path)
+    if not success:
+        result['checked'] = False
+        result['error'] = "Not a git repository"
+        return result
+
+    # Ensure upstream remote exists
+    success, upstream_url = ensure_upstream_remote(base_path)
+    if not success:
+        result['checked'] = False
+        result['error'] = upstream_url  # Contains error message
+        return result
+
+    result['upstream_url'] = upstream_url
+
+    # Fetch upstream (just refs, fast)
+    success, output = run_git_command(['fetch', 'upstream', '--quiet'], cwd=base_path)
+    if not success:
+        # Network error - don't fail startup, just note it
+        result['checked'] = False
+        result['error'] = f"Could not reach upstream: {output}"
+        return result
+
+    # Compare local vs upstream 00-system/
+    # Get hash of local 00-system/
+    success, local_hash = run_git_command(
+        ['rev-parse', 'HEAD:00-system'],
+        cwd=base_path
+    )
+    if not success:
+        local_hash = "unknown"
+
+    # Get hash of upstream 00-system/
+    success, upstream_hash = run_git_command(
+        ['rev-parse', 'upstream/main:00-system'],
+        cwd=base_path
+    )
+    if not success:
+        result['error'] = f"Could not read upstream version: {output}"
+        return result
+
+    # Try to read upstream VERSION file
+    success, upstream_version = run_git_command(
+        ['show', 'upstream/main:00-system/VERSION'],
+        cwd=base_path
+    )
+    if success:
+        result['upstream_version'] = upstream_version.strip()
+
+    # Compare hashes
+    if local_hash != upstream_hash:
+        result['update_available'] = True
+
+        # Get list of changed files
+        success, diff_output = run_git_command(
+            ['diff', '--name-only', 'HEAD', 'upstream/main', '--', '00-system/', 'CLAUDE.md', 'README.md'],
+            cwd=base_path
+        )
+        if success and diff_output:
+            result['changed_files'] = diff_output.split('\n')
+            result['changes_count'] = len(result['changed_files'])
+
+    return result
+
+
+def sync_from_upstream(base_path: str, dry_run: bool = False, force: bool = False) -> Dict[str, Any]:
+    """
+    Sync system files from upstream repository.
+
+    Args:
+        base_path: Root path to Nexus installation
+        dry_run: If True, show what would change without changing
+        force: If True, skip confirmation prompts
+
+    Returns:
+        Dict with sync results
+    """
+    result = {
+        'success': False,
+        'dry_run': dry_run,
+        'local_version': get_local_version(base_path),
+        'upstream_version': None,
+        'files_updated': [],
+        'backup_path': None,
+        'error': None
+    }
+
+    # Pre-flight checks
+    # 1. Check git installed and we're in a repo
+    success, _ = run_git_command(['rev-parse', '--git-dir'], cwd=base_path)
+    if not success:
+        result['error'] = "Not a git repository"
+        return result
+
+    # 2. Check for uncommitted changes (warn user)
+    success, status_output = run_git_command(['status', '--porcelain'], cwd=base_path)
+    if success and status_output and not force:
+        result['error'] = "Uncommitted changes detected. Commit first or use --force."
+        result['uncommitted_changes'] = status_output.split('\n')
+        return result
+
+    # 3. Ensure upstream exists and fetch
+    success, upstream_url = ensure_upstream_remote(base_path)
+    if not success:
+        result['error'] = upstream_url
+        return result
+
+    result['upstream_url'] = upstream_url
+
+    success, _ = run_git_command(['fetch', 'upstream'], cwd=base_path)
+    if not success:
+        result['error'] = "Could not fetch from upstream. Check your internet connection."
+        return result
+
+    # Get upstream version
+    success, upstream_version = run_git_command(
+        ['show', 'upstream/main:00-system/VERSION'],
+        cwd=base_path
+    )
+    if success:
+        result['upstream_version'] = upstream_version.strip()
+
+    # Get changed files
+    success, diff_output = run_git_command(
+        ['diff', '--name-only', 'HEAD', 'upstream/main', '--', '00-system/', 'CLAUDE.md', 'README.md'],
+        cwd=base_path
+    )
+
+    if not success or not diff_output.strip():
+        result['success'] = True
+        result['message'] = "Already up-to-date"
+        return result
+
+    changed_files = [f for f in diff_output.strip().split('\n') if f]
+    result['files_to_update'] = changed_files
+
+    # Dry run - just show what would change
+    if dry_run:
+        result['success'] = True
+        result['message'] = f"Would update {len(changed_files)} files"
+        return result
+
+    # Create backup of local system files that will be overwritten
+    backup_dir = Path(base_path) / ".sync-backup" / datetime.now().strftime("%Y-%m-%d-%H%M%S")
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    result['backup_path'] = str(backup_dir)
+
+    for file_path in changed_files:
+        local_file = Path(base_path) / file_path
+        if local_file.exists():
+            backup_file = backup_dir / file_path
+            backup_file.parent.mkdir(parents=True, exist_ok=True)
+            try:
+                shutil.copy2(local_file, backup_file)
+            except Exception as e:
+                result['error'] = f"Backup failed: {e}"
+                return result
+
+    # Perform the sync - checkout system files from upstream
+    for sync_path in SYNC_PATHS:
+        success, output = run_git_command(
+            ['checkout', 'upstream/main', '--', sync_path],
+            cwd=base_path
+        )
+        if success:
+            result['files_updated'].append(sync_path)
+        else:
+            # Non-fatal: file might not exist in upstream
+            pass
+
+    result['success'] = True
+    result['message'] = f"Updated {len(result['files_updated'])} paths from upstream"
+
+    return result
+
+
 def main():
     # Configure UTF-8 output for Windows console
     if sys.stdout.encoding != 'utf-8':
@@ -1184,9 +1522,10 @@ def main():
     script_path = Path(__file__).resolve()  # Absolute path to this script
     detected_nexus_root = script_path.parent.parent.parent  # Go up 2 levels: core -> 00-system -> nexus-root
 
-    parser = argparse.ArgumentParser(description="Nexus-v3 Context Loader")
+    parser = argparse.ArgumentParser(description="Nexus-v4 Context Loader")
     parser.add_argument('--startup', action='store_true', help='Load startup context with embedded memory files')
     parser.add_argument('--resume', action='store_true', help='Resume after context summary (skip menu, continue working)')
+    parser.add_argument('--skip-update-check', action='store_true', help='Skip update check during startup (faster startup)')
     parser.add_argument('--metadata', action='store_true', help='Load only project/skill metadata (use after --startup --no-metadata)')
     parser.add_argument('--no-metadata', action='store_true', help='Exclude metadata from startup (smaller output, use --metadata separately)')
     parser.add_argument('--project', help='Load project by ID')
@@ -1194,15 +1533,25 @@ def main():
     parser.add_argument('--list-projects', action='store_true', help='List all projects')
     parser.add_argument('--list-skills', action='store_true', help='List all skills')
     parser.add_argument('--full', action='store_true', help='Return complete metadata (default: minimal fields for efficiency)')
-    parser.add_argument('--base-path', default=str(detected_nexus_root), help=f'Base path to Nexus-v3 (default: auto-detected from script location)')
+    parser.add_argument('--base-path', default=str(detected_nexus_root), help=f'Base path to Nexus-v4 (default: auto-detected from script location)')
     parser.add_argument('--show-tokens', action='store_true', help='Include token cost analysis')
+    # Sync commands
+    parser.add_argument('--check-update', action='store_true', help='Check if upstream updates are available')
+    parser.add_argument('--sync', action='store_true', help='Sync system files from upstream')
+    parser.add_argument('--dry-run', action='store_true', help='Show what would change without changing (use with --sync)')
+    parser.add_argument('--force', action='store_true', help='Skip confirmation prompts (use with --sync)')
 
     args = parser.parse_args()
 
     # Execute command
-    if args.startup or args.resume:
+    if args.check_update:
+        result = check_for_updates(args.base_path)
+    elif args.sync:
+        result = sync_from_upstream(args.base_path, dry_run=args.dry_run, force=args.force)
+    elif args.startup or args.resume:
         include_metadata = not args.no_metadata
-        result = load_startup(args.base_path, include_metadata=include_metadata, resume_mode=args.resume)
+        check_updates = not args.skip_update_check
+        result = load_startup(args.base_path, include_metadata=include_metadata, resume_mode=args.resume, check_updates=check_updates)
     elif args.metadata:
         result = load_metadata(args.base_path)
     elif args.project:

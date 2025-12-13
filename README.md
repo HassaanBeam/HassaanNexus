@@ -1,10 +1,6 @@
 # Nexus
 
-> **Quick Start:** Clone repo → Open in VS Code → Start Claude Code → Say "hi" → Start working immediately
->
-> ```bash
-> git clone https://github.com/DorianSchlede/nexus-template.git
-> ```
+> **Quick Start:** [Use this template](https://github.com/DorianSchlede/nexus-template/generate) → Clone your repo → Open in VS Code → Start Claude Code → Say "hi"
 
 ---
 
@@ -83,13 +79,16 @@ Capture workflows you repeat. Say "create skill" after doing something useful, a
 - [ ] **Claude Code VS Code Extension** — Install from VS Code marketplace
 - [ ] **Python 3.x** — [Download](https://python.org)
 
-### Step 1: Clone & Open
+### Step 1: Create Your Nexus
 
-```bash
-git clone https://github.com/DorianSchlede/nexus-template.git
-cd nexus-template
-code .
-```
+1. Click **[Use this template](https://github.com/DorianSchlede/nexus-template/generate)**
+2. Name your repo (e.g., `my-nexus`), click **Create repository**
+3. Clone and open:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/my-nexus.git
+   cd my-nexus
+   code .
+   ```
 
 ### Step 2: Start Claude Code
 
@@ -225,6 +224,81 @@ Say "connect notion" or "connect airtable" to get started.
 
 - **[Product Overview](00-system/documentation/product-overview.md)** — The problems Nexus solves
 - **[Framework Overview](00-system/documentation/framework-overview.md)** — Technical deep dive
+
+---
+
+## Getting Nexus
+
+### Option 1: Use as Template (Recommended)
+
+1. Go to the [Nexus GitHub repository](https://github.com/DorianSchlede/nexus-template)
+2. Click **"Use this template"** → **"Create a new repository"**
+3. Name your repo, set visibility, click **"Create repository"**
+4. Clone your new repo:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
+   cd YOUR-REPO-NAME
+   code .
+   ```
+
+This gives you your own copy where you can commit personal data (goals, projects, skills).
+
+### Option 2: Direct Clone (For Trying It Out)
+
+```bash
+git clone https://github.com/DorianSchlede/nexus-template.git
+cd nexus-template
+code .
+```
+
+Note: With direct clone, you can't push changes to the original repo.
+
+---
+
+## Getting Updates
+
+Nexus receives regular system updates (new skills, improvements, fixes). Your personal data is **never touched** during updates.
+
+### What Gets Updated
+
+| Updated (from upstream) | Protected (your data) |
+|------------------------|----------------------|
+| `00-system/` | `01-memory/` |
+| `CLAUDE.md` | `02-projects/` |
+| `README.md` | `03-skills/` |
+| | `04-workspace/` |
+| | `.env`, `.claude/` |
+
+### How to Update
+
+Just say:
+```
+You: "update nexus"
+
+AI: [Checks for updates]
+    UPDATE AVAILABLE: v0.82.0 → v0.83.0
+    Files to update: 12
+
+    Proceed? (yes/no)
+
+You: "yes"
+
+AI: [Updates system files, creates backup]
+    ✅ Updated! Backup at: .sync-backup/2024-01-15-143022/
+```
+
+### Check for Updates Manually
+
+Updates are checked automatically on startup. You'll see:
+```
+⚡ UPDATE AVAILABLE: v0.82.0 → v0.83.0
+   Say 'update nexus' to get latest improvements
+```
+
+Or run directly:
+```bash
+python 00-system/core/nexus-loader.py --check-update
+```
 
 ---
 

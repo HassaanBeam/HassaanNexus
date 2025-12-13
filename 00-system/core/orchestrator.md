@@ -104,6 +104,10 @@ Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.
     ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
     ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝ v4
 
+[If stats.update_available=true:]
+⚡ UPDATE AVAILABLE: v{stats.update_info.local_version} → v{stats.update_info.upstream_version}
+   Say 'update nexus' to get latest improvements
+
 🧠 MEMORY
    [If stats.goals_personalized=false: "Not configured ▸ 'setup goals'"]
    [If stats.goals_personalized=true: "Role: {role}" and "Focus: {goal}"]
