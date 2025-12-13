@@ -609,6 +609,7 @@ def detect_configured_integrations(base_path: str = ".") -> List[Dict[str, Any]]
         'airtable': 'AIRTABLE_API_KEY',
         'notion': 'NOTION_API_KEY',
         'beam': 'BEAM_API_KEY',
+        'hubspot': 'HUBSPOT_ACCESS_TOKEN',
     }
 
     # Load .env file if exists
@@ -1006,6 +1007,29 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
         except Exception:
             pass  # Keep defaults on error
 
+    # Build pending_onboarding list - ONLY incomplete onboarding skills
+    # This is the definitive list AI should use for proactive suggestions
+    # Maps skill names to their user-facing triggers
+    ONBOARDING_SKILLS = {
+        'setup_goals': {'name': 'setup-goals', 'trigger': 'setup goals', 'priority': 'critical', 'time': '8 min'},
+        'setup_workspace': {'name': 'setup-workspace', 'trigger': 'setup workspace', 'priority': 'high', 'time': '5-8 min'},
+        'learn_projects': {'name': 'learn-projects', 'trigger': 'learn projects', 'priority': 'high', 'time': '8-10 min'},
+        'learn_skills': {'name': 'learn-skills', 'trigger': 'learn skills', 'priority': 'high', 'time': '10-12 min'},
+        'learn_integrations': {'name': 'learn-integrations', 'trigger': 'learn integrations', 'priority': 'high', 'time': '10-12 min'},
+        'learn_nexus': {'name': 'learn-nexus', 'trigger': 'learn nexus', 'priority': 'medium', 'time': '15-18 min'},
+    }
+
+    pending_onboarding = []
+    for key, info in ONBOARDING_SKILLS.items():
+        if not learning_completed.get(key, False):
+            pending_onboarding.append({
+                'key': key,
+                'name': info['name'],
+                'trigger': info['trigger'],
+                'priority': info['priority'],
+                'time': info['time'],
+            })
+
     # Filter to non-complete projects for menu
     active_projects = [p for p in projects if p.get('status') != 'COMPLETE']
 
@@ -1071,6 +1095,10 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
         'integrations_configured': integrations_configured,
         'configured_integrations': configured_integrations,  # List of built integrations
         'learning_completed': learning_completed,
+        # ONBOARDING: Only incomplete onboarding skills - AI should use this for proactive suggestions
+        # If this list is empty, user has completed all onboarding
+        'pending_onboarding': pending_onboarding,
+        'onboarding_complete': len(pending_onboarding) == 0,
         'update_available': update_info['update_available'],
         'update_info': update_info,
     }
