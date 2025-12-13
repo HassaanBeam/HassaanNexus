@@ -127,12 +127,12 @@ Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.
    [If stats.workspace_configured=true: "Configured ▸ 'validate workspace' to sync"]
 
 🔌 INTEGRATIONS
-   Available: Notion, Airtable, Beam.ai ▸ 'add integration'
-   [If stats.integrations_configured=false AND stats.learning_completed.learn_integrations=false:
+   [If any integration in stats.configured_integrations has active=true:
+    "Active: {list names where active=true}" e.g. "Active: Notion, Airtable"]
+   [If no integrations active:
+    "Available: Notion, Airtable, Beam ▸ 'add integration'"]
+   [If stats.learning_completed.learn_integrations=false AND no active integrations:
     "Not configured ▸ 'learn integrations'"]
-   [If stats.integrations_configured=false AND stats.learning_completed.learn_integrations=true:
-    "Ready to connect ▸ 'connect notion' or 'add integration'"]
-   [If stats.integrations_configured=true: "Active ▸ 'add integration' for more"]
 
 💡 SUGGESTED NEXT STEPS
    [Number sequentially starting from 1. Show ALL applicable:]

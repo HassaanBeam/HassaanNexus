@@ -589,19 +589,44 @@ def scan_projects(base_path: str = ".", minimal: bool = True) -> List[Dict[str, 
 
 def detect_configured_integrations(base_path: str = ".") -> List[Dict[str, Any]]:
     """
-    Detect which integrations are already built in the system.
+    Detect which integrations are actually configured (have credentials).
 
-    An integration is considered "configured" if it has a master skill folder:
-    00-system/skills/{integration}/{integration}-master/
+    An integration is considered "active" if:
+    1. It has a master skill folder (00-system/skills/{integration}/{integration}-master/)
+    2. The required environment variable is set in .env
 
     Returns:
-        List of dicts with integration name and available skills
+        List of dicts with integration name, available skills, and active status
     """
     integrations = []
     skills_dir = Path(base_path) / "00-system" / "skills"
 
     if not skills_dir.exists():
         return []
+
+    # Map integration names to their required env vars
+    INTEGRATION_ENV_VARS = {
+        'airtable': 'AIRTABLE_API_KEY',
+        'notion': 'NOTION_API_KEY',
+        'beam': 'BEAM_API_KEY',
+    }
+
+    # Load .env file if exists
+    env_vars = {}
+    env_file = Path(base_path) / ".env"
+    if env_file.exists():
+        try:
+            with open(env_file, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#') and '=' in line:
+                        key, _, value = line.partition('=')
+                        # Remove quotes if present
+                        value = value.strip().strip('"').strip("'")
+                        if value:  # Only count if value is non-empty
+                            env_vars[key.strip()] = value
+        except Exception:
+            pass
 
     # Known integration patterns (folders that represent external service integrations)
     # These follow the master/connect/specialized pattern
@@ -614,11 +639,16 @@ def detect_configured_integrations(base_path: str = ".") -> List[Dict[str, Any]]
         # Check if this category has a master skill (indicates it's an integration)
         master_skill = category_dir / f"{category_name}-master"
         if master_skill.exists() and (master_skill / "SKILL.md").exists():
-            # This is a configured integration
+            # Check if credentials are configured
+            required_env = INTEGRATION_ENV_VARS.get(category_name.lower())
+            is_active = required_env and required_env in env_vars
+
             integration = {
                 'name': category_name,
                 'slug': category_name.lower(),
-                'skills': []
+                'skills': [],
+                'active': is_active,
+                'required_env': required_env,
             }
 
             # List all skills in this integration
