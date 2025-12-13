@@ -1,6 +1,48 @@
 ---
 name: learn-nexus
 description: "Load when user says 'learn nexus', 'nexus tutorial', 'system mastery', 'nexus best practices'. Covers philosophy, design principles, pitfalls, AI patterns. 15-18 min."
+onboarding: true
+priority: medium
+---
+
+## 🎯 AI Proactive Triggering (ONBOARDING SKILL)
+
+**This is an ONBOARDING skill with MEDIUM PRIORITY (suggest after core onboarding complete).**
+
+### When to Proactively Suggest (AI MUST check user-config.yaml)
+
+Check `learning_tracker.completed.learn_nexus` in user-config.yaml. If `false`:
+
+**PROACTIVELY SUGGEST when user:**
+1. Has completed OTHER onboarding skills (setup-goals, learn-projects, learn-skills)
+   but hasn't done learn-nexus yet - suggest as "graduation" step
+2. Asks philosophical questions ("why does Nexus work this way?", "what's the design behind...")
+3. Encounters AI patterns (false progress, incomplete reads, over-engineering)
+4. Makes common mistakes (creating projects instead of skills, skipping close-session)
+5. Expresses interest in mastering the system or best practices
+6. After using Nexus for 3+ sessions without completing this skill
+
+**Suggestion Pattern (after other onboarding):**
+```
+💡 You've learned the core concepts! Ready for system mastery? 'learn nexus'
+(15 min) covers the philosophy, design principles, common pitfalls, and
+expert collaboration techniques.
+
+This is the "graduation" skill - after this, you'll understand Nexus deeply.
+```
+
+**Suggestion Pattern (encountering issues):**
+```
+💡 I notice you're running into [AI pattern / common mistake]. The 'learn nexus'
+skill covers exactly how to handle this. Want to take 15 minutes to learn
+the system deeply? It'll prevent these issues in the future.
+```
+
+**DO NOT suggest if:**
+- `learning_tracker.completed.learn_nexus: true`
+- User hasn't completed core onboarding yet (suggest core skills first)
+- User is new and just getting started (too advanced for first sessions)
+
 ---
 
 # Learn Nexus

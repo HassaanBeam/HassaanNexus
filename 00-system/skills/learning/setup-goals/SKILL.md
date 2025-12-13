@@ -1,6 +1,58 @@
 ---
 name: setup-goals
 description: "Load when user says 'setup goals', 'personalize nexus', 'set my goals', 'define my role'. Captures role, goals, preferences. 8-10 min."
+onboarding: true
+priority: critical
+---
+
+## 🎯 AI Proactive Triggering (ONBOARDING SKILL - CRITICAL PRIORITY)
+
+**This is the FIRST onboarding skill with CRITICAL priority. Suggest early and often.**
+
+### When to Proactively Suggest (AI MUST check user-config.yaml)
+
+Check `learning_tracker.completed.setup_goals` AND `goals.md` for `smart_default: true`. If not personalized:
+
+**PROACTIVELY SUGGEST when user:**
+1. **FIRST SESSION**: Always suggest during first interaction if goals not set
+2. Asks for help with work that would benefit from context (AI can personalize better after setup)
+3. Uses Nexus for meaningful work but hasn't personalized yet
+4. Mentions their role, job, or what they do
+5. Expresses frustration that AI doesn't understand their context
+6. At menu display when `goals_personalized: false` - PROMINENTLY highlight
+
+**Suggestion Pattern (first session):**
+```
+💡 Welcome to Nexus! I'm currently using smart defaults. To help you most
+effectively, I'd love to learn about:
+- Your role and work context
+- Your goals (short-term and long-term)
+- Your preferences
+
+This takes about 8 minutes and dramatically improves our collaboration.
+Say 'setup goals' to personalize, or continue with defaults.
+```
+
+**Suggestion Pattern (returning user, still on defaults):**
+```
+💡 I notice you're still using Nexus defaults. Personalizing takes 8 minutes
+and helps me understand your work context, goals, and preferences.
+
+Ready to 'setup goals'? (This is a one-time setup that improves every session)
+```
+
+**Menu Integration:**
+When displaying menu with `goals_personalized: false`:
+```
+🧠 MEMORY
+   ⚠️ Not personalized ▸ 'setup goals' (8 min, highly recommended)
+```
+
+**DO NOT suggest if:**
+- `learning_tracker.completed.setup_goals: true`
+- `goals.md` no longer has `smart_default: true`
+- User explicitly declined personalization multiple times
+
 ---
 
 # Setup Goals

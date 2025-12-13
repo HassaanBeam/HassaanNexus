@@ -3,6 +3,39 @@ name: add-integration
 description: Build a new API integration for Nexus. Load when user mentions "add integration", "new integration", "integrate with", "connect to [service]", or "build [service] integration". Interactive workflow that discovers API endpoints, plans the integration, and creates a project for implementation.
 ---
 
+## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)
+
+**Before building an integration, AI MUST check `stats.pending_onboarding` for `learn_integrations`:**
+
+### Pre-Flight Check (RECOMMENDED)
+
+Check if `learn_integrations` is in `stats.pending_onboarding`. If present:
+
+```
+💡 Before building your first integration, would you like a quick 10-minute
+tutorial on how Nexus integrations work? It covers:
+- What MCP (Model Context Protocol) is
+- Available integration patterns
+- When to use integrations vs other approaches
+
+Say 'learn integrations' to start the tutorial, or 'skip' to build directly.
+```
+
+**If user says 'skip':** Proceed with integration building but add this note at the end:
+```
+💡 Tip: Run 'learn integrations' later to understand the integration ecosystem.
+```
+
+**If `learn_integrations` NOT in `pending_onboarding`:** Proceed normally without suggestion.
+
+### Context Awareness
+
+If user mentions connecting to external tools but `learn_integrations` is pending:
+- Gently suggest learning first if they seem unfamiliar with MCP concepts
+- Skip suggestion if they clearly know what they're doing (e.g., mention specific API endpoints)
+
+---
+
 # Add Integration
 
 Build complete API integrations following the master/connect/specialized pattern.

@@ -3,6 +3,51 @@ name: execute-project
 description: "[CORE SKILL] Execute and track project work. Load when user says 'continue project', 'work on project', 'execute project', 'resume [name]'. AI should SUGGEST (not auto-load) when: (1) user has IN_PROGRESS projects and asks related work, (2) user references an existing project. Ask: 'Want to continue your [project-name] project?' - let user decide."
 ---
 
+## 🎯 Onboarding Awareness (CONTEXTUAL SUGGESTIONS)
+
+**During project execution, AI should watch for teachable moments:**
+
+### Onboarding Suggestions During Execution
+
+Check `learning_tracker.completed` in user-config.yaml for contextual suggestions:
+
+**If user encounters repeating patterns:**
+```yaml
+learn_skills: false  → Suggest when user does something that could be a skill
+```
+Pattern detection: If user asks to do something similar to what they've done before,
+or creates similar outputs repeatedly → gently suggest 'learn skills':
+```
+💡 I notice this task is similar to [previous task]. If you do this regularly,
+it might be worth learning about Skills (reusable workflows). Run 'learn skills'
+(10 min) when you have time.
+```
+
+**If user asks about integrations during execution:**
+```yaml
+learn_integrations: false  → Suggest when user mentions external tools
+```
+```
+💡 You mentioned [tool]. If you work with external tools often, 'learn integrations'
+(10 min) teaches how Nexus connects to services like Notion, GitHub, etc.
+```
+
+**On project completion (100%):**
+If multiple onboarding skills incomplete, suggest the next logical one:
+```
+🎉 Project complete! You're getting the hang of Nexus.
+
+💡 Next learning opportunity: 'learn skills' - turn repeating work into
+reusable workflows (10 min). Or 'learn nexus' for system mastery (15 min).
+```
+
+### DO NOT Suggest If:
+- User is mid-task and focused (wait for natural breaks)
+- User has explicitly dismissed learning suggestions
+- All onboarding already complete
+
+---
+
 # Skill: Execute Project
 
 **Purpose**: Systematically execute project work with continuous progress tracking and task completion validation.
@@ -428,15 +473,24 @@ Congratulations on completing this project! 🎉
 
 **When to Offer**: At key decision points during execution (section completion, risk assessment, design choices)
 
-**Pattern**: AI always loads mental-models skill, reviews catalog, and offers 2-3 relevant models to user
+**Pattern**: AI runs select_mental_models.py, reviews output, and offers 2-3 relevant models to user
 
 **Mental Models Skill Integration**:
 
-The execute-project skill automatically references mental-models skill at decision points for:
+The execute-project skill automatically references mental-models at decision points for:
 - **Risk analysis** at section checkpoints
 - **Decision-making** when multiple approaches exist
 - **Problem decomposition** when stuck on complex tasks
 - **Systems thinking** for dependency validation
+
+**Required Workflow**:
+1. Run script to get available models:
+   ```bash
+   python 00-system/mental-models/scripts/select_mental_models.py --format brief
+   ```
+2. Select 2-3 relevant models based on context
+3. Offer to user with brief descriptions
+4. Load individual model file only after user selects
 
 **Offering Pattern**:
 
@@ -458,15 +512,15 @@ Which approach sounds most useful? Or continue without structured analysis?
 [User picks option]
 
 If user picks a model:
-→ Load: mental-models/references/diagnostic-models.md (Pre-Mortem)
+→ Read: 00-system/mental-models/models/diagnostic/pre-mortem.md
 → Apply model questions before bulk-completing section
 ```
 
 **Benefits**:
-- ✅ **Proactive** - AI always loads mental-models to identify relevant options
+- ✅ **Proactive** - AI runs script to identify relevant options
 - ✅ **User Choice** - User picks which model (or none) to apply
 - ✅ **Contextual** - Offered at decision points only
-- ✅ **Progressive** - Detailed reference loaded only after selection
+- ✅ **Individual files** - Each model has its own file with full details
 - ✅ **Efficient** - Descriptions are brief (3-7 words) but descriptive
 
 **When to Skip Offering**:

@@ -3,6 +3,43 @@ name: create-project
 description: "[CORE SKILL] Create new temporal work projects. Load when user says 'create project', 'new project', 'start project'. AI should SUGGEST (not auto-load) when: (1) user describes work with a clear endpoint, (2) user asks for help with a deliverable, (3) user mentions planning work. Ask: 'Would you like me to create a project to track this?' - let user decide."
 ---
 
+## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)
+
+**Before creating a project, AI MUST check user-config.yaml for incomplete onboarding:**
+
+### Pre-Flight Check (MANDATORY)
+
+```yaml
+# Check learning_tracker.completed in user-config.yaml
+learn_projects: false  → SUGGEST 'learn projects' skill FIRST
+```
+
+**If `learn_projects: false` AND this is user's FIRST project:**
+```
+💡 Before creating your first project, would you like a quick 8-minute tutorial
+on how Nexus projects work? It covers:
+- When to use projects vs skills (avoid common mistakes)
+- Project structure and lifecycle
+- How to track progress effectively
+
+Say 'learn projects' to start the tutorial, or 'skip' to create directly.
+```
+
+**If user says 'skip':** Proceed with project creation but add this note at the end:
+```
+💡 Tip: Run 'learn projects' later if you want to understand the project system deeply.
+```
+
+**If `learn_projects: true`:** Proceed normally without suggestion.
+
+### Recommended Onboarding Sequence
+
+When checking `learning_tracker.completed`, if user hasn't done core onboarding:
+1. `setup_goals: false` → Consider suggesting (but don't block project creation)
+2. `learn_projects: false` → Suggest before FIRST project (high priority)
+
+---
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⚠️ CRITICAL EXECUTION REQUIREMENTS ⚠️
 
@@ -144,16 +181,20 @@ During the **plan.md** phase, AI **MUST run** select_mental_models.py script FIR
 **Required Workflow** (DO NOT SKIP):
 1. **Run script FIRST** (before applying ANY models):
    ```bash
-   python 00-system/mental-models/scripts/select_mental_models.py
+   python 00-system/mental-models/scripts/select_mental_models.py --format brief
    ```
 
-2. **Review script output**: JSON array with all available mental models and descriptions
+2. **Review script output**: JSON array with all available mental models (59 models across 12 categories)
 
 3. **Offer 2-3 relevant models** to user based on project type/context with brief (3-7 words) descriptions
 
 4. **Wait for user selection**: User chooses which models to apply (or none)
 
-5. **Load specific reference files** only after user selects
+5. **Load the specific model file** only after user selects:
+   ```bash
+   # Individual model files are in: 00-system/mental-models/models/{category}/{model-slug}.md
+   # Example: 00-system/mental-models/models/cognitive/first-principles.md
+   ```
 
 6. **Apply questions** from selected models to fill plan.md collaboratively
 
@@ -183,9 +224,9 @@ Which approach(es) sound most useful? Or we can combine them!
 ```markdown
 User picks: "First Principles + Pre-Mortem"
 
-AI loads:
-→ mental-models/references/cognitive-models.md (First Principles section)
-→ mental-models/references/diagnostic-models.md (Pre-Mortem section)
+AI loads individual model files:
+→ Read: 00-system/mental-models/models/cognitive/first-principles.md
+→ Read: 00-system/mental-models/models/diagnostic/pre-mortem.md
 → Apply questions from both models to fill plan.md
 ```
 
@@ -193,9 +234,9 @@ AI loads:
 - ✅ **Proactive** - AI always loads mental-models, shows what's available
 - ✅ **User choice** - User picks which models (or none) to apply
 - ✅ **Efficient metadata** - Brief (3-7 words) but descriptive
-- ✅ **Single source** - References mental-models skill (no duplication)
-- ✅ **Progressive** - Detailed references loaded only after selection
-- ✅ **Maintainable** - Update mental-models once, all skills benefit
+- ✅ **Individual files** - Each model has its own file with full details
+- ✅ **Script-parseable** - YAML frontmatter for programmatic access
+- ✅ **Maintainable** - Update one model file, all skills benefit
 
 **See**: [`mental-models framework`](../../mental-models/mental-models.md) for full catalog and offering guidance
 

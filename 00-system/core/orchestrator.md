@@ -119,8 +119,9 @@ Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.
     If >5: "+{N} more"]
 
 🔧 SKILLS  [{total_skills} available ▸ 'list skills']
-   [If stats.user_skills>0: "User: {names}"]
-   System: create-project, create-skill, setup-goals, close-session
+   [If stats.user_skills>0: "Custom: {names}"]
+   [If stats.user_skills=0: "No custom skills ▸ 'create skill' or 'search skill library'"]
+   Core: Create Project, Create Skill, Setup Goals, Update Workspace Map
 
 📁 WORKSPACE
    [If stats.workspace_configured=false: "Not configured ▸ 'setup workspace'"]
@@ -176,6 +177,45 @@ Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.
 After loading files, check `user-config.yaml`:
 - If `user_preferences.language` is set → Use that language for ALL responses
 - If empty → Default to English
+
+---
+
+## Proactive Onboarding (HIGH PRIORITY)
+
+**nexus-loader.py returns `stats.pending_onboarding`** - a list of incomplete onboarding skills.
+
+### How to Use `pending_onboarding`
+
+1. **Check on startup**: If `pending_onboarding` is NOT empty, onboarding is incomplete
+2. **Each item has**: `name`, `trigger`, `priority`, `time`
+3. **Suggest proactively** based on context triggers in each skill's SKILL.md
+
+### Example `stats.pending_onboarding` Output:
+```json
+[
+  {"key": "setup_goals", "name": "setup-goals", "trigger": "setup goals", "priority": "critical", "time": "8 min"},
+  {"key": "learn_projects", "name": "learn-projects", "trigger": "learn projects", "priority": "high", "time": "8-10 min"}
+]
+```
+
+### Proactive Suggestion Rules
+
+**DO suggest when** (based on individual skill trigger conditions):
+- `setup_goals` pending + first session or user mentions role/goals
+- `learn_projects` pending + user says "create project" for first time
+- `learn_skills` pending + user describes repeating work patterns
+- `learn_integrations` pending + user mentions external tool
+
+**DO NOT suggest when**:
+- `stats.onboarding_complete: true` (all done!)
+- User is mid-task and focused
+- User explicitly said "skip" or dismissed
+
+### Priority Order
+
+1. **Critical**: `setup_goals` - suggest first, most important
+2. **High**: `setup_workspace`, `learn_projects`, `learn_skills`, `learn_integrations`
+3. **Medium**: `learn_nexus` - "graduation" skill, suggest after others complete
 
 ---
 

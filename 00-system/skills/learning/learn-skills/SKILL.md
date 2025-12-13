@@ -1,6 +1,51 @@
 ---
 name: learn-skills
 description: "Load when user says 'learn skills', 'how do skills work', 'what is a skill', 'skill tutorial'. Teaches skill-worthiness, structure, and triggering. 10-12 min."
+onboarding: true
+priority: high
+---
+
+## 🎯 AI Proactive Triggering (ONBOARDING SKILL)
+
+**This is an ONBOARDING skill with HIGH PRIORITY for proactive suggestion.**
+
+### When to Proactively Suggest (AI MUST check user-config.yaml)
+
+Check `learning_tracker.completed.learn_skills` in user-config.yaml. If `false`:
+
+**PROACTIVELY SUGGEST when user:**
+1. Says "create skill" for the FIRST TIME (suggest learning before creating)
+2. Describes repeating work patterns ("every week I...", "I always have to...")
+3. Asks about automating workflows or creating templates
+4. Expresses confusion about what makes something a "skill"
+5. Creates multiple similar things (report-jan, report-feb anti-pattern)
+6. At the END of learn-projects (natural progression)
+7. When user completes a workflow that could be skill-worthy
+
+**Suggestion Pattern:**
+```
+💡 I notice you're describing repeating work. Before creating a skill, would you
+like a 10-minute tutorial on what makes workflows "skill-worthy"? It covers:
+- The 3-criteria skill-worthiness framework
+- How skills are structured
+- How AI triggers skills automatically
+
+Say 'learn skills' to start, or continue with your current task.
+```
+
+**Anti-Pattern Detection:**
+```
+If user creates: report-jan, report-feb, report-mar...
+→ "I notice you're creating similar items. This is a perfect use case for
+   a SKILL instead of multiple projects. Want to 'learn skills' to understand
+   how to capture this as a reusable workflow?"
+```
+
+**DO NOT suggest if:**
+- `learning_tracker.completed.learn_skills: true`
+- User explicitly says "skip" or "just create the skill"
+- User has already created skills successfully
+
 ---
 
 # Learn Skills

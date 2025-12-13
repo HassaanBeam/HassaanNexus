@@ -1,6 +1,53 @@
 ---
 name: setup-workspace
 description: "Load when user says 'setup workspace', 'organize folders', 'folder structure', 'configure workspace'. Creates practical 04-workspace/ structure. 5-8 min."
+onboarding: true
+priority: high
+---
+
+## 🎯 AI Proactive Triggering (ONBOARDING SKILL)
+
+**This is an ONBOARDING skill with HIGH PRIORITY. Natural follow-up after setup-goals.**
+
+### When to Proactively Suggest (AI MUST check user-config.yaml)
+
+Check `learning_tracker.completed.setup_workspace` in user-config.yaml. If `false`:
+
+**PROACTIVELY SUGGEST when user:**
+1. Just completed setup-goals (natural next step)
+2. Asks where to save files or how to organize work
+3. Creates files in wrong locations (04-workspace/ should be for user content)
+4. Mentions file organization, folder structure, or workspace setup
+5. Has been using Nexus for 2+ sessions without workspace setup
+6. At menu display when `workspace_configured: false`
+
+**Suggestion Pattern (after setup-goals):**
+```
+💡 Great, your goals are set! Next recommended step: 'setup workspace' (5-8 min).
+
+This creates a practical folder structure in 04-workspace/ for your files,
+tailored to your work patterns. Quick and makes file organization effortless.
+```
+
+**Suggestion Pattern (file organization confusion):**
+```
+💡 I notice you're working with files. Would you like to run 'setup workspace'
+(5 min) to create a practical folder structure? It'll help keep your work
+organized and make files easier to find.
+```
+
+**Menu Integration:**
+When displaying menu with `workspace_configured: false`:
+```
+📁 WORKSPACE
+   Not configured ▸ 'setup workspace' (5 min)
+```
+
+**DO NOT suggest if:**
+- `learning_tracker.completed.setup_workspace: true`
+- User has already organized 04-workspace/ manually
+- User explicitly prefers ad-hoc organization
+
 ---
 
 # Setup Workspace

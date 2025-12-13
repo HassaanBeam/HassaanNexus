@@ -1,6 +1,41 @@
 ---
 name: learn-integrations
 description: "Load when user says 'learn integrations', 'what is MCP', 'connect tools', 'integration tutorial'. Teaches MCP, available integrations, when to integrate. 10-12 min."
+onboarding: true
+priority: high
+---
+
+## 🎯 AI Proactive Triggering (ONBOARDING SKILL)
+
+**This is an ONBOARDING skill with HIGH PRIORITY for proactive suggestion.**
+
+### When to Proactively Suggest (AI MUST check user-config.yaml)
+
+Check `learning_tracker.completed.learn_integrations` in user-config.yaml. If `false`:
+
+**PROACTIVELY SUGGEST when user:**
+1. Mentions ANY external tool (GitHub, Slack, Notion, Airtable, Google Drive, Linear, etc.)
+2. Says "I use..." or "I work with..." followed by a tool name
+3. Asks about connecting, syncing, or automating with external services
+4. Expresses frustration about copying data between tools
+5. Asks "can you access..." or "can you connect to..."
+6. Mentions MCP, API, or integration in any context
+7. At the END of completing another onboarding skill (suggest as next step)
+
+**Suggestion Pattern:**
+```
+💡 I notice you haven't learned about integrations yet. Understanding how Nexus
+connects to external tools (like [tool they mentioned]) takes about 10 minutes
+and will help you work more efficiently.
+
+Would you like to run 'learn integrations' now? (You can always do it later)
+```
+
+**DO NOT suggest if:**
+- `learning_tracker.completed.learn_integrations: true`
+- User explicitly dismissed learning skills
+- User is mid-task and focused on something else
+
 ---
 
 # Learn Integrations

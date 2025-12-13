@@ -3,6 +3,42 @@ name: create-skill
 description: "[CORE SKILL] Create reusable workflow skills. Load when user says 'create skill', 'new skill', 'make skill', 'automate this'. AI should SUGGEST (not auto-load) when: (1) user describes repeating tasks ('every week I...'), (2) user completes a reusable workflow, (3) user creates similar things (report-jan, report-feb). Ask: 'Want to turn this into a reusable skill?' - let user decide."
 ---
 
+## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)
+
+**Before creating a skill, AI MUST check `stats.pending_onboarding` for `learn_skills`:**
+
+### Pre-Flight Check (MANDATORY)
+
+Check if `learn_skills` is in `stats.pending_onboarding`. If present AND this is user's FIRST skill:
+
+```
+💡 Before creating your first skill, would you like a quick 10-minute tutorial
+on what makes workflows "skill-worthy"? It covers:
+- The 3-criteria skill-worthiness framework
+- How skills are structured (SKILL.md, scripts/, references/)
+- How AI triggers skills automatically
+
+Say 'learn skills' to start the tutorial, or 'skip' to create directly.
+```
+
+**If user says 'skip':** Proceed with skill creation but add this note at the end:
+```
+💡 Tip: Run 'learn skills' later to understand the skill system deeply.
+```
+
+**If `learn_skills` NOT in `pending_onboarding`:** Proceed normally without suggestion.
+
+### Anti-Pattern Detection
+
+If user is creating similar items (report-jan, report-feb, report-mar pattern):
+```
+💡 I notice you're creating similar items. This is a perfect use case for
+a SKILL instead of multiple projects/files. Want to 'learn skills' first
+to understand how to capture this as a reusable workflow?
+```
+
+---
+
 # Create Skill
 
 This skill provides guidance for creating effective skills.
