@@ -1,5 +1,39 @@
 # Release Notes
 
+## v0.14.2 - Core Skill Triggering Improvements (2025-12-18)
+
+### Skill Priority Ordering
+
+Skills now return in priority order for better AI attention:
+
+1. **CORE skills first**: create-project, execute-project, create-skill
+2. **LEARNING skills second**: setup-memory, learn-projects, learn-skills, etc.
+3. **All other skills** follow
+
+### Renamed setup-goals → setup-memory
+
+The `setup-goals` skill is now `setup-memory` to better reflect its purpose of configuring Nexus memory with user context.
+
+### Orchestrator Improvements
+
+- Added **semantic intent matching** guidance for core skills
+- Clearer decision flow: check existing projects → new work → automation → skill match
+- Simplified learning skill suggestion triggers using `stats.pending_onboarding`
+
+### Simplified Skill Descriptions
+
+Core skill descriptions now focus on intent signals rather than keyword lists:
+- `create-project`: "Load when user wants to START something new with a deliverable"
+- `execute-project`: "Load when user references ANY project by name, ID, or number"
+- `create-skill`: "Load when user wants to automate repeating work"
+
+### Other Changes
+
+- Removed `_file_name` from loader output (redundant with `_file_path`)
+- Updated all references from setup-goals to setup-memory across config, state, templates, and orchestrator
+
+---
+
 ## v0.14.0 - Memory Auto-Scaffolding & Loader Refactor (2025-12-18)
 
 ### Auto-Scaffolding for New Users

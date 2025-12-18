@@ -6,72 +6,55 @@
 
 ## Purpose
 
-The `core/` folder contains fundamental infrastructure files that are essential to Nexus-v3 system operation. These files are loaded every session and provide the foundation for all system functionality.
+Contains fundamental infrastructure for Nexus system operation. Loaded every session.
 
 ---
 
-## Files
+## Structure
 
-### orchestrator.md
-**Purpose**: AI decision logic and routing system
-
-**What it does**:
-- Defines initialization sequence
-- Provides smart routing logic (skills → projects → init state → general work)
-- Specifies context loading rules
-- Handles state detection and menu generation
-
-**Loaded**: Every session (via CLAUDE.md)
-
----
-
-### nexus-loader.py
-**Purpose**: Context loading automation script
-
-**What it does**:
-- Loads core files (system-map, memory-map, project-map, goals, workspace-map)
-- Scans projects and extracts YAML metadata
-- Scans skills and extracts YAML metadata
-- Generates structured JSON output with files + metadata + stats
-- Monitors token budget
-
-**Usage**:
-```bash
-# Startup (loads everything)
-python 00-system/core/nexus-loader.py --startup
-
-# Load specific project
-python 00-system/core/nexus-loader.py --project {project-id}
-
-# Load specific skill
-python 00-system/core/nexus-loader.py --skill {skill-name}
+```
+core/
+├── nexus-loader.py      # CLI entry point (thin wrapper)
+├── nexus/               # Python package
+│   ├── __init__.py      # Public API
+│   ├── config.py        # Constants and paths
+│   ├── models.py        # Dataclasses (Project, Skill, State)
+│   ├── loaders.py       # File scanning and loading
+│   ├── state.py         # State detection and instructions
+│   ├── service.py       # NexusService orchestration
+│   ├── sync.py          # Git sync and updates
+│   ├── utils.py         # Helpers (YAML, tokens, etc.)
+│   └── templates/       # Default file templates
+├── orchestrator.md      # AI routing logic
+└── test_nexus_loader.py # Test suite
 ```
 
-**Loaded**: Every session initialization
+---
+
+## Usage
+
+```bash
+# Startup (loads memory, detects state, returns instructions)
+python 00-system/core/nexus-loader.py --startup
+
+# Load project metadata + file paths
+python 00-system/core/nexus-loader.py --project {id}
+
+# Load skill content
+python 00-system/core/nexus-loader.py --skill {name}
+
+# List all projects/skills
+python 00-system/core/nexus-loader.py --list-projects
+python 00-system/core/nexus-loader.py --list-skills
+
+# Check for updates
+python 00-system/core/nexus-loader.py --check-update
+```
 
 ---
 
-## Why "core/"?
+## Related
 
-These files are:
-- **Fundamental** - System cannot function without them
-- **Always loaded** - Present in every session
-- **Infrastructure** - Not user-modifiable
-- **Cross-cutting** - Affect all other system components
-
-By grouping them in `core/`, we clearly separate infrastructure from:
-- `/skills/` - Reusable workflows (user-facing)
-- `/documentation/` - Reference materials
-- `/blueprints/` - Templates and patterns
-
----
-
-## Related Documentation
-
-- [orchestrator.md](orchestrator.md) - Complete orchestration logic
+- [orchestrator.md](orchestrator.md) - AI decision logic
 - [system-map.md](../system-map.md) - System overview
-- [CLAUDE.md](../../CLAUDE.md) - Initialization entry point
-
----
-
-**Last Updated**: 2025-11-03
+- [CLAUDE.md](../../CLAUDE.md) - Entry point
