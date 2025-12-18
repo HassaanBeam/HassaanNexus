@@ -1,5 +1,33 @@
 # Release Notes
 
+## v0.14.0 - Memory Auto-Scaffolding (2025-12-18)
+
+### User Content Now Stays Local
+
+Memory, projects, skills, and workspace files are no longer tracked in git. They auto-scaffold on first run.
+
+#### Changes
+
+- **Gitignore 01-04 folders** - Only READMEs tracked, user content stays local
+- **Templates moved** - Memory templates now in `00-system/core/nexus/templates/`
+- **Auto-scaffold** - `nexus-loader.py --startup` creates memory files from templates if missing
+- **New nexus/ package** - Refactored loader into modular Python package:
+  - `config.py` - Paths and constants
+  - `models.py` - SystemState enum
+  - `utils.py` - File utilities
+  - `loaders.py` - Project/skill/memory loading
+  - `state.py` - State detection and stats
+  - `sync.py` - Git sync operations
+  - `service.py` - Main NexusService class
+
+#### Why This Matters
+
+- Clone Nexus → your personal data never goes to GitHub
+- Templates provide consistent starting point for all users
+- Cleaner separation: system code vs user content
+
+---
+
 ## v0.13.0 - Display Hints & Mental Models Expansion (2025-12-18)
 
 ### Display Hints for Menu Rendering
