@@ -307,16 +307,20 @@ def create_smart_defaults(base_path: str) -> Dict[str, Any]:
     return result
 
 
-def load_project(project_id: str, base_path: str = ".") -> Dict[str, Any]:
+def load_project(project_id: str, base_path: str = ".", part: int = 0) -> Dict[str, Any]:
     """
-    Load complete project context (all planning files).
+    Load project context with metadata and file paths.
+
+    Returns metadata and paths for all planning files. AI should use Read tool
+    to load file contents (keeps output under bash limit).
 
     Args:
         project_id: Project ID or folder name prefix
         base_path: Root path to Nexus installation
+        part: Reserved for future use (ignored)
 
     Returns:
-        Dictionary with project files and metadata
+        Dictionary with project metadata and file paths (use Read for content)
     """
     from datetime import datetime
 
@@ -350,7 +354,7 @@ def load_project(project_id: str, base_path: str = ".") -> Dict[str, Any]:
         "files": {},
     }
 
-    # Load all planning files
+    # List planning files with metadata (no content - use Read tool)
     planning_files = [
         "01-planning/overview.md",
         "01-planning/plan.md",
@@ -362,13 +366,13 @@ def load_project(project_id: str, base_path: str = ".") -> Dict[str, Any]:
     for file_rel in planning_files:
         file_path = project_path / file_rel
         if file_path.exists():
-            # Extract YAML metadata
+            # Extract YAML metadata only
             metadata = extract_yaml_frontmatter(str(file_path))
 
             result["files"][file_rel] = {
                 "path": str(file_path),
                 "metadata": metadata,
-                # NO 'content' field - use Read tool for complete content
+                # No content - use Read tool for file contents
             }
 
     # List outputs directory
@@ -377,6 +381,14 @@ def load_project(project_id: str, base_path: str = ".") -> Dict[str, Any]:
         result["outputs"] = [
             str(f.relative_to(outputs_path)) for f in outputs_path.rglob("*") if f.is_file()
         ]
+
+    # Instructions for AI
+    result["_usage"] = {
+        "note": "Use Read tool to load file contents in parallel",
+        "recommended_reads": [
+            f["path"] for f in result["files"].values()
+        ],
+    }
 
     return result
 

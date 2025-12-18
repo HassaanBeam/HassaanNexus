@@ -180,17 +180,18 @@ class NexusService:
 
         return result
 
-    def load_project(self, project_id: str) -> Dict[str, Any]:
+    def load_project(self, project_id: str, part: int = 0) -> Dict[str, Any]:
         """
         Load complete project context.
 
         Args:
             project_id: Project ID or folder name prefix
+            part: Which part to load (0=auto, 1=essential, 2=references)
 
         Returns:
             Project context with files and metadata
         """
-        return load_project(project_id, str(self.base_path))
+        return load_project(project_id, str(self.base_path), part=part)
 
     def load_skill(self, skill_name: str) -> Dict[str, Any]:
         """

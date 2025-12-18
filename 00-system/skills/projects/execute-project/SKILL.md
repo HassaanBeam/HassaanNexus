@@ -127,15 +127,21 @@ N+1. Trigger close-session
 
 **Commands**:
 ```bash
-# Load project metadata and file paths
+# Load project with full content (overview, plan, steps, etc.)
 python 00-system/core/nexus-loader.py --project [project-id]
 ```
 
-**Then read all planning files in parallel**:
-```python
-Read: {project}/01-planning/overview.md
-Read: {project}/01-planning/plan.md (or design.md)
-Read: {project}/01-planning/steps.md (or tasks.md)
+**The loader returns**:
+- File paths for all planning files (overview.md, plan.md, steps.md, etc.)
+- YAML metadata extracted from each file
+- Output file listings
+- `_usage.recommended_reads` - list of paths to read
+
+**Then use Read tool in parallel** to load the file contents:
+```
+Read: {path from recommended_reads[0]}
+Read: {path from recommended_reads[1]}
+Read: {path from recommended_reads[2]}
 ```
 
 **Display Project Summary**:

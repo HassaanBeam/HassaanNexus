@@ -105,6 +105,7 @@ def main():
     parser.add_argument('--metadata', action='store_true', help='Load only project/skill metadata (use after --startup --no-metadata)')
     parser.add_argument('--no-metadata', action='store_true', help='Exclude metadata from startup (smaller output, use --metadata separately)')
     parser.add_argument('--project', help='Load project by ID')
+    parser.add_argument('--part', type=int, default=0, help='Part to load for split responses (0=auto, 1=essential, 2=references)')
     parser.add_argument('--skill', help='Load skill by name')
     parser.add_argument('--list-projects', action='store_true', help='List all projects')
     parser.add_argument('--list-skills', action='store_true', help='List all skills')
@@ -138,7 +139,7 @@ def main():
     elif args.metadata:
         result = service.load_metadata()
     elif args.project:
-        result = service.load_project(args.project)
+        result = service.load_project(args.project, part=args.part)
     elif args.skill:
         result = service.load_skill(args.skill)
     elif args.list_projects:
