@@ -1157,6 +1157,7 @@ def load_project(project_id: str, base_path: str = ".") -> Dict[str, Any]:
     # Load all planning files
     planning_files = [
         '01-planning/overview.md',
+        '01-planning/plan.md',
         '01-planning/requirements.md',
         '01-planning/design.md',
         '01-planning/steps.md'
