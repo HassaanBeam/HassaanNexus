@@ -1,5 +1,76 @@
 # Release Notes
 
+## v0.15.0 - Slack Integration (2025-12-19)
+
+### New Integration: Slack
+
+Complete Slack integration with OAuth 2.0 user authentication.
+
+#### Features
+
+**Messaging Operations**
+- Send, update, delete messages
+- Schedule messages
+- Channel history retrieval
+
+**Channel Operations**
+- List channels (public/private)
+- Get channel info
+- Create channels
+
+**User Operations**
+- List workspace users
+- Get user details
+
+**Search Operations**
+- Search messages
+- Search files
+
+**File Operations**
+- Upload files to channels
+- List files
+
+#### Architecture
+
+```
+00-system/skills/slack/
+├── slack-master/           # Shared resources
+│   ├── scripts/            # Python scripts
+│   │   ├── setup_slack.py
+│   │   ├── check_slack_config.py
+│   │   ├── send_message.py
+│   │   ├── list_channels.py
+│   │   ├── channel_history.py
+│   │   ├── list_users.py
+│   │   ├── search_messages.py
+│   │   └── ... (more)
+│   └── references/
+│       ├── setup-guide.md
+│       ├── api-reference.md
+│       └── error-handling.md
+├── slack-connect/          # User entry point
+│   └── SKILL.md            # Meta-skill with routing
+└── SKILL.md                # Main skill definition
+```
+
+#### Usage
+
+Say any of these to trigger Slack operations:
+- "slack" / "connect slack" / "send slack message"
+- "send message to #channel"
+- "list slack channels" / "slack users"
+- "search slack for 'keyword'"
+- "get channel history"
+
+#### Setup
+
+1. Create Slack App at api.slack.com/apps
+2. Add User Token Scopes (channels:read, chat:write, users:read, etc.)
+3. Add redirect URL: `https://localhost:8765/callback`
+4. Run OAuth setup to authorize and save token
+
+---
+
 ## v0.14.2 - Core Skill Triggering Improvements (2025-12-18)
 
 ### Skill Priority Ordering
@@ -95,14 +166,6 @@ Expanded mental models from 30 to **59 models** across **12 categories**.
 
 Models now stored as individual files in `00-system/mental-models/models/{category}/{model}.md` for better organization and loading.
 
-#### Updated Scanner
-
-```bash
-python 00-system/mental-models/scripts/select_mental_models.py --format brief
-python 00-system/mental-models/scripts/select_mental_models.py --category cognitive
-python 00-system/mental-models/scripts/select_mental_models.py --format list
-```
-
 ### Other Changes
 
 - Removed HubSpot integration project (skills remain available)
@@ -138,27 +201,9 @@ Complete HubSpot CRM integration following the master/connect/specialized patter
 00-system/skills/hubspot/
 ├── hubspot-master/          # Shared resources
 │   ├── scripts/             # 20 Python scripts
-│   │   ├── hubspot_client.py
-│   │   ├── check_hubspot_config.py
-│   │   ├── list_contacts.py
-│   │   ├── create_contact.py
-│   │   └── ... (16 more)
 │   └── references/
-│       ├── setup-guide.md
-│       ├── api-reference.md
-│       ├── error-handling.md
-│       └── authentication.md
 └── hubspot-connect/         # User entry point
-    └── SKILL.md             # Meta-skill with routing
 ```
-
-#### Usage
-
-Say any of these to trigger HubSpot operations:
-- "hubspot" / "list contacts" / "show companies"
-- "create contact john@example.com"
-- "search deals enterprise"
-- "list meetings" / "log call"
 
 #### Setup
 
@@ -166,23 +211,50 @@ Say any of these to trigger HubSpot operations:
 2. Add required scopes (crm.objects.contacts.read/write, etc.)
 3. Copy access token to `.env` as `HUBSPOT_ACCESS_TOKEN`
 
-#### Technical Notes
+---
 
-- Token format: EU accounts use `pat-eu1-...`, US use `pat-na1-...`
-- Rate limits: 100 requests/10 seconds, 500,000/day
-- Scope changes regenerate access tokens
+## v0.9.0 - Nexus Sync & Dynamic Integrations (2025-12-11)
 
-### Other Changes
+### Nexus Sync Feature
 
-- Added `hubspot` to integration auto-detection in nexus-loader.py
-- Added `pending_onboarding` stats for proactive skill suggestions
-- Minor updates to learning skills and orchestrator
+Update system files from upstream while protecting user data.
+
+- New `update-nexus` skill - say "update nexus" to pull latest changes
+- `--check-update` and `--sync` commands in nexus-loader.py
+- Automatic backup before sync (saved to `.sync-backup/`)
+- Menu shows update notice when updates are available
+
+### Protected Paths (Never Touched by Sync)
+
+- `01-memory/` - Your goals, config, learnings
+- `02-projects/` - Your projects
+- `03-skills/` - Your custom skills
+- `04-workspace/` - Your files
+- `.env`, `.claude/` - Your secrets and settings
+
+### Dynamic Integrations Menu
+
+- Integrations detected from .env configuration
+- Dynamic menu rendering based on configured integrations
 
 ---
 
-## Previous Releases
+## v0.8.0 - Quick Start Mode (2025-12-10)
 
-### v0.9.0 (2025-12-11)
-- Dynamic integrations menu
-- Improved integration detection
-- README updates
+### Optional Onboarding
+
+- System now works immediately without setup
+- Smart defaults for immediate use
+- Onboarding skills are optional, not required
+- Learning tracker in user-config.yaml
+
+---
+
+## v0.7.0 - Initial Release
+
+Core features:
+- Memory persistence system
+- Project management
+- Skill creation and execution
+- Notion and Airtable integrations
+- Learning skills for onboarding

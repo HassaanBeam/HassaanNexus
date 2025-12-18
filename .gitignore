@@ -50,3 +50,6 @@ desktop.ini
 
 # MCP Configuration (contains API keys)
 .mcp.local.json
+
+# Google OAuth credentials
+google-credentials.json
