@@ -14,7 +14,7 @@ Public API:
     result = service.startup()
 """
 
-__version__ = "0.13.0"
+__version__ = "0.14.2"
 
 # Dependency check - fail gracefully with helpful message
 try:
