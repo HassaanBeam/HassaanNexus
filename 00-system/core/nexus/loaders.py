@@ -205,6 +205,7 @@ def detect_configured_integrations(base_path: str = ".") -> List[Dict[str, Any]]
                 "slug": category_name.lower(),
                 "skills": [],
                 "active": is_active,
+                "status": "configured" if is_active else "available",
                 "required_env": required_env,
             }
 

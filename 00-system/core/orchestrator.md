@@ -183,8 +183,9 @@ Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.
 
 🔌 INTEGRATIONS
    [Build from stats.configured_integrations array:]
-   - Active: {list where active=true, comma-separated} (or "None" if empty)
-   - Available: {list where active=false, comma-separated} ▸ 'connect {name}'
+   - Configured: {list where status="configured", comma-separated} (or "None" if empty)
+   - Available: {list where status="available", comma-separated} ▸ 'connect {name}'
+   [If ALL integrations have status="available": show "No integrations configured yet"]
    - 'add integration' for new services
 
 💡 SUGGESTED NEXT STEPS
