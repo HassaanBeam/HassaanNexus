@@ -1,101 +1,387 @@
 ---
 name: process-client-meeting
-description: Complete workflow to process a meeting end-to-end. Load when user says "process meeting", "meeting workflow", "process client meeting", "full meeting processing", "handle meeting for [client]", or "post-meeting workflow". Orchestrates fetching transcripts, creating minutes, Linear tickets, drafting updates, sending internal updates, and updating project context.
+description: Complete end-to-end workflow to process a client meeting. Load when user says "process meeting", "meeting workflow", "process client meeting", "full meeting processing", "handle meeting for [client]", or "post-meeting workflow". Handles transcript fetching, minutes creation, Linear tickets, client updates, internal updates, and project context sync.
+version: "1.0"
 ---
 
 # Process Client Meeting
 
-**CONSOLIDATED WORKFLOW**: Orchestrates multiple skills for complete meeting processing.
+Complete end-to-end workflow for processing client meetings from transcript to deliverables.
 
-## Overview
+## Purpose
 
-This workflow chains:
-1. `fathom-fetch-meetings` → Fetch meeting transcript
-2. `create-meeting-minutes` → Format into minutes
-3. `linear-create-tickets` → Create tickets for action items
-4. `linear-update-tickets` → Update tickets discussed in meeting
-5. `draft-client-update` → Generate external message
-6. `send-internal-update` → Post to team channel
-7. `update-project-context` → Sync project files
+Automates the entire post-meeting workflow:
+- Fetch meeting transcript from Fathom
+- Generate formatted meeting minutes
+- Create Linear tickets for action items
+- Draft client-facing update message
+- Post internal team update to Slack
+- Update project context files
 
----
+**Time saved**: ~45 minutes of manual work per meeting
 
-## Workflow Execution
+## Quick Setup
 
-### STEP 1: Fetch Meeting
-**Uses**: `fathom-fetch-meetings`
+**Required integrations** (add to `.env`):
 
-Get meeting from Fathom filtered by domain:
+```bash
+# Fathom API - for meeting transcripts
+FATHOM_API_KEY=your-fathom-key
+
+# Linear API - for ticket management
+LINEAR_API_KEY=lin_api_xxxxx
+
+# Slack - for team notifications (run setup_slack.py first)
+SLACK_USER_TOKEN=xoxp-xxxxx
 ```
-Fetching meetings for [domain]...
 
-Found 3 meetings:
-1. Weekly Sync - Dec 15, 2025
-2. POC Review - Dec 12, 2025
-3. Technical Deep-Dive - Dec 10, 2025
+## Workflow Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  STEP 1: Fetch Meeting       [CHECKPOINT: Select meeting]   │
+│  ↓                                                          │
+│  STEP 2: Create Meeting Minutes                             │
+│  ↓                                                          │
+│  STEP 3: Create Linear Tickets (action items)               │
+│  ↓                                                          │
+│  STEP 4: Update Existing Tickets (if discussed)             │
+│  ↓                                                          │
+│  STEP 5: Draft Client Update  [CHECKPOINT: Approve draft]   │
+│  ↓                                                          │
+│  STEP 6: Send Internal Update (Slack)                       │
+│  ↓                                                          │
+│  STEP 7: Update Project Context                             │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-**CHECKPOINT**: Ask user which meeting to process.
+---
+
+# STEP 1: Fetch Meeting from Fathom
+
+## Purpose
+Retrieve meeting list and transcript from Fathom API filtered by client domain.
+
+## Configuration
+
+**API Endpoint**: `https://api.fathom.ai/external/v1`
+**Auth Header**: `X-Api-Key: {FATHOM_API_KEY}`
+
+**Known Client Domains**:
+| Client | Domain |
+|--------|--------|
+| Smartly | smartly.io |
+| Rivertrace | rivertrace.com |
+| Moverii | moverii.de |
+| Doula Givers | doulagivers.com |
+
+## Execution
+
+### 1.1 List Meetings by Domain
+
+```bash
+curl -s --request GET \
+  --url 'https://api.fathom.ai/external/v1/meetings?calendar_invitees_domains[]={DOMAIN}&include_summary=true&include_action_items=true' \
+  --header 'X-Api-Key: {FATHOM_API_KEY}'
+```
+
+**Display**:
+```
+Found 3 meetings for smartly.io:
+
+1. Weekly Sync - Dec 20, 2025
+   Summary: Discussed pipeline progress and Q1 planning...
+   Recording ID: abc123-def456
+
+2. Technical Review - Dec 18, 2025
+   Summary: Reviewed architecture decisions...
+   Recording ID: ghi789-jkl012
+
+Which meeting to process? (enter number)
+```
+
+### 1.2 Fetch Full Transcript
+
+```bash
+curl -s --request GET \
+  --url 'https://api.fathom.ai/external/v1/recordings/{RECORDING_ID}/transcript' \
+  --header 'X-Api-Key: {FATHOM_API_KEY}'
+```
+
+**Response Format**:
+```json
+{
+  "transcript": [
+    {
+      "speaker": {"display_name": "Name", "matched_calendar_invitee_email": "email"},
+      "text": "What they said",
+      "timestamp": "HH:MM:SS"
+    }
+  ]
+}
+```
 
 ---
 
-### STEP 2: Create Meeting Minutes
-**Uses**: `create-meeting-minutes`
+# STEP 2: Create Meeting Minutes
 
-Fetch full transcript and parse into structured minutes:
-- Discussion points
-- Action items (categorized by owner)
-- Decisions made
+## Purpose
+Transform raw transcript into structured meeting minutes with discussion points and action items.
 
-Save to: `[project]/meetings/YYYY-MM-DD-Meeting-Minutes.md`
+## Extraction Rules
+
+**Discussion Points** (include):
+- Key topics and decisions
+- Technical details explained
+- Blockers or dependencies
+- Timeline discussions
+
+**Action Items** (include):
+- Tasks with specific deliverables
+- Clear ownership (internal vs client)
+- Due dates if mentioned
+
+**Action Items** (exclude):
+- "Schedule next meeting" (scheduling tasks)
+- Vague items without deliverables
+- Already completed items
+
+## Output Format
+
+```markdown
+# Meeting Minutes: [Client] — [Topic]
+
+**Date:** [Month Day, Year]
+**Attendees:** [Name] (Company), [Name] (Company)
+**Recording:** [Fathom link if available]
 
 ---
 
-### STEP 3: Create Linear Tickets
-**Uses**: `linear-create-tickets`
+## Discussion Points
 
-For each internal team action item:
-- Filter out scheduling tasks
-- Create ticket in appropriate project
-- Assign default owner
+- [Topic with context and decisions made]
+- [Technical details or process explanations]
+- [Blockers, dependencies, or waiting items]
 
+---
+
+## Action Items
+
+### Internal Team
+- [Person] to [specific task with deliverable]
+- [Person] to [specific task with deliverable]
+
+### Client Actions
+- [Person] to [specific task]
+
+---
+
+## Decisions Made
+
+- [Decision 1]
+- [Decision 2]
+
+---
+
+## Next Meeting
+[Date/time if discussed]
+```
+
+## Save Location
+```
+[project-folder]/meetings/YYYY-MM-DD-Meeting-Minutes.md
+```
+
+---
+
+# STEP 3: Create Linear Tickets
+
+## Purpose
+Create Linear tickets from internal team action items.
+
+## Configuration
+
+**API Endpoint**: `https://api.linear.app/graphql`
+**Auth Header**: `Authorization: {LINEAR_API_KEY}` (NO "Bearer" prefix!)
+
+**Team IDs**:
+| Team | ID |
+|------|-----|
+| Clients | 2686694f-6343-48a0-9efb-d69d77aaa621 |
+
+**State IDs (Clients team)**:
+| State | ID |
+|-------|-----|
+| Todo | d8899534-a204-4446-a06b-681cbc4c6e04 |
+| In Progress | 9a2c9ba8-5931-491e-8298-c9fb761aab23 |
+| In Review | 7866c5ad-5654-4516-849f-b3f7462613d6 |
+| Done | 40112a2a-870e-48ca-aeff-7f16356acd90 |
+
+**Priority Values**:
+| Priority | Value |
+|----------|-------|
+| Urgent | 1 |
+| High | 2 |
+| Medium | 3 |
+| Low | 4 |
+
+## Create Ticket Mutation
+
+```graphql
+mutation CreateIssue($input: IssueCreateInput!) {
+  issueCreate(input: $input) {
+    success
+    issue {
+      id
+      identifier
+      title
+      url
+    }
+  }
+}
+```
+
+**Variables**:
+```json
+{
+  "input": {
+    "title": "Task title (no project prefix)",
+    "teamId": "2686694f-6343-48a0-9efb-d69d77aaa621",
+    "projectId": "PROJECT_UUID",
+    "stateId": "d8899534-a204-4446-a06b-681cbc4c6e04",
+    "priority": 3,
+    "description": "## Context\nFrom meeting: [date]\n\n## Description\n[Task details]"
+  }
+}
+```
+
+## Ticket Title Rules
+- **Good**: "Implement data validation logic"
+- **Bad**: "[Smartly] Implement validation" (no project prefix)
+
+## Output
 ```
 Created 3 tickets:
-- CLI-456: Implement validation
-- CLI-457: Update documentation
-- CLI-458: Review architecture
+- CLI-456: Implement data validation logic
+- CLI-457: Update documentation for new API
+- CLI-458: Review architecture proposal
 ```
 
 ---
 
-### STEP 4: Update Existing Tickets
-**Uses**: `linear-update-tickets`
+# STEP 4: Update Existing Tickets
 
-If meeting discussed existing work:
-- Identify tickets mentioned
-- Update status if completed
-- Add comments with context
+## Purpose
+Update tickets that were discussed in the meeting (status changes, comments).
 
+## Identify Tickets
+Look for ticket references in transcript:
+- "CLI-123 is done"
+- "We finished the pipeline work"
+- "That ticket can be closed"
+
+## Update Status Mutation
+
+```graphql
+mutation UpdateIssue($id: String!, $input: IssueUpdateInput!) {
+  issueUpdate(id: $id, input: $input) {
+    success
+    issue {
+      identifier
+      title
+      state { name }
+    }
+  }
+}
 ```
-Tickets mentioned in meeting:
-- CLI-400: "Pipeline setup" - discussed as complete
 
-Mark CLI-400 as Done? (y/n)
+**Variables (status change)**:
+```json
+{
+  "id": "issue-uuid",
+  "input": {
+    "stateId": "40112a2a-870e-48ca-aeff-7f16356acd90"
+  }
+}
+```
+
+## Add Comment Mutation
+
+```graphql
+mutation AddComment($issueId: String!, $body: String!) {
+  commentCreate(input: {
+    issueId: $issueId,
+    body: $body
+  }) {
+    success
+    comment { id }
+  }
+}
+```
+
+## Output
+```
+Updated tickets:
+- CLI-400: In Progress → Done (comment: "Completed per meeting discussion")
 ```
 
 ---
 
-### STEP 5: Draft Client Update
-**Uses**: `draft-client-update`
+# STEP 5: Draft Client Update
 
-Generate external-facing summary:
-- Meeting overview
-- What was covered
-- Next steps and action items
-- Next meeting date
+## Purpose
+Generate external client-facing summary for Slack or email.
 
-**CHECKPOINT**: Present draft for approval before proceeding.
+## **CHECKPOINT**: Present draft for user approval before proceeding.
 
+## Message Format (Slack)
+
+```
+Hey team! Quick update from today's call:
+
+**What we covered:**
+• [Key discussion point 1]
+• [Key discussion point 2]
+• [Decision made]
+
+**Next steps:**
+• [Our team]: [Action with timeline]
+• [Your team]: [What we need from them]
+
+**Next meeting:** [Date/time if scheduled]
+
+Let me know if you have any questions!
+```
+
+## Message Format (Email)
+
+```
+Subject: [Client] Meeting Follow-up - [Date]
+
+Hi [Name],
+
+Thanks for the productive call today! Here's a quick summary:
+
+**Discussion Highlights:**
+- [Point 1]
+- [Point 2]
+
+**Action Items:**
+Our team:
+- [Action 1]
+- [Action 2]
+
+Your team:
+- [Action if any]
+
+**Next Steps:**
+[Timeline and next meeting info]
+
+Best regards,
+[Name]
+```
+
+## Approval Flow
 ```
 Draft client update:
 ---
@@ -105,92 +391,167 @@ Draft client update:
 1. Approve and continue
 2. Request changes
 3. Skip client update
+
+Choice:
 ```
 
 ---
 
-### STEP 6: Send Internal Update
-**Uses**: `send-internal-update`
+# STEP 6: Send Internal Update
 
-Post to internal team channel:
-- Summary and decisions
-- Blockers
-- Team action items
-- Link to full notes
+## Purpose
+Post meeting summary to internal team Slack channel.
 
----
+## Configuration
 
-### STEP 7: Update Project Context
-**Uses**: `update-project-context`
+Uses Slack User OAuth token from `.env`:
+```
+SLACK_USER_TOKEN=xoxp-xxxxx
+```
 
-Sync project files:
-- Add entry to PROJECT_CONTEXT.md
-- Update project-state.json
-- Capture decisions and action items
+## API Call
 
----
+```bash
+curl -X POST https://slack.com/api/chat.postMessage \
+  -H "Authorization: Bearer {SLACK_USER_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "channel": "#client-updates",
+    "text": "Meeting update message..."
+  }'
+```
 
-## Completion Summary
+## Message Format
 
 ```
-✅ Meeting Processing Complete
+*[Client] Meeting Summary* - [Date]
 
-📋 Meeting Minutes
-   Saved: [path]
+*Key Decisions:*
+• [Decision 1]
+• [Decision 2]
 
-🎫 Linear Tickets
+*Action Items Created:*
+• CLI-456: [Task]
+• CLI-457: [Task]
+
+*Blockers/Risks:*
+• [Any blockers identified]
+
+*Next Meeting:* [Date]
+
+Full notes: [link to minutes]
+```
+
+---
+
+# STEP 7: Update Project Context
+
+## Purpose
+Sync PROJECT_CONTEXT.md and project-state.json with meeting outcomes.
+
+## PROJECT_CONTEXT.md Update
+
+Add new entry at TOP of file:
+
+```markdown
+## [Today's Date]
+
+**Meeting: [Topic]**
+- [Key outcome 1]
+- [Key outcome 2]
+- Action items: CLI-456, CLI-457, CLI-458
+- Next meeting: [Date]
+
+**Decisions:**
+- [Decision 1]
+- [Decision 2]
+```
+
+## project-state.json Update
+
+```json
+{
+  "lastUpdated": "[timestamp]",
+  "currentPhase": "[DISCOVERY|BUILD|REVIEW|COMPLETE]",
+  "recentActivity": [
+    {
+      "date": "[today]",
+      "type": "meeting",
+      "summary": "[Meeting topic and key outcomes]",
+      "tickets": ["CLI-456", "CLI-457"]
+    }
+  ],
+  "nextSteps": [
+    "[Updated next step 1]",
+    "[Updated next step 2]"
+  ],
+  "openIssues": ["[Any new issues]"],
+  "blockers": ["[Any blockers]"]
+}
+```
+
+---
+
+# Completion Summary
+
+```
+Meeting Processing Complete
+
+Meeting Minutes
+   Saved: [path/to/minutes.md]
+
+Linear Tickets
    Created: CLI-456, CLI-457, CLI-458
    Updated: CLI-400 → Done
 
-📤 Client Update
-   Status: [approved/pending/skipped]
+Client Update
+   Status: Approved
+   Format: Slack message
 
-📢 Internal Update
-   Posted to: #[channel]
+Internal Update
+   Posted to: #client-updates
 
-📁 Project Context
-   Updated: PROJECT_CONTEXT.md, project-state.json
+Project Context
+   Updated: PROJECT_CONTEXT.md
+   Updated: project-state.json
 
-Would you like to send the client update now?
+All steps completed successfully!
 ```
 
 ---
 
-## Error Handling
+# Error Handling
 
-If any step fails:
+| Step | Error | Recovery |
+|------|-------|----------|
+| 1 | No meetings found | Ask for different date range or domain |
+| 1 | API 401 | Check FATHOM_API_KEY |
+| 3 | Linear 401 | Check LINEAR_API_KEY (no Bearer prefix!) |
+| 5 | User skips | Continue to step 6 |
+| 6 | Slack fails | Offer to copy message manually |
+
+**On any step failure**:
 1. Report which step failed and why
 2. Offer to retry or skip
 3. Continue with remaining steps
-4. Summarize success/failure at end
+4. Summarize successes/failures at end
 
 ---
 
-## HITL Checkpoints
+# Customization
 
-Two mandatory checkpoints for human approval:
-1. **After Step 1**: Select which meeting to process
-2. **After Step 5**: Approve client update before sending
+**Skip steps** based on context:
+- No Fathom → User provides transcript directly
+- No action items → Skip ticket creation
+- Internal meeting → Skip client update
+- No project folder → Skip context update
 
----
-
-## Customization
-
-Each step can be run independently:
-- Skip Fathom fetch if transcript provided
-- Skip ticket creation if no action items
-- Skip client update if internal-only meeting
+**Run individual steps**:
+Each step can be executed independently via the component skills.
 
 ---
 
-## Skills Used
-
-| Step | Skill | Purpose |
-|------|-------|---------|
-| 1 | `fathom-fetch-meetings` | Get transcript |
-| 2 | `create-meeting-minutes` | Format minutes |
-| 3 | `linear-create-tickets` | Create new tickets |
-| 4 | `linear-update-tickets` | Update existing |
-| 5 | `draft-client-update` | External message |
-| 6 | `send-internal-update` | Team notification |
-| 7 | `update-project-context` | Sync files |
+**Version**: 1.0
+**Integration**: Fathom, Linear, Slack
+**Owner**: Hassaan Ahmed
+**Tested**: Full workflow validated

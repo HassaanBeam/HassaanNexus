@@ -39,13 +39,13 @@ curl -s --request GET \
 **Response:**
 ```json
 {
-  "meetings": [
+  "items": [
     {
-      "id": "meeting-uuid",
+      "id": "meeting-id",
       "title": "Weekly Sync",
       "created_at": "2025-01-15T10:00:00Z",
       "duration_seconds": 3600,
-      "recording_id": "recording-uuid",
+      "recording_id": 123456789,
       "calendar_invitees": [
         {
           "email": "user@smartly.io",
@@ -58,7 +58,8 @@ curl -s --request GET \
       ]
     }
   ],
-  "next_cursor": "cursor-for-next-page"
+  "next_cursor": "cursor-for-next-page",
+  "limit": 50
 }
 ```
 
@@ -122,9 +123,12 @@ Returns metadata about a specific recording.
 
 ## Rate Limits
 
-- 100 requests per minute
+- **60 requests per 60 seconds** (global limit)
 - 429 response indicates rate limiting - wait and retry
-- Use `Retry-After` header for wait time
+- Response headers:
+  - `RateLimit-Limit`: Max requests in window
+  - `RateLimit-Remaining`: Requests left
+  - `RateLimit-Reset`: Time until window resets
 
 ---
 

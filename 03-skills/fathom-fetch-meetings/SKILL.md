@@ -1,42 +1,57 @@
 ---
 name: fathom-fetch-meetings
-description: Fetch meeting recordings and transcripts from Fathom API filtered by attendee email domain. Load when user says "fetch meetings", "get fathom recordings", "fathom meetings for [domain]", "list meetings from fathom", "get transcripts", or mentions Fathom. Returns meeting summaries, action items, and optionally full transcripts.
+description: Fetch meeting recordings and transcripts from Fathom API filtered by attendee email domain. Load when user says "fetch meetings", "get fathom recordings", "fathom meetings for [domain]", "list meetings from fathom", "get transcripts", or mentions Fathom.
+version: "1.0"
 ---
 
 # Fathom Fetch Meetings
 
-Fetch meetings from Fathom API filtered by attendee domain.
+Fetch and filter meeting recordings from Fathom API by client domain.
+
+## Purpose
+
+Query Fathom to retrieve meetings filtered by attendee email domain. Returns meeting summaries, action items, and optionally full transcripts. Use this as the entry point for meeting processing workflows.
+
+## Quick Setup
+
+**Requirements**: Fathom API key in `.env`
+
+```bash
+# Add to .env
+FATHOM_API_KEY=your-api-key-here
+```
+
+Get your API key: Fathom Settings → API
 
 ## Configuration
 
 **API Endpoint**: `https://api.fathom.ai/external/v1`
+**Auth Header**: `X-Api-Key: {FATHOM_API_KEY}`
 
-**API Key Location**: User must provide or store in environment/config.
-
-**Known Domains** (expandable):
-- `smartly.io` → Smartly
-- `rivertrace.com` → Rivertrace
-
----
+**Known Client Domains**:
+| Client | Domain |
+|--------|--------|
+| Smartly | smartly.io |
+| Rivertrace | rivertrace.com |
+| Moverii | moverii.de |
+| Doula Givers | doulagivers.com |
 
 ## Workflow
 
 ### Step 1: Get Domain
 
-If user provides client name, map to domain:
+Map client name to domain or ask user:
 ```
 "Smartly" → smartly.io
 "Rivertrace" → rivertrace.com
 ```
 
-If unknown, ask user for the email domain directly.
-
 ### Step 2: Fetch Meetings
 
 ```bash
 curl -s --request GET \
-  --url 'https://api.fathom.ai/external/v1/meetings?calendar_invitees_domains[]={DOMAIN}&include_summary=true' \
-  --header 'X-Api-Key: {API_KEY}'
+  --url 'https://api.fathom.ai/external/v1/meetings?calendar_invitees_domains[]={DOMAIN}&include_summary=true&include_action_items=true' \
+  --header 'X-Api-Key: {FATHOM_API_KEY}'
 ```
 
 **Query Parameters**:
@@ -46,28 +61,32 @@ curl -s --request GET \
 | `include_summary` | Include AI-generated summary |
 | `include_transcript` | Include full transcript |
 | `include_action_items` | Include extracted action items |
-| `created_after` | ISO 8601 date filter |
+| `created_after` | ISO 8601 date filter (e.g., 2025-01-01) |
+| `created_before` | ISO 8601 date filter |
 
 ### Step 3: Display Results
 
 ```
-Found {count} meetings for {domain}:
+Found 3 meetings for smartly.io:
 
-1. {title} - {date}
-   Summary: {preview}
-   Recording ID: {id}
+1. Weekly Sync - Dec 20, 2025
+   Summary: Discussed pipeline progress...
+   Recording ID: abc123-def456
 
-2. {title} - {date}
-   ...
+2. Technical Review - Dec 18, 2025
+   Summary: Reviewed architecture decisions...
+   Recording ID: ghi789-jkl012
+
+Select meeting to get full transcript (or 'skip'):
 ```
 
 ### Step 4: Fetch Transcript (Optional)
 
-For specific meeting:
+For a specific meeting:
 ```bash
 curl -s --request GET \
   --url 'https://api.fathom.ai/external/v1/recordings/{RECORDING_ID}/transcript' \
-  --header 'X-Api-Key: {API_KEY}'
+  --header 'X-Api-Key: {FATHOM_API_KEY}'
 ```
 
 **Transcript Response**:
@@ -83,8 +102,6 @@ curl -s --request GET \
 }
 ```
 
----
-
 ## Output
 
 Returns meeting data including:
@@ -94,9 +111,22 @@ Returns meeting data including:
 - Attendee list
 - Full transcript (if requested)
 
----
+## Error Handling
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| 401 Unauthorized | Invalid API key | Check FATHOM_API_KEY in .env |
+| No meetings found | Wrong domain or date range | Verify domain, adjust date filters |
+| 403 Forbidden | API access disabled | Contact Fathom support |
 
 ## Related Skills
 
+- `fathom-get-transcript` - Fetch transcript by recording ID
 - `create-meeting-minutes` - Format transcript into minutes
 - `process-client-meeting` - Full meeting workflow
+
+---
+
+**Version**: 1.0
+**Integration**: Fathom API
+**Owner**: Hassaan Ahmed

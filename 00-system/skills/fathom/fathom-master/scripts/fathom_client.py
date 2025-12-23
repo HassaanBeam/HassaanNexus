@@ -135,7 +135,7 @@ class FathomClient:
             include_action_items: Include extracted action items
             created_after: ISO 8601 date string
             created_before: ISO 8601 date string
-            limit: Max results per request
+            limit: Max results per request (max 60 requests per 60 seconds)
         """
         params = {
             'include_summary': str(include_summary).lower(),
@@ -150,14 +150,18 @@ class FathomClient:
         if created_before:
             params['created_before'] = created_before
 
-        return self.get('/meetings', params=params)
+        result = self.get('/meetings', params=params)
+        # API returns 'items' array, normalize to 'meetings' for compatibility
+        if 'items' in result and 'meetings' not in result:
+            result['meetings'] = result['items']
+        return result
 
     def get_transcript(self, recording_id):
         """
         Get full transcript for a recording.
 
         Args:
-            recording_id: UUID of the recording
+            recording_id: Integer ID of the recording (from meeting's recording_id field)
         """
         return self.get(f'/recordings/{recording_id}/transcript')
 

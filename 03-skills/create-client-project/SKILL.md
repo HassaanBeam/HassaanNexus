@@ -1,11 +1,22 @@
 ---
 name: create-client-project
-description: Create a new client project folder with complete structure and templates. Load when user says "create client project", "new client", "add client [name]", "onboard new client", "setup client folder", or "create project for [client]". Creates folder structure with documentation templates based on provided information.
+description: Create a new client project folder with complete structure and templates. Load when user says "create client project", "new client", "add client [name]", "onboard new client", "setup client folder", or "create project for [client]".
+version: "1.0"
 ---
 
 # Create Client Project
 
-Create a new client project folder with complete structure.
+Create a standardized client project folder structure with pre-configured templates.
+
+## Purpose
+
+Quickly onboard new clients with a complete folder structure including:
+- Project context tracking files
+- Documentation templates
+- Meeting notes organization
+- Communication archives
+
+**Time saved**: ~20 minutes of manual setup per client
 
 ## Workflow
 
@@ -24,7 +35,7 @@ Create a new client project folder with complete structure.
 What's the client name?
 > Acme Corporation
 
-Do you have any documentation to include? (paste, file path, or 'skip')
+Do you have any GTM documentation to include? (paste, file path, or 'skip')
 ```
 
 ### Step 2: Normalize Name
@@ -67,7 +78,7 @@ Convert to folder-safe format:
 ```markdown
 # [Client Name] Project Context
 
-> Quick-reference log of project changes. Newest at top.
+> Quick-reference log of project changes. Newest entries at top.
 
 ---
 
@@ -78,6 +89,7 @@ Convert to folder-safe format:
 
 **Links:**
 - [Scope of Work](docs/SCOPE_OF_WORK.md)
+- [Technical Architecture](docs/TECHNICAL_ARCHITECTURE.md)
 ```
 
 **project-state.json**:
@@ -85,6 +97,7 @@ Convert to folder-safe format:
 {
   "lastUpdated": "[timestamp]",
   "clientName": "[Client Name]",
+  "clientDomain": "[domain.com]",
   "currentPhase": "DISCOVERY",
   "recentActivity": [{
     "date": "[today]",
@@ -98,7 +111,10 @@ Convert to folder-safe format:
   ],
   "openIssues": [],
   "blockers": [],
-  "team": { "internal": [], "client": [] }
+  "team": {
+    "internal": [],
+    "client": []
+  }
 }
 ```
 
@@ -135,11 +151,11 @@ If documentation provided, extract:
 ### Step 6: Report Success
 
 ```
-✅ Client project created: [Client Name]
+Client project created: [Client Name]
 
-📁 Location: [path]
+Location: [path]
 
-📝 Files Created:
+Files Created:
 - PROJECT_CONTEXT.md
 - project-state.json
 - README.md
@@ -149,23 +165,38 @@ If documentation provided, extract:
 - docs/LINEAR_TICKETS.md
 - docs/SLACK_CHANNELS_SETUP.md
 
-📋 Next Steps:
+Next Steps:
 1. Review and complete SCOPE_OF_WORK.md
 2. Create Linear project
 3. Set up Slack channels
 4. Schedule kickoff meeting
 ```
 
----
+## Package Contents
 
-## Template Files
-
-Templates in `templates/` subdirectory can be customized.
-
----
+```
+create-client-project/
+├── SKILL.md                    # This file
+└── templates/
+    ├── PROJECT_CONTEXT.md      # Context template
+    ├── project-state.json      # State template
+    ├── README.md               # Overview template
+    └── docs/
+        ├── SCOPE_OF_WORK.md
+        ├── SOLUTION_WORKFLOW.md
+        ├── TECHNICAL_ARCHITECTURE.md
+        ├── LINEAR_TICKETS.md
+        └── SLACK_CHANNELS_SETUP.md
+```
 
 ## Related Skills
 
-- `process-client-meeting` - Use after kickoff
+- `process-client-meeting` - Use after kickoff meeting
 - `update-project-context` - Keep context current
 - `create-weekly-update` - Start weekly reporting
+- `fathom-fetch-meetings` - Filter meetings by client domain
+
+---
+
+**Version**: 1.0
+**Owner**: Hassaan Ahmed
