@@ -1,0 +1,30 @@
+{
+  "lastUpdated": "{{TIMESTAMP}}",
+  "version": "1.0",
+  "clientName": "{{CLIENT_NAME}}",
+  "currentPhase": "DISCOVERY",
+  "phaseStatus": "In Progress",
+  "recentActivity": [
+    {
+      "date": "{{DATE}}",
+      "type": "onboarding",
+      "summary": "Project folder created"
+    }
+  ],
+  "nextSteps": [
+    "Complete kickoff meeting",
+    "Define scope of work",
+    "Set up communication channels"
+  ],
+  "openIssues": [],
+  "completedIssues": [],
+  "blockers": [],
+  "team": {
+    "internal": [],
+    "client": []
+  },
+  "actionItems": {
+    "pending": [],
+    "completed": []
+  }
+}
