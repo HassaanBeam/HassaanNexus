@@ -5,6 +5,10 @@
 
 smart_default: true
 
+notion:
+  notion_user_id: "173499c3-edf2-41af-887d-7116f0aa52e1"
+  notion_user_name: "Hassaan Ahmed"
+
 user_preferences:
   language: ""
   timezone: ""
