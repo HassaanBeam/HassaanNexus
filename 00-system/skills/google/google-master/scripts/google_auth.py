@@ -27,6 +27,40 @@ NEXUS_ROOT = find_nexus_root()
 TOKEN_PATH = NEXUS_ROOT / "01-memory" / "integrations" / "google-token.json"
 CREDENTIALS_PATH = NEXUS_ROOT / "00-system" / "google-credentials.json"
 
+def load_env():
+    """Load environment variables from .env file."""
+    env_path = NEXUS_ROOT / ".env"
+    env_vars = {}
+    if env_path.exists():
+        with open(env_path) as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    key, _, value = line.partition('=')
+                    env_vars[key.strip()] = value.strip()
+    return env_vars
+
+def get_credentials_from_env():
+    """Get Google OAuth credentials from .env file."""
+    env_vars = load_env()
+    client_id = env_vars.get('GOOGLE_CLIENT_ID') or os.getenv('GOOGLE_CLIENT_ID')
+    client_secret = env_vars.get('GOOGLE_CLIENT_SECRET') or os.getenv('GOOGLE_CLIENT_SECRET')
+    project_id = env_vars.get('GOOGLE_PROJECT_ID') or os.getenv('GOOGLE_PROJECT_ID')
+
+    if client_id and client_secret:
+        return {
+            "installed": {
+                "client_id": client_id,
+                "project_id": project_id or "nexus-integration",
+                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                "token_uri": "https://oauth2.googleapis.com/token",
+                "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+                "client_secret": client_secret,
+                "redirect_uris": ["http://localhost"]
+            }
+        }
+    return None
+
 # All scopes for all Google services
 SCOPES = {
     'gmail': [
@@ -122,9 +156,23 @@ def get_credentials(scopes=None):
                 creds = None
 
         if not creds:
-            if not CREDENTIALS_PATH.exists():
-                print(f"[ERROR] OAuth credentials not found at: {CREDENTIALS_PATH}")
-                print("\nTo set up Google authentication:")
+            # Try to get credentials from .env first
+            env_creds = get_credentials_from_env()
+
+            if env_creds:
+                # Use credentials from .env
+                flow = InstalledAppFlow.from_client_config(env_creds, scopes)
+            elif CREDENTIALS_PATH.exists():
+                # Fall back to JSON file
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    str(CREDENTIALS_PATH), scopes
+                )
+            else:
+                print("[ERROR] OAuth credentials not found")
+                print("\nTo set up Google authentication, add to your .env file:")
+                print("  GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com")
+                print("  GOOGLE_CLIENT_SECRET=your-client-secret")
+                print("\nOr download OAuth credentials JSON from Google Cloud Console:")
                 print("1. Go to https://console.cloud.google.com/")
                 print("2. Create a project (or select existing)")
                 print("3. Enable APIs: Gmail, Docs, Sheets, Calendar")
@@ -133,10 +181,6 @@ def get_credentials(scopes=None):
                 print("6. Download JSON and save as:")
                 print(f"   {CREDENTIALS_PATH}")
                 return None
-
-            flow = InstalledAppFlow.from_client_secrets_file(
-                str(CREDENTIALS_PATH), scopes
-            )
             creds = flow.run_local_server(port=0)
 
         # Save token
@@ -195,15 +239,19 @@ def check_config(service=None, json_output=False):
         "scopes_requested": scopes
     }
 
+    # Check if credentials exist in .env
+    env_creds = get_credentials_from_env()
+    status["credentials_in_env"] = env_creds is not None
+
     if not status["dependencies_installed"]:
         status["error"] = "Missing dependencies"
         status["ai_action"] = "install_dependencies"
         status["fix"] = "pip install google-auth google-auth-oauthlib google-api-python-client"
         status["exit_code"] = 2
-    elif not status["credentials_file"]:
+    elif not status["credentials_file"] and not status["credentials_in_env"]:
         status["error"] = f"OAuth credentials not found"
         status["ai_action"] = "need_credentials"
-        status["fix"] = "Download OAuth credentials from Google Cloud Console"
+        status["fix"] = "Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to .env"
         status["exit_code"] = 2
     elif not status["token_file"]:
         status["message"] = "Credentials found but not authenticated yet"
@@ -263,9 +311,13 @@ def login(service=None):
         print("  pip install google-auth google-auth-oauthlib google-api-python-client")
         sys.exit(2)
 
-    if not CREDENTIALS_PATH.exists():
-        print(f"[ERROR] OAuth credentials not found at: {CREDENTIALS_PATH}")
-        print("\nTo set up:")
+    env_creds = get_credentials_from_env()
+    if not CREDENTIALS_PATH.exists() and not env_creds:
+        print("[ERROR] OAuth credentials not found")
+        print("\nTo set up, add to your .env file:")
+        print("  GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com")
+        print("  GOOGLE_CLIENT_SECRET=your-client-secret")
+        print("\nOr download OAuth credentials JSON from Google Cloud Console:")
         print("1. Go to https://console.cloud.google.com/")
         print("2. Create a project (or select existing)")
         print("3. Enable APIs: Gmail API, Google Docs API, Google Sheets API, Google Calendar API")
