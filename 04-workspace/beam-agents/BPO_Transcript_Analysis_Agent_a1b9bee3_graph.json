@@ -1,0 +1,1313 @@
+{
+  "graph": {
+    "id": "5fa146c6-fe54-4cc0-8bd4-47cc8a87ddd7",
+    "agentId": "a1b9bee3-1e15-4c11-a6d5-739d8a4f01ea",
+    "isActive": false,
+    "isDraft": true,
+    "isPublished": false,
+    "publishedAt": null,
+    "isEdited": false,
+    "isEverExecuted": false,
+    "isEverUsedForTemplate": false,
+    "nodes": [
+      {
+        "id": "4cdf6552-0b1d-4660-8a66-b57fc465ce18",
+        "customId": "6b04cbae-e686-4fb2-a696-3a8c88bf8141",
+        "objective": "Exit Node",
+        "evaluationCriteria": [
+          null
+        ],
+        "isEntryNode": false,
+        "isExitNode": true,
+        "xCoordinate": 391.91337511517474,
+        "yCoordinate": 724.7433895181701,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "childEdges": [],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "db93f1ba-9656-4b22-85e9-b585f9919845",
+            "sourceAgentGraphNodeId": "f062a797-cf4c-4c43-b471-0e1b707dc3d6",
+            "targetAgentGraphNodeId": "4cdf6552-0b1d-4660-8a66-b57fc465ce18",
+            "condition": "Not flagged",
+            "name": "Transcript Not Flagged",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "33510185-1a27-46a6-a84a-5290b7b1bade",
+        "customId": "505ba141-b800-42df-9319-64ae4431491d",
+        "objective": "Send email to the customer regarding the flagging of their conversation and that it owuld be looked at internally.\n\nThe body of the email should be in HTML format so that line breaks and formatting is preserved",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -358.3063775676304,
+        "yCoordinate": 726.784758197376,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "e9cb6560-ccd1-41ea-a897-90cbffc24850",
+          "toolFunctionName": "GmailAction_SendEmail",
+          "toolName": "Send Email",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1ed80007-64a5-4266-aa2e-658a1ecc4da5",
+          "description": "Send an email to one or more recipients.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "908f5c15-25b6-45f1-964d-ca9ea9f8447c",
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T13:36:33.836Z",
+              "updatedAt": "2026-01-06T13:36:33.836Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "boolean",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "0e7139b0-bc5d-4976-8dc9-be0068bf3a25",
+              "paramName": "reply_to_sender_only",
+              "agentToolConfigurationId": "e9cb6560-ccd1-41ea-a897-90cbffc24850",
+              "paramDescription": "If true, replies go only to the original sender",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:36:33.836Z",
+              "updatedAt": "2026-01-06T13:36:33.836Z",
+              "fillType": "ai_fill",
+              "position": 1,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "e1533d2d-dbd1-44e4-a0e0-e9fdbd238a8f",
+              "paramName": "reply_to",
+              "agentToolConfigurationId": "e9cb6560-ccd1-41ea-a897-90cbffc24850",
+              "paramDescription": "Email address where replies should be directed",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:36:33.836Z",
+              "updatedAt": "2026-01-06T13:36:33.836Z",
+              "fillType": "ai_fill",
+              "position": 2,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "d80633dd-bf5a-4409-9d6e-5fdaca8f0f02",
+              "paramName": "sender_name",
+              "agentToolConfigurationId": "e9cb6560-ccd1-41ea-a897-90cbffc24850",
+              "paramDescription": "Display name shown as the sender",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:36:33.836Z",
+              "updatedAt": "2026-01-06T13:36:33.836Z",
+              "fillType": "ai_fill",
+              "position": 3,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "66a791f0-2d81-41b7-bcaa-d185f2c071ac",
+              "paramName": "cc_list",
+              "agentToolConfigurationId": "e9cb6560-ccd1-41ea-a897-90cbffc24850",
+              "paramDescription": "Comma-separated CC recipient email addresses",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:36:33.836Z",
+              "updatedAt": "2026-01-06T13:36:33.836Z",
+              "fillType": "ai_fill",
+              "position": 4,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "b042e8ff-e0ef-4ce4-8613-9fe123fd66dd",
+              "paramName": "bcc_list",
+              "agentToolConfigurationId": "e9cb6560-ccd1-41ea-a897-90cbffc24850",
+              "paramDescription": "Comma-separated BCC recipient email addresses",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:36:33.836Z",
+              "updatedAt": "2026-01-06T13:36:33.836Z",
+              "fillType": "ai_fill",
+              "position": 5,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "d4cceab7-927f-4368-b3cb-0bc79ddb4f60",
+              "paramName": "body",
+              "agentToolConfigurationId": "e9cb6560-ccd1-41ea-a897-90cbffc24850",
+              "paramDescription": "HTML or markdown content of the email",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:36:33.836Z",
+              "updatedAt": "2026-01-06T13:36:33.836Z",
+              "fillType": "ai_fill",
+              "position": 6,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "10ea2a63-b60e-41bb-9557-bdf2ad494fa6",
+              "paramName": "subject",
+              "agentToolConfigurationId": "e9cb6560-ccd1-41ea-a897-90cbffc24850",
+              "paramDescription": "Subject line of the email",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:36:33.836Z",
+              "updatedAt": "2026-01-06T13:36:33.836Z",
+              "fillType": "ai_fill",
+              "position": 7,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "a4f7ce91-3020-4c89-9d9a-9fdf2e71b58f",
+              "paramName": "email_address",
+              "agentToolConfigurationId": "e9cb6560-ccd1-41ea-a897-90cbffc24850",
+              "paramDescription": "Comma-separated recipient email addresses",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Send Email",
+            "toolFunctionName": "GmailAction_SendEmail",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1ed80007-64a5-4266-aa2e-658a1ecc4da5",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Send an email to one or more recipients.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GmailAction_SendEmail: Function to send an email using Gmail.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1ed80007-64a5-4266-aa2e-658a1ecc4da5",
+              "tool_name": "Send Email",
+              "data_source": false,
+              "description": "Function to send an email using Gmail.",
+              "function_name": "GmailAction_SendEmail",
+              "preferred_model": "GPT40",
+              "requires_consent": true,
+              "integrationIdentifier": "google-mail",
+              "optional_extracted_args": [
+                "bcc_list: string // The bcc list, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "cc_list: string // The cc list, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "sender_name: string // The sender name, found in Gmail API responses or user input and formatted as a string.",
+                "reply_to: string // The reply to, found in Gmail API responses or user input and formatted as a string.",
+                "reply_to_sender_only: boolean // The reply to sender only, found in Gmail API responses or user input and formatted as a string.",
+                "attachment: string // The attachment, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "email_address: string // The email address, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "subject: string // The subject, found in Gmail API responses or user input and formatted as a string.",
+                "body: string // The body, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Send an email to one or more recipients.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "body": "{{string}}",
+                    "cc_list": "{{string}}",
+                    "subject": "{{string}}",
+                    "bcc_list": "{{string}}",
+                    "reply_to": "{{string}}",
+                    "attachment": "{{string}}",
+                    "email_address": "{{string}}",
+                    "reply_to_sender_only": "{{boolean}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-mail/send-email"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "label_ids": "{{result.data.label_ids}}",
+                  "thread_id": "{{result.data?.thread_id}}",
+                  "message_id": "{{result.data?.message_id}}",
+                  "email_address": "{{result.data?.email_address}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "681b4b01-3dc5-469f-98e0-3c9610b34f4d",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "Email address (e.g., user@example.com)",
+                "required": true,
+                "paramName": "email_address",
+                "paramDescription": "The email address, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The subject parameter value",
+                "required": true,
+                "paramName": "subject",
+                "paramDescription": "The subject, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The body parameter value",
+                "required": true,
+                "paramName": "body",
+                "paramDescription": "The body, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The bcc list parameter value",
+                "required": false,
+                "paramName": "bcc_list",
+                "paramDescription": "The bcc list, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The cc list parameter value",
+                "required": false,
+                "paramName": "cc_list",
+                "paramDescription": "The cc list, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "Name value (e.g., Finalize report)",
+                "required": false,
+                "paramName": "sender_name",
+                "paramDescription": "The sender name, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The reply to parameter value",
+                "required": false,
+                "paramName": "reply_to",
+                "paramDescription": "The reply to, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "boolean",
+                "fillType": "ai_fill",
+                "paramTip": "The reply to sender only parameter value",
+                "required": false,
+                "paramName": "reply_to_sender_only",
+                "paramDescription": "The reply to sender only, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The attachment parameter value",
+                "required": false,
+                "paramName": "attachment",
+                "paramDescription": "The attachment, found in Gmail API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-mail",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "f6515187-0b96-4c17-8d99-fa6d06016284",
+            "sourceAgentGraphNodeId": "33510185-1a27-46a6-a84a-5290b7b1bade",
+            "targetAgentGraphNodeId": "8fbf56d2-6dea-4e08-ab15-484abe800b39",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "7efd2a8f-4f7a-4626-be89-730baf35dc3a",
+            "sourceAgentGraphNodeId": "f062a797-cf4c-4c43-b471-0e1b707dc3d6",
+            "targetAgentGraphNodeId": "33510185-1a27-46a6-a84a-5290b7b1bade",
+            "condition": "If the conversation has been flagged",
+            "name": "Flagged Conversation Analysis",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "8fbf56d2-6dea-4e08-ab15-484abe800b39",
+        "customId": "5de3d2f1-cdd8-4fad-a397-e861430e4773",
+        "objective": "Send slack message to internal teams. include details of the customer and mention that their conversation needs to be reviewed",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -358.3063775676305,
+        "yCoordinate": 870.8506987425984,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "95020ef1-dc11-4a90-8fdd-fdf73812069b",
+          "toolFunctionName": "SlackAction_SendMessageToChannel",
+          "toolName": "Post Message to Channel",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/4785b7d0-8818-44a8-b02b-d9924e029151",
+          "description": "Send Message To Channel in Slack",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "cf44a11d-cc8e-43e1-8714-3fe2243995d6",
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T13:37:47.453Z",
+              "updatedAt": "2026-01-06T13:37:47.453Z",
+              "fillType": "static",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": "demo-notifications",
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "22976a5c-0443-4966-b449-1feffa4471b4",
+              "paramName": "channel",
+              "agentToolConfigurationId": "95020ef1-dc11-4a90-8fdd-fdf73812069b",
+              "paramDescription": "The channel, found in Slack API responses or user input and formatted as a string (e.g., ``general``).",
+              "paramTip": "The channel used in Slack (e.g., general)",
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:37:47.453Z",
+              "updatedAt": "2026-01-06T13:37:47.453Z",
+              "fillType": "ai_fill",
+              "position": 1,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "bc55f424-7c5f-4095-874a-72a4e5fcf9ca",
+              "paramName": "message",
+              "agentToolConfigurationId": "95020ef1-dc11-4a90-8fdd-fdf73812069b",
+              "paramDescription": "The message, found in Slack API responses or user input and formatted as a string (e.g., ``Standup starting now.``).",
+              "paramTip": "The message used in Slack (e.g., Standup starting now.)",
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Post Message to Channel",
+            "toolFunctionName": "SlackAction_SendMessageToChannel",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/4785b7d0-8818-44a8-b02b-d9924e029151",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Send Message To Channel in Slack",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "SlackAction_SendMessageToChannel: Function for send a message to a Slack channel.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/4785b7d0-8818-44a8-b02b-d9924e029151",
+              "tool_name": "Post Message to Channel",
+              "data_source": false,
+              "description": "Function for send a message to a Slack channel.",
+              "function_name": "SlackAction_SendMessageToChannel",
+              "preferred_model": null,
+              "requires_consent": false,
+              "integrationIdentifier": "slack",
+              "optional_extracted_args": [],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "channel: string // The channel, found in Slack API responses or user input and formatted as a string (e.g., ``general``).",
+                "message: string // The message, found in Slack API responses or user input and formatted as a string (e.g., ``Standup starting now.``)."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Send Message To Channel in Slack",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "channel": "{{string}}",
+                    "message": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/slack/send-message-channel"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "channel_id": "{{result.data?.channel_id}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "fd49a281-2984-4d33-ada2-9dbebff80afc",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The channel used in Slack (e.g., general)",
+                "required": true,
+                "paramName": "channel",
+                "paramDescription": "The channel, found in Slack API responses or user input and formatted as a string (e.g., ``general``)."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The message used in Slack (e.g., Standup starting now.)",
+                "required": true,
+                "paramName": "message",
+                "paramDescription": "The message, found in Slack API responses or user input and formatted as a string (e.g., ``Standup starting now.``)."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "slack",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "f6515187-0b96-4c17-8d99-fa6d06016284",
+            "sourceAgentGraphNodeId": "33510185-1a27-46a6-a84a-5290b7b1bade",
+            "targetAgentGraphNodeId": "8fbf56d2-6dea-4e08-ab15-484abe800b39",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "3c8de4f2-8b36-48c8-82da-62f22d2092c2",
+        "customId": "69928821-7ce7-4253-bb21-309648eb28ea",
+        "objective": "Exit Node",
+        "evaluationCriteria": [
+          null
+        ],
+        "isEntryNode": false,
+        "isExitNode": true,
+        "xCoordinate": 379.4505445910833,
+        "yCoordinate": 576.0038875264135,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "childEdges": [],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "65afbbc1-5188-4430-8dc2-512f4cb92093",
+            "sourceAgentGraphNodeId": "71633538-a800-4076-beae-aaa3048320d7",
+            "targetAgentGraphNodeId": "3c8de4f2-8b36-48c8-82da-62f22d2092c2",
+            "condition": "If no orders are found",
+            "name": "No Orders Found",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "f062a797-cf4c-4c43-b471-0e1b707dc3d6",
+        "customId": "a830ba07-23ca-48e4-8561-5ff68c78da8d",
+        "objective": "Analyze Transcript for Flags (Negative Sentiment / Compliance). The output should have confirmaiton if the transcript is flagged or not flagged and the reason for flagging (if it is flagge",
+        "evaluationCriteria": [
+          "1. **Objective**: Ensure accurate analysis of call transcripts for negative sentiment and compliance issues.\n2. **Metrics**: Measure success based on accuracy, completeness, and relevance of the analysis.\n3. **Steps**: Evaluate the tool by testing it with various call transcripts to ensure consistent performance.\n4. **Expected Outcome**: The tool should accurately identify any flags and provide clear reasoning for flagging.\n5. **Scoring**: Assign a numerical score based on accuracy and completeness, with a range of 0-100.\n6. **Reasoning for Low Scores**: \n   - **Context**: Evaluated under conditions with varying transcript formats.\n   - **Specific Issues**: Inaccurate analysis or failure to identify relevant flags.\n   - **Impact**: Affects the relevance and accuracy of the analysis.\n   - **Recommendations**: Improve analysis techniques and validation processes to enhance accuracy."
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -238.35163377324983,
+        "yCoordinate": 573.3716947590851,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "57750884-7bbc-4209-8b5f-77d9c7681b92",
+          "toolFunctionName": "GPTAction_Custom_TranscriptAnalysisTool_ULNr",
+          "toolName": "Transcript Analysis Tool",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/01d9f4d0-8a09-4c21-8cb1-938407c9e917_badge-check.png",
+          "description": "The Transcript Analysis Tool is designed to analyze call transcripts for negative sentiment and compliance issues. It ensures that the transcript is thoroughly examined for any flags that may indicate a problem. The tool maintains data integrity and ensures that all relevant information is considered in the analysis. It provides a clear and actionable output that reflects the findings of the analysis. The tool is essential for identifying potential issues and ensuring compliance.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "object",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "ac05cb02-a38b-4eca-9ee3-e68875e2ef55",
+              "paramName": "retreived_data",
+              "agentToolConfigurationId": "57750884-7bbc-4209-8b5f-77d9c7681b92",
+              "paramDescription": "The data that has been retrieved from Airtable regarding the order",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "e068c91e-8111-4722-b864-24187d564ce7",
+              "paramName": "call_transcript",
+              "agentToolConfigurationId": "57750884-7bbc-4209-8b5f-77d9c7681b92",
+              "paramDescription": "The transcript of the call from which information needs to be extracted. This would be provided in the task context",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [
+            {
+              "isArray": false,
+              "id": "b5808952-510c-4bdc-a6a0-c96f19ec46b0",
+              "paramName": "flag_reason",
+              "position": 0,
+              "paramDescription": "Provides the reason for flagging the transcript, if applicable.",
+              "agentToolConfigurationId": "57750884-7bbc-4209-8b5f-77d9c7681b92",
+              "parentId": null,
+              "paramPath": null,
+              "outputExample": null,
+              "dataType": "string",
+              "typeOptions": null,
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z"
+            },
+            {
+              "isArray": false,
+              "id": "dfb90a63-c771-4e06-9944-0d13bcd0fc2b",
+              "paramName": "flag_status",
+              "position": 0,
+              "paramDescription": "Indicates whether the transcript is flagged or not flagged.",
+              "agentToolConfigurationId": "57750884-7bbc-4209-8b5f-77d9c7681b92",
+              "parentId": null,
+              "paramPath": null,
+              "outputExample": null,
+              "dataType": "string",
+              "typeOptions": null,
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z"
+            }
+          ],
+          "originalTool": {
+            "toolName": "Transcript Analysis Tool",
+            "toolFunctionName": "GPTAction_Custom_TranscriptAnalysisTool_ULNr",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/01d9f4d0-8a09-4c21-8cb1-938407c9e917_badge-check.png",
+            "type": "custom_gpt_tool",
+            "prompt": "## Role\nYou are an expert in analyzing call transcripts for negative sentiment and compliance issues. Your role involves ensuring that the analysis is thorough and accurate, identifying any potential flags that may indicate a problem. You must maintain data integrity and ensure that all relevant information is considered in the analysis. Your expertise in sentiment analysis and compliance ensures that the findings are clear and actionable. You are responsible for providing a comprehensive analysis that reflects the findings accurately. Your role is crucial in identifying potential issues and ensuring compliance.\n\n---\n\n## Objective\nThe objective is to analyze the call transcript for any negative sentiment or compliance issues. The analysis should confirm whether the transcript is flagged or not and provide reasons for any flagging. The objective is to ensure that the analysis is thorough and accurate, considering all relevant information. The findings should be clear and actionable, reflecting the analysis accurately. The objective is to identify potential issues and ensure compliance. The analysis should be comprehensive, considering all relevant data. The objective is to provide a clear and actionable output that reflects the findings of the analysis.\n\n---\n\n## Task\nYour task is to analyze the call transcript for any negative sentiment or compliance issues. You must confirm whether the transcript is flagged or not and provide reasons for any flagging. The analysis should be thorough and accurate, considering all relevant information. You must ensure that the findings are clear and actionable, reflecting the analysis accurately. Your task is to identify potential issues and ensure compliance. The analysis should be comprehensive, considering all relevant data. You must provide a clear and actionable output that reflects the findings of the analysis.\n\n---\n\n## Parameter Context\n@CallTranscript:\nThe transcript of the call from which information needs to be extracted.\n```{call_transcript}```\n@EndCallTranscript\n\n@OrderDetails:\nThe details of the order retrieved from the Airtable database.\n```{retreived_data}```\n@EndOrderDetails\n\n \n---\n## Instruction\n- Analyze the call transcript for negative sentiment.\n- Identify any negative words or phrases.\n- Determine the overall sentiment of the conversation.\n- Analyze the call transcript for compliance issues.\n- Identify any compliance-related keywords.\n- Determine if any compliance standards are violated.\n- Combine the findings from both analyses.\n- Determine if the transcript is flagged.\n- Provide reasons for any flagging.\n\n\n---\n\n## Rules And Constraints\n- Ensure thorough and accurate analysis.\n- Consider all relevant information.\n- Identify potential flags.\n- Provide clear and actionable findings.\n- Ensure compliance with relevant standards.\n\n---\n\n## Expected Output\nThe expected output should confirm whether the transcript is flagged or not and provide reasons for any flagging. The output should be clear and actionable, reflecting the findings of the analysis. It should include confirmation of flag status and reasons for flagging, if applicable.\n\n---\n",
+            "description": "The Transcript Analysis Tool is designed to analyze call transcripts for negative sentiment and compliance issues. It ensures that the transcript is thoroughly examined for any flags that may indicate a problem. The tool maintains data integrity and ensures that all relevant information is considered in the analysis. It provides a clear and actionable output that reflects the findings of the analysis. The tool is essential for identifying potential issues and ensuring compliance.",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "The Transcript Analysis Tool is designed to analyze call transcripts for negative sentiment and compliance issues. It ensures that the transcript is thoroughly examined for any flags that may indicate a problem. The tool maintains data integrity and ensures that all relevant information is considered in the analysis. It provides a clear and actionable output that reflects the findings of the analysis. The tool is essential for identifying potential issues and ensuring compliance.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/01d9f4d0-8a09-4c21-8cb1-938407c9e917_badge-check.png",
+              "tool_name": "Transcript Analysis Tool",
+              "description": "The Transcript Analysis Tool is designed to analyze call transcripts for negative sentiment and compliance issues. It ensures that the transcript is thoroughly examined for any flags that may indicate a problem. The tool maintains data integrity and ensures that all relevant information is considered in the analysis. It provides a clear and actionable output that reflects the findings of the analysis. The tool is essential for identifying potential issues and ensuring compliance.",
+              "function_name": "GPTAction_Custom_TranscriptAnalysisTool_ULNr"
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "2105a5cb-0474-41d2-973d-4c7ab2212c3e",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "call_transcript",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "The transcript of the call from which information needs to be extracted. This would be provided in the task context",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "96fa68e7-c3d2-42b5-9c90-006ce3ec1057"
+              },
+              {
+                "id": "b63e2d99-f65e-4944-859d-41253f9ba1ce",
+                "dataType": "object",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "retreived_data",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "The data that has been retrieved from Airtable regarding the order",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "96fa68e7-c3d2-42b5-9c90-006ce3ec1057"
+              }
+            ],
+            "outputParams": [
+              {
+                "id": "1e26af31-d49c-48bb-9405-e249eab04b96",
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "flag_reason",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "paramDescription": "Provides the reason for flagging the transcript, if applicable.",
+                "agentToolConfigurationId": "96fa68e7-c3d2-42b5-9c90-006ce3ec1057"
+              },
+              {
+                "id": "77d8a664-5055-4030-bed4-303e5d9882e4",
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "flag_status",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "paramDescription": "Indicates whether the transcript is flagged or not flagged.",
+                "agentToolConfigurationId": "96fa68e7-c3d2-42b5-9c90-006ce3ec1057"
+              }
+            ]
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "7efd2a8f-4f7a-4626-be89-730baf35dc3a",
+            "sourceAgentGraphNodeId": "f062a797-cf4c-4c43-b471-0e1b707dc3d6",
+            "targetAgentGraphNodeId": "33510185-1a27-46a6-a84a-5290b7b1bade",
+            "condition": "If the conversation has been flagged",
+            "name": "Flagged Conversation Analysis",
+            "isAttachmentDataPulledIn": true
+          },
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "db93f1ba-9656-4b22-85e9-b585f9919845",
+            "sourceAgentGraphNodeId": "f062a797-cf4c-4c43-b471-0e1b707dc3d6",
+            "targetAgentGraphNodeId": "4cdf6552-0b1d-4660-8a66-b57fc465ce18",
+            "condition": "Not flagged",
+            "name": "Transcript Not Flagged",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "936d71c2-dc7b-4f30-bb0c-424e89becbb5",
+            "sourceAgentGraphNodeId": "71633538-a800-4076-beae-aaa3048320d7",
+            "targetAgentGraphNodeId": "f062a797-cf4c-4c43-b471-0e1b707dc3d6",
+            "condition": "If orders are found",
+            "name": "Order Found",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "71633538-a800-4076-beae-aaa3048320d7",
+        "customId": "12f33dd6-486c-40bc-aaa8-367ae50e8cec",
+        "objective": "Get order details from the Airtable database",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -37.38849157227449,
+        "yCoordinate": 415.2850698742599,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "129d80f7-5204-4f4d-91d4-2f494ed6ba67",
+          "toolFunctionName": "AirtableAction_GetRecords",
+          "toolName": "Retrieve Airtable Records",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/2805ae7a-fa3e-47c4-b373-85b1826e2564",
+          "description": "Retrieves records from an Airtable table, with optional filtering by field values.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": true,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "d06912be-72db-4de9-974c-84d6fb7a9587",
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T13:36:42.071Z",
+              "updatedAt": "2026-01-06T13:36:42.071Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "object",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "65a51a4b-0057-492b-981c-50fa2acf7a8b",
+              "paramName": "filter",
+              "agentToolConfigurationId": "129d80f7-5204-4f4d-91d4-2f494ed6ba67",
+              "paramDescription": "Filter for Order Number with an object with field:value pairs (e.g., {\"Order Number\":\"Active\"})",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:36:42.071Z",
+              "updatedAt": "2026-01-06T13:36:42.071Z",
+              "fillType": "static",
+              "position": 1,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": "tblCsCjuFe5qj5nbc",
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "f0f04ad8-7f85-4321-8f58-37e4e6779f01",
+              "paramName": "table",
+              "agentToolConfigurationId": "129d80f7-5204-4f4d-91d4-2f494ed6ba67",
+              "paramDescription": "Table name or ID (e.g., \"Contacts\")",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:36:42.071Z",
+              "updatedAt": "2026-01-06T13:36:42.071Z",
+              "fillType": "static",
+              "position": 2,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": "appaJAfTi3RohG8AB",
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "138cd8a5-3ffb-4ff9-848d-90f573c761bc",
+              "paramName": "base_id",
+              "agentToolConfigurationId": "129d80f7-5204-4f4d-91d4-2f494ed6ba67",
+              "paramDescription": "Airtable base ID (e.g., \"app123ABC\")",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Retrieve Airtable Records",
+            "toolFunctionName": "AirtableAction_GetRecords",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/2805ae7a-fa3e-47c4-b373-85b1826e2564",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Retrieves records from an Airtable table, with optional filtering by field values.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "AirtableAction_GetRecords: Retrieve records from Airtable table with optional filtering by field values.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/2805ae7a-fa3e-47c4-b373-85b1826e2564",
+              "tool_name": "Get Records",
+              "data_source": false,
+              "description": "Fetch records from an Airtable table, optionally filtering by a JSON object of field:value pairs (e.g., {\"Status\":\"Active\"}).",
+              "function_name": "AirtableAction_GetRecords",
+              "preferred_model": null,
+              "requires_consent": true,
+              "agentos_categories": [],
+              "integrationIdentifier": "airtable",
+              "optional_extracted_args": [
+                "filter: object // The field filter array, found in Airtable API responses or user input and formatted as a JSON string or object (e.g., ``{\"Status\":\"Active\"}``)."
+              ],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "base_id: string // The Airtable base ID, found in Airtable API lookups or previous node outputs and formatted as provider ID (e.g., ``app123ABC``).",
+                "table: string // The table name or ID, found in Airtable base configuration or previous node outputs and formatted as a string (e.g., ``Contacts``)."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Retrieves records from an Airtable table, with optional filtering by field values.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "table": "{{string}}",
+                    "filter": "{{object}}",
+                    "base_id": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/airtable/get-records"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "records": "{{result.data?.records}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "fb6d4a6e-b93f-4ea4-bd83-592bf4a258bc",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The base id used to reference records in Airtable (e.g., app123ABC)",
+                "required": true,
+                "paramName": "base_id",
+                "paramDescription": "The Airtable base ID, found in Airtable API lookups or previous node outputs and formatted as provider ID (e.g., ``app123ABC``)."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The table used in Airtable (e.g., Contacts)",
+                "required": true,
+                "paramName": "table",
+                "paramDescription": "The table name or ID, found in Airtable base configuration or previous node outputs and formatted as a string (e.g., ``Contacts``)."
+              },
+              {
+                "dataType": "object",
+                "fillType": "ai_fill",
+                "paramTip": "The filter used in Airtable (e.g., {\"Status\":\"Active\"})",
+                "required": false,
+                "paramName": "filter",
+                "paramDescription": "The field filter array, found in Airtable API responses or user input and formatted as a JSON string or object (e.g., ``{\"Status\":\"Active\"}``)."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "airtable",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "936d71c2-dc7b-4f30-bb0c-424e89becbb5",
+            "sourceAgentGraphNodeId": "71633538-a800-4076-beae-aaa3048320d7",
+            "targetAgentGraphNodeId": "f062a797-cf4c-4c43-b471-0e1b707dc3d6",
+            "condition": "If orders are found",
+            "name": "Order Found",
+            "isAttachmentDataPulledIn": true
+          },
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "65afbbc1-5188-4430-8dc2-512f4cb92093",
+            "sourceAgentGraphNodeId": "71633538-a800-4076-beae-aaa3048320d7",
+            "targetAgentGraphNodeId": "3c8de4f2-8b36-48c8-82da-62f22d2092c2",
+            "condition": "If no orders are found",
+            "name": "No Orders Found",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "6862cd3e-8163-4b33-9478-0ccebabbebae",
+            "sourceAgentGraphNodeId": "5be2a1bb-95f5-4136-888f-ddc411cdfc62",
+            "targetAgentGraphNodeId": "71633538-a800-4076-beae-aaa3048320d7",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "5be2a1bb-95f5-4136-888f-ddc411cdfc62",
+        "customId": "63936659-44c0-47b2-9c5f-8831295bfb58",
+        "objective": "Exclude key information from the provided call transcript. Ensure that you also extract the order number.",
+        "evaluationCriteria": [
+          "1. **Objective**: Ensure accurate analysis of call transcripts for negative sentiment and compliance issues.\n2. **Metrics**: Measure success based on accuracy, completeness, and relevance of the analysis.\n3. **Steps**: Evaluate the tool by testing it with various call transcripts to ensure consistent performance.\n4. **Expected Outcome**: The tool should accurately identify any flags and provide clear reasoning for flagging.\n5. **Scoring**: Assign a numerical score based on accuracy and completeness, with a range of 0-100.\n6. **Reasoning for Low Scores**: \n   - **Context**: Evaluated under conditions with varying transcript formats.\n   - **Specific Issues**: Inaccurate analysis or failure to identify relevant flags.\n   - **Impact**: Affects the relevance and accuracy of the analysis.\n   - **Recommendations**: Improve analysis techniques and validation processes to enhance accuracy."
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -35.830637756763025,
+        "yCoordinate": 266.54556788250324,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "cd50d2b7-f721-406c-a4cb-08db077d2e13",
+          "toolFunctionName": "GPTAction_Custom_TranscriptAnalysisTool_wUK3",
+          "toolName": "Transcript Analysis Tool",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/3dd090ac-265a-4a90-8da7-4714cc98067c_paperclip.png",
+          "description": "The Transcript Analysis Tool is designed to analyze call transcripts for negative sentiment and compliance issues. It ensures that the transcript is thoroughly examined for any flags that may indicate a problem. The tool maintains data integrity and ensures that all relevant information is considered in the analysis. It provides a clear and actionable output that reflects the findings of the analysis. The tool is essential for identifying potential issues and ensuring compliance.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "ebad0643-bb36-42ae-986f-3bb74362c269",
+              "paramName": "call_transcript",
+              "agentToolConfigurationId": "cd50d2b7-f721-406c-a4cb-08db077d2e13",
+              "paramDescription": "The transcript of the call from which information needs to be extracted. This would be provided in the task context",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [
+            {
+              "isArray": false,
+              "id": "4af32982-0cbd-4669-aad9-ccde88023b77",
+              "paramName": "flag_reason",
+              "position": 0,
+              "paramDescription": "Provides the reason for flagging the transcript, if applicable.",
+              "agentToolConfigurationId": "cd50d2b7-f721-406c-a4cb-08db077d2e13",
+              "parentId": null,
+              "paramPath": null,
+              "outputExample": null,
+              "dataType": "string",
+              "typeOptions": null,
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z"
+            },
+            {
+              "isArray": false,
+              "id": "0b7e35a6-586d-431a-b901-815204e308f6",
+              "paramName": "flag_status",
+              "position": 0,
+              "paramDescription": "Indicates whether the transcript is flagged or not flagged.",
+              "agentToolConfigurationId": "cd50d2b7-f721-406c-a4cb-08db077d2e13",
+              "parentId": null,
+              "paramPath": null,
+              "outputExample": null,
+              "dataType": "string",
+              "typeOptions": null,
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z"
+            },
+            {
+              "isArray": false,
+              "id": "5378bab2-8871-4683-9592-0d6fc04e3471",
+              "paramName": "reasoning_steps",
+              "position": 0,
+              "paramDescription": "list of reasoning steps for the Tree-of-Thought topology that leads to the final output:",
+              "agentToolConfigurationId": "cd50d2b7-f721-406c-a4cb-08db077d2e13",
+              "parentId": null,
+              "paramPath": null,
+              "outputExample": null,
+              "dataType": "string",
+              "typeOptions": null,
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z"
+            }
+          ],
+          "originalTool": {
+            "toolName": "Transcript Analysis Tool",
+            "toolFunctionName": "GPTAction_Custom_TranscriptAnalysisTool_wUK3",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/3dd090ac-265a-4a90-8da7-4714cc98067c_paperclip.png",
+            "type": "custom_gpt_tool",
+            "prompt": "## Role\nYou are an expert in analyzing call transcripts for negative sentiment and compliance issues. Your role involves ensuring that the analysis is thorough and accurate, identifying any potential flags that may indicate a problem. You must maintain data integrity and ensure that all relevant information is considered in the analysis. Your expertise in sentiment analysis and compliance ensures that the findings are clear and actionable. You are responsible for providing a comprehensive analysis that reflects the findings accurately. Your role is crucial in identifying potential issues and ensuring compliance.\n\n---\n\n## Objective\nThe objective is to analyze the call transcript for any negative sentiment or compliance issues. The analysis should confirm whether the transcript is flagged or not and provide reasons for any flagging. The objective is to ensure that the analysis is thorough and accurate, considering all relevant information. The findings should be clear and actionable, reflecting the analysis accurately. The objective is to identify potential issues and ensure compliance. The analysis should be comprehensive, considering all relevant data. The objective is to provide a clear and actionable output that reflects the findings of the analysis.\n\n---\n\n## Task\nYour task is to analyze the call transcript for any negative sentiment or compliance issues. You must confirm whether the transcript is flagged or not and provide reasons for any flagging. The analysis should be thorough and accurate, considering all relevant information. You must ensure that the findings are clear and actionable, reflecting the analysis accurately. Your task is to identify potential issues and ensure compliance. The analysis should be comprehensive, considering all relevant data. You must provide a clear and actionable output that reflects the findings of the analysis.\n\n---\n\n## Parameter Context\n@CallTranscript:\nThe transcript of the call from which information needs to be extracted.\n```{call_transcript}```\n@EndCallTranscript\n\n\n---\n\n## Reasoning\nreasoning\n### Task Objective:\nAnalyze the call transcript for negative sentiment and compliance issues, confirming if flagged and providing reasons.\n\n### Selected Topology:\nTree-of-Thought was selected to explore different branches of analysis, such as sentiment and compliance separately.\n\n### Task Decomposition:\n- Analyze for negative sentiment.\n- Analyze for compliance issues.\n- Combine findings.\n\n### Applied Rules, Constraints & Logic:\n- Ensure thorough and accurate analysis.\n- Consider all relevant information.\n- Provide clear and actionable findings.\n\n### Reasoning Steps:\n- Identify negative words or phrases.\n- Determine overall sentiment.\n- Identify compliance-related keywords.\n- Determine compliance violations.\n- Combine findings.\n\n### Output Formatting:\n- Provide confirmation if flagged.\n- Provide reasons for flagging.\n\n### Risks & Safeguards:\n- Ensure data integrity.\n- Avoid false positives.\n\n### Conclusion & Next Steps:\n- Provide a comprehensive analysis.\n- Ensure compliance.\n\n\n### Reasoning Steps Example\n\n[\n[\n   {{\n      \"input\": \"The customer was unhappy with the service.\",\n      \"steps\": [\n         {{\n            \"step\": 1,\n            \"description\": \"Identify negative words.\",\n            \"data\": \"unhappy\"\n         }},\n         {{\n            \"step\": 2,\n            \"description\": \"Determine overall sentiment.\",\n            \"data\": \"Negative\"\n         }},\n         {{\n            \"step\": 3,\n            \"description\": \"Identify compliance keywords.\",\n            \"data\": \"None\"\n         }},\n         {{\n            \"step\": 4,\n            \"description\": \"Determine compliance violations.\",\n            \"data\": \"None\"\n         }},\n         {{\n            \"step\": 5,\n            \"description\": \"Combine findings.\",\n            \"data\": \"Flagged for negative sentiment.\"\n         }}\n      ],\n      \"final_result\": \"Flagged\"\n   }}\n]\n]\n\n \n---\n## Instruction\n- Analyze the call transcript for negative sentiment.\n- Identify any negative words or phrases.\n- Determine the overall sentiment of the conversation.\n- Analyze the call transcript for compliance issues.\n- Identify any compliance-related keywords.\n- Determine if any compliance standards are violated.\n- Combine the findings from both analyses.\n- Determine if the transcript is flagged.\n- Provide reasons for any flagging.\n\n---\n\n## Extraction Strategy\nFor Data Extraction, ensure that all relevant information is accurately extracted from the call transcript. Use strict matching and first-occurrence extraction. Do not infer or guess missing information. Preserve field ordering as provided. Maintain consistency between normalization, extraction, and validation.\n\n---\n\n## Data Continuity Directive\nEnsure that all data fields are retained throughout the analysis. Use a deep merge strategy to combine new or corrected fields into cumulative data. Do not drop any keys. Ensure that the information and data fields are not missed.\n\n---\n\n## Rules And Constraints\n- Ensure thorough and accurate analysis.\n- Consider all relevant information.\n- Identify potential flags.\n- Provide clear and actionable findings.\n- Ensure compliance with relevant standards.\n\n---\n\n## Expected Output\nThe expected output should confirm whether the transcript is flagged or not and provide reasons for any flagging. The output should be clear and actionable, reflecting the findings of the analysis. It should include confirmation of flag status and reasons for flagging, if applicable.\n\n---\n",
+            "description": "The Transcript Analysis Tool is designed to analyze call transcripts for negative sentiment and compliance issues. It ensures that the transcript is thoroughly examined for any flags that may indicate a problem. The tool maintains data integrity and ensures that all relevant information is considered in the analysis. It provides a clear and actionable output that reflects the findings of the analysis. The tool is essential for identifying potential issues and ensuring compliance.",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "The Transcript Analysis Tool is designed to analyze call transcripts for negative sentiment and compliance issues. It ensures that the transcript is thoroughly examined for any flags that may indicate a problem. The tool maintains data integrity and ensures that all relevant information is considered in the analysis. It provides a clear and actionable output that reflects the findings of the analysis. The tool is essential for identifying potential issues and ensuring compliance.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/3dd090ac-265a-4a90-8da7-4714cc98067c_paperclip.png",
+              "tool_name": "Transcript Analysis Tool",
+              "description": "The Transcript Analysis Tool is designed to analyze call transcripts for negative sentiment and compliance issues. It ensures that the transcript is thoroughly examined for any flags that may indicate a problem. The tool maintains data integrity and ensures that all relevant information is considered in the analysis. It provides a clear and actionable output that reflects the findings of the analysis. The tool is essential for identifying potential issues and ensuring compliance.",
+              "function_name": "GPTAction_Custom_TranscriptAnalysisTool_wUK3"
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "980fbcb4-177c-4894-ba7c-5e480ee4cce2",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "call_transcript",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "The transcript of the call from which information needs to be extracted. This would be provided in the task context",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "a152f1c3-c1cd-4712-a7a8-697f1daadbbf"
+              }
+            ],
+            "outputParams": [
+              {
+                "id": "a9d1ff71-3d32-4f3c-a410-1273db75d41f",
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "flag_reason",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "paramDescription": "Provides the reason for flagging the transcript, if applicable.",
+                "agentToolConfigurationId": "a152f1c3-c1cd-4712-a7a8-697f1daadbbf"
+              },
+              {
+                "id": "461e7fc0-d7cf-4fff-a818-630dcc0f010a",
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "flag_status",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "paramDescription": "Indicates whether the transcript is flagged or not flagged.",
+                "agentToolConfigurationId": "a152f1c3-c1cd-4712-a7a8-697f1daadbbf"
+              },
+              {
+                "id": "33a605b3-1b17-4c4d-8995-e3e630d33c78",
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "reasoning_steps",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "paramDescription": "list of reasoning steps for the Tree-of-Thought topology that leads to the final output:",
+                "agentToolConfigurationId": "a152f1c3-c1cd-4712-a7a8-697f1daadbbf"
+              }
+            ]
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "6862cd3e-8163-4b33-9478-0ccebabbebae",
+            "sourceAgentGraphNodeId": "5be2a1bb-95f5-4136-888f-ddc411cdfc62",
+            "targetAgentGraphNodeId": "71633538-a800-4076-beae-aaa3048320d7",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "1b7176ef-4241-4561-ae18-b6d765910e69",
+            "sourceAgentGraphNodeId": "eb1bc450-2e53-49c1-be41-47e72416a91d",
+            "targetAgentGraphNodeId": "5be2a1bb-95f5-4136-888f-ddc411cdfc62",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "eb1bc450-2e53-49c1-be41-47e72416a91d",
+        "customId": "9c15972a-583b-4a15-89b3-d368e0f36cfb",
+        "objective": "Is Entry Node",
+        "evaluationCriteria": [],
+        "isEntryNode": true,
+        "isExitNode": false,
+        "xCoordinate": 110.27278394125162,
+        "yCoordinate": 165.1325044442123,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:37:50.425Z",
+            "updatedAt": "2026-01-06T13:37:50.425Z",
+            "deletedAt": null,
+            "id": "1b7176ef-4241-4561-ae18-b6d765910e69",
+            "sourceAgentGraphNodeId": "eb1bc450-2e53-49c1-be41-47e72416a91d",
+            "targetAgentGraphNodeId": "5be2a1bb-95f5-4136-888f-ddc411cdfc62",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": []
+      }
+    ],
+    "agent": {
+      "id": "a1b9bee3-1e15-4c11-a6d5-739d8a4f01ea",
+      "name": "BPO Transcript Analysis Agent",
+      "themeIconUrl": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/2401fd87-d05a-41c4-b9a6-1a53e0fb138f"
+    }
+  }
+}

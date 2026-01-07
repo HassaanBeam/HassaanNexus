@@ -1,0 +1,1614 @@
+{
+  "graph": {
+    "id": "19bf6c9a-ce74-438f-84ac-af2cf2403b05",
+    "agentId": "3aa08542-6f71-43e6-9120-72d78015e7ab",
+    "isActive": true,
+    "isDraft": true,
+    "isPublished": true,
+    "publishedAt": "2025-05-23T06:26:25.572Z",
+    "isEdited": false,
+    "isEverExecuted": false,
+    "isEverUsedForTemplate": true,
+    "nodes": [
+      {
+        "id": "0152b57e-1f88-4615-bba2-bc511e52307e",
+        "customId": null,
+        "objective": "Entry Node",
+        "evaluationCriteria": [],
+        "isEntryNode": true,
+        "isExitNode": false,
+        "xCoordinate": 0,
+        "yCoordinate": 0,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "childEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "d9c2e93b-95cc-4d3c-aebd-f7e58a952780",
+            "sourceAgentGraphNodeId": "0152b57e-1f88-4615-bba2-bc511e52307e",
+            "targetAgentGraphNodeId": "66c87e25-f1a5-4421-a616-71670f301cb8",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": []
+      },
+      {
+        "id": "66c87e25-f1a5-4421-a616-71670f301cb8",
+        "customId": null,
+        "objective": "Email Input is received from the customer based on the customer's property details to check if they meet the underwriting criteria.",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -146,
+        "yCoordinate": 152,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "5203e0a5-3764-48aa-bffb-15a289dd9356",
+          "toolFunctionName": "GPTAction_Custom_PropertyUnderwritingChecker_sgKJ",
+          "toolName": "Property Underwriting Checker",
+          "iconSrc": "",
+          "description": "The Property Underwriting Eligibility Checker is designed to evaluate customer-provided property details against underwriting criteria. It ensures accurate assessment of risk and eligibility for insurance coverage. The tool identifies discrepancies and missing information, maintaining confidentiality and integrity throughout the process. It provides a detailed report on eligibility status and criteria met or not met.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "786f7891-136d-4009-bf43-66103b27e8af",
+              "paramName": "email_input",
+              "agentToolConfigurationId": "5203e0a5-3764-48aa-bffb-15a289dd9356",
+              "paramDescription": "The email input received from the customer containing property details.",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "a66dd551-2d34-4756-bbd0-5eed2ee02e66",
+              "paramName": "property_details",
+              "agentToolConfigurationId": "5203e0a5-3764-48aa-bffb-15a289dd9356",
+              "paramDescription": "Specific details about the customer's property that need to be evaluated.",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Property Underwriting Checker",
+            "toolFunctionName": "GPTAction_Custom_PropertyUnderwritingChecker_sgKJ",
+            "iconSrc": "",
+            "type": "custom_gpt_tool",
+            "prompt": "<Task>\nYou are a skilled underwriting analyst specializing in evaluating property details to determine eligibility for insurance coverage. Your role involves extracting and structuring key property details from customer emails in a JSON format to be used for underwriting decisions. \nYour task is to analyze the email input received from customers, accurately extract the necessary property details, and structure them in a predefined JSON format. The extracted details will be used in the underwriting automation process to validate eligibility based on company criteria. Ensure that no assumptions are made and only explicitly mentioned details are captured.\n<EndTask>\n\n@EmailInput: ```{email_input}``` @PropertyDetails: ```{property_details}``` \n\n<Context> \n@UnderwritingCriteriaContext: At Beam Insurance & Property Corp., the underwriting process ensures that properties meet the necessary criteria for insurance coverage. Extracting and validating key property details from customer inquiries is essential for accurate risk assessment and eligibility determination. \nYour role is to structure these details in a standardized JSON format, which will be used to automate underwriting decisions. This ensures that policies are processed efficiently, minimizing errors and streamlining approvals or rejections. \nMaintain accuracy by capturing only explicitly mentioned details and ensuring proper formatting for seamless integration into the underwriting workflow.\n<EndContext>\n\n<RulesAndConstraints>\n- Extract only the explicitly mentioned details from the email.  \n  **Justification:** Underwriting decisions must be based on factual customer-provided information. Do NOT add missing details from context or external assumptions.  \n- Do NOT infer or assume information that is not provided by the customer.  \n  **Justification:** If an email does not contain a specific property detail (e.g., Coverage Limit or Inspection Status), leave it blank or flag it for missing information. Do not generate or estimate values.  \n- Ensure the extracted data follows a structured JSON format.  \n  **Justification:** The extracted data must be structured correctly for automation. Any incorrectly formatted output may disrupt the underwriting workflow.  \n- Maintain confidentiality of customer data at all times.  \n  **Justification:** The information extracted is sensitive and should not be shared, modified, or used for any purpose beyond underwriting processing.  \n- Adhere to a maximum token length of 1000 for output.  \n  **Justification:** Ensuring concise, structured outputs prevents system overloads and optimizes processing efficiency. Avoid unnecessary details in JSON output.  \n### **How the LLM Identifies & Extracts Information in Emails:**\n1-  **Property Address** \u2192 Look for location-related phrases (e.g., *\u201cMy home at 123 Main St, Springfield, IL\u201d*).  \n2-  **Property ID** \u2192 Customers explicitly mention it (e.g., *\u201cProperty ID: PROP001\u201d*).  \n3-  **Owner Name** \u2192 Typically appears in the sender\u2019s signature or introduction (e.g., *\u201cBest regards, John Doe\u201d*).  \n4-  **Property Type** \u2192 Look for mentions like *\u201csingle-family home,\u201d \u201ccondo,\u201d \u201capartment,\u201d \u201ccommercial property\u201d*.  \n5-  **Coverage Limit** \u2192 Explicitly mentioned as *\u201cI have a coverage limit of $500,000\u201d* (do NOT infer from context).  \n6-  **Inspection Status** \u2192 Look for statements like *\u201cThe inspection was completed and the status is \u2018Passed\u2019\u201d*.  \n<EndRulesAndConstraints>\n\n<OutputFormat>\nReturn a structured .json\nCustomer Name: [Extracted Customer Name]  \nProperty ID: [Extracted Property ID, if mentioned]  \nProperty Address: [Extracted Property Address]  \nOwner Name: [Extracted Owner Name]  \nProperty Type: [Extracted Property Type]  \nCoverage Limit: [Extracted Coverage Limit]  \nInspection Status: [Extracted Inspection Status]  \n<EndOutputFormat>",
+            "description": "The Property Underwriting Eligibility Checker is designed to evaluate customer-provided property details against underwriting criteria. It ensures accurate assessment of risk and eligibility for insurance coverage. The tool identifies discrepancies and missing information, maintaining confidentiality and integrity throughout the process. It provides a detailed report on eligibility status and criteria met or not met.",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "The Property Underwriting Eligibility Checker is designed to evaluate customer-provided property details against underwriting criteria. It ensures accurate assessment of risk and eligibility for insurance coverage. The tool identifies discrepancies and missing information, maintaining confidentiality and integrity throughout the process. It provides a detailed report on eligibility status and criteria met or not met.",
+              "icon_src": "",
+              "tool_name": "Property Underwriting Checker",
+              "description": "The Property Underwriting Eligibility Checker is designed to evaluate customer-provided property details against underwriting criteria. It ensures accurate assessment of risk and eligibility for insurance coverage. The tool identifies discrepancies and missing information, maintaining confidentiality and integrity throughout the process. It provides a detailed report on eligibility status and criteria met or not met.",
+              "function_name": "GPTAction_Custom_PropertyUnderwritingChecker_sgKJ",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "786f7891-136d-4009-bf43-66103b27e8af",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "email_input",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "The email input received from the customer containing property details.",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "5203e0a5-3764-48aa-bffb-15a289dd9356"
+              },
+              {
+                "id": "a66dd551-2d34-4756-bbd0-5eed2ee02e66",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": false,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "property_details",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "Specific details about the customer's property that need to be evaluated.",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "5203e0a5-3764-48aa-bffb-15a289dd9356"
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "bfd732e0-b9f0-40a2-a06d-550ca9136ef2",
+            "sourceAgentGraphNodeId": "66c87e25-f1a5-4421-a616-71670f301cb8",
+            "targetAgentGraphNodeId": "17777118-c874-4515-a816-8584b49e3689",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "d9c2e93b-95cc-4d3c-aebd-f7e58a952780",
+            "sourceAgentGraphNodeId": "0152b57e-1f88-4615-bba2-bc511e52307e",
+            "targetAgentGraphNodeId": "66c87e25-f1a5-4421-a616-71670f301cb8",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "17777118-c874-4515-a816-8584b49e3689",
+        "customId": null,
+        "objective": "Get underwriting master dataset from the provided spreadsheet link",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -146,
+        "yCoordinate": 304,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "48dfd1fb-5b59-4827-b562-3618b5bac71a",
+          "toolFunctionName": "GoogleSheetsAction_GetAllRows",
+          "toolName": "Retrieve All Rows",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+          "description": "Retrieve all rows from a spreadsheet.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "7dcbe028-8768-47c4-813b-10f1eea32584",
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "static",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": "https://docs.google.com/spreadsheets/d/1DdduD6o5ijtlQf3-RyZutklgLOUdUp-R4VakbcZ8Lf4/edit?gid=0#gid=0",
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "1d56ac64-5c75-47b0-bfdc-b92f0a36c6e2",
+              "paramName": "spreadsheet_url",
+              "agentToolConfigurationId": "48dfd1fb-5b59-4827-b562-3618b5bac71a",
+              "paramDescription": "The url of the spreadsheet",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Retrieve All Rows",
+            "toolFunctionName": "GoogleSheetsAction_GetAllRows",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Retrieve all rows from a spreadsheet.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GoogleSheetsAction_GetAllRows: Function to retrieve all rows in a Google Sheet spreadsheet.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+              "tool_name": "Retrieve All Rows",
+              "categories": [
+                "Files and Documents"
+              ],
+              "data_source": false,
+              "description": "Retrieve every row of data from a Google Sheets spreadsheet.",
+              "function_name": "GoogleSheetsAction_GetAllRows",
+              "agent_category": {
+                "id": "d118b6fb-f915-4b0b-9f25-9238bb0235a9",
+                "title": "Files and Documents"
+              },
+              "preferred_model": "GPT40",
+              "requires_consent": false,
+              "agentos_categories": [],
+              "requires_translation": false,
+              "integrationIdentifier": "google-sheet",
+              "optional_extracted_args": [],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "spreadsheet_url: string // The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Retrieve all rows from a spreadsheet.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "spreadsheet_url": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-sheet/get-all-rows"
+                },
+                "response": {
+                  "data": "{{result.data?.data}}",
+                  "message": "{{result.data?.message}}",
+                  "spreadsheet_id": "{{result.data?.spreadsheet_id}}",
+                  "spreadsheet_url": "{{result.data?.spreadsheet_url}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "51445e46-b182-4700-bf7c-ec81091ce97e",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The spreadsheet url parameter value",
+                "required": true,
+                "paramName": "spreadsheet_url",
+                "paramDescription": "The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-sheet",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "cecde048-5a66-447a-84e7-e73a96a979a5",
+            "sourceAgentGraphNodeId": "17777118-c874-4515-a816-8584b49e3689",
+            "targetAgentGraphNodeId": "2a7ffb90-9cb5-424e-9f80-72ec0db7c43c",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "bfd732e0-b9f0-40a2-a06d-550ca9136ef2",
+            "sourceAgentGraphNodeId": "66c87e25-f1a5-4421-a616-71670f301cb8",
+            "targetAgentGraphNodeId": "17777118-c874-4515-a816-8584b49e3689",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "2a7ffb90-9cb5-424e-9f80-72ec0db7c43c",
+        "customId": null,
+        "objective": "Verify Property_ID of the sender against the Underwriting Master Database Property_ID Column",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -146,
+        "yCoordinate": 456,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "3d14775f-b7d2-4e76-8694-a53c9cf665e3",
+          "toolFunctionName": "GPTAction_Custom_PropertyIDVerificationTool_68uz",
+          "toolName": "Property ID Verification Tool",
+          "iconSrc": "",
+          "description": "The Property ID Verification Tool is designed to ensure the accuracy of property information by cross-referencing sender Property_IDs against the Underwriting Master Database. It helps prevent errors in underwriting decisions by verifying data integrity. The tool maintains confidentiality and data security throughout the verification process. It provides a detailed report of verification status and any discrepancies found.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "44de5aef-9979-4a87-adf2-63aff48dee88",
+              "paramName": "underwriting_master_dataset",
+              "agentToolConfigurationId": "3d14775f-b7d2-4e76-8694-a53c9cf665e3",
+              "paramDescription": "Underwriting Master Dataset",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "e09180f6-bfbf-4b7d-911f-dcd8db3497df",
+              "paramName": "sender_property_id",
+              "agentToolConfigurationId": "3d14775f-b7d2-4e76-8694-a53c9cf665e3",
+              "paramDescription": "The Property_ID that needs to be verified against the database.",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Property ID Verification Tool",
+            "toolFunctionName": "GPTAction_Custom_PropertyIDVerificationTool_68uz",
+            "iconSrc": "",
+            "type": "custom_gpt_tool",
+            "prompt": "<Task>\nYou are a diligent property verification specialist, skilled in cross-referencing property IDs against external databases to ensure their validity. Your primary goal is to verify whether a given property is registered in the official company database.\nYour task is to cross-reference the extracted `Property_ID` against the Master Dataset to verify whether the property exists. You should output a verification status indicating either **\"Property Verified\"** or **\"Property Not Verified\"**.\n<EndTask>\n\n@SenderPropertyID: ```{sender_property_id}``` \n@UnderwritingMasterDataset: ```{underwriting_master_dataset}```  \n\n<Context>  \n@PropertyVerificationContext:  \nAt Beam Insurance & Property Corp., it is crucial to ensure that all underwriting evaluations are performed only on registered properties. Your role involves verifying each Property ID against our records to confirm its existence. This process helps maintain the integrity of our underwriting system, ensuring that only eligible properties proceed to further risk assessment.\n<EndContext>\n\n <RulesAndConstraints>  \n- Ensure that the Property ID is accurately cross-referenced against the \"Underwriting-Master-Dataset\"  \n- Do not infer or assume the existence of a property; rely solely on the data provided.  \n- If the Property ID is missing or incorrect, return **\"Property Not Verified\"**.  \n- Maintain confidentiality and do not disclose any property details beyond the verification status.  \n- Adhere to a maximum response time of 30 seconds per verification.  \n<EndRulesAndConstraints>\n\n<OutputFormat>  \nProperty ID: [Extracted Property ID]  \nVerification Status: [Insert \"Property_ID Verified\" or \"Property_ID Not Verified\" here]\n<EndOutputFormat>",
+            "description": "The Property ID Verification Tool is designed to ensure the accuracy of property information by cross-referencing sender Property_IDs against the Underwriting Master Database. It helps prevent errors in underwriting decisions by verifying data integrity. The tool maintains confidentiality and data security throughout the verification process. It provides a detailed report of verification status and any discrepancies found.",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "The Property ID Verification Tool is designed to ensure the accuracy of property information by cross-referencing sender Property_IDs against the Underwriting Master Database. It helps prevent errors in underwriting decisions by verifying data integrity. The tool maintains confidentiality and data security throughout the verification process. It provides a detailed report of verification status and any discrepancies found.",
+              "icon_src": "",
+              "tool_name": "Property ID Verification Tool",
+              "description": "The Property ID Verification Tool is designed to ensure the accuracy of property information by cross-referencing sender Property_IDs against the Underwriting Master Database. It helps prevent errors in underwriting decisions by verifying data integrity. The tool maintains confidentiality and data security throughout the verification process. It provides a detailed report of verification status and any discrepancies found.",
+              "function_name": "GPTAction_Custom_PropertyIDVerificationTool_68uz",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "e09180f6-bfbf-4b7d-911f-dcd8db3497df",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "sender_property_id",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "The Property_ID that needs to be verified against the database.",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "3d14775f-b7d2-4e76-8694-a53c9cf665e3"
+              },
+              {
+                "id": "44de5aef-9979-4a87-adf2-63aff48dee88",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "underwriting_master_dataset",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "Underwriting Master Dataset",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "3d14775f-b7d2-4e76-8694-a53c9cf665e3"
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "04ddb91b-3b1a-4fa8-a2b6-e577c561524c",
+            "sourceAgentGraphNodeId": "2a7ffb90-9cb5-424e-9f80-72ec0db7c43c",
+            "targetAgentGraphNodeId": "13c15475-226e-4136-9755-eba467583370",
+            "condition": "If \"Verification Status\" is \"Property Not Verified\"",
+            "name": "Property Not Verified",
+            "isAttachmentDataPulledIn": true
+          },
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "ee2dd31c-6bfe-48fa-8395-6945d4ebc9dc",
+            "sourceAgentGraphNodeId": "2a7ffb90-9cb5-424e-9f80-72ec0db7c43c",
+            "targetAgentGraphNodeId": "66d306a7-3467-4867-a8a8-eedfab518de4",
+            "condition": "If \"Verification Status\" is \"Property Verified\"",
+            "name": "Property Verified",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "cecde048-5a66-447a-84e7-e73a96a979a5",
+            "sourceAgentGraphNodeId": "17777118-c874-4515-a816-8584b49e3689",
+            "targetAgentGraphNodeId": "2a7ffb90-9cb5-424e-9f80-72ec0db7c43c",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "66d306a7-3467-4867-a8a8-eedfab518de4",
+        "customId": null,
+        "objective": "Analyze Claim Underwriting Request Against Claim Underwriting Set of Rule / Guidelines",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -346,
+        "yCoordinate": 608,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "771da7b8-5f29-4c27-8f6e-17a0f8c3392d",
+          "toolFunctionName": "GPTAction_Custom_ClaimUnderwritingAnalysisTool_OqMq",
+          "toolName": "Claim Underwriting Analysis Tool",
+          "iconSrc": "",
+          "description": "The Claim Underwriting Analysis Tool is designed to evaluate claim underwriting requests against established guidelines. It ensures compliance and identifies any discrepancies in the requests. The tool provides a detailed report of the evaluation, maintaining confidentiality and accuracy. It is essential for safeguarding the company's financial stability and regulatory compliance.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "eaebcaed-9adf-467c-b12f-8e39f49e13c7",
+              "paramName": "extracted_property_details",
+              "agentToolConfigurationId": "771da7b8-5f29-4c27-8f6e-17a0f8c3392d",
+              "paramDescription": "Property Details",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "f8f2eb4c-a745-430c-8eaa-535d31ba65e9",
+              "paramName": "property_verification_status",
+              "agentToolConfigurationId": "771da7b8-5f29-4c27-8f6e-17a0f8c3392d",
+              "paramDescription": "Property Status",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Claim Underwriting Analysis Tool",
+            "toolFunctionName": "GPTAction_Custom_ClaimUnderwritingAnalysisTool_OqMq",
+            "iconSrc": "",
+            "type": "custom_gpt_tool",
+            "prompt": "<Task>  \nYou are an expert property underwriting evaluator, specializing in assessing property details against predefined underwriting guidelines to determine eligibility for coverage. Your role involves meticulously analyzing the property type, coverage limit, and inspection status to ensure accurate and fair underwriting decisions.  \nYour task is to evaluate the property details extracted from the email and verify whether the property meets the underwriting eligibility criteria based on the predefined rules. You will use the extracted property details from the first tool and the property verification status from the second tool to make your assessment.  \n<EndTask> \n\n@PropertyDetails: ```{extracted_property_details}```\n@VerificationStatus: ```{property_verification_status}``` \n\n<Context>  \n@UnderwritingEvaluationContext:  \nAt Beam Insurance & Property Corp., the underwriting process ensures that only eligible properties receive coverage. To maintain compliance and manage risks effectively, each property must be assessed against a structured set of underwriting rules.  \nYour role is to evaluate the property based on its **Property Type, Coverage Limit, and Inspection Status**, ensuring that it aligns with the company\u2019s underwriting standards before proceeding with the policy issuance.  \n<EndContext>\n\n<RulesAndConstraints>  \n- **Property Existence Verification:**  \n  - The property **must exist in the Master Dataset**.  \n  - If **Property_ID is not found**, underwriting **is not possible**, and the request will exit before evaluation.  \n- **Property Type-Based Underwriting Criteria:**  \n  - **Single-Family Home:** Eligible if the **Coverage Limit** is at least **$400,000** and **Inspection Status is \"Passed\"**.  \n  - **Condo:** Eligible if the **Coverage Limit** is at least **$350,000** and **Inspection Status is not \"Failed\"**.  \n  - **Apartment:** Must have a **minimum Coverage Limit of $500,000** and **Inspection Status as \"Passed\"**.  \n  - **Commercial:** Requires a **minimum Coverage Limit of $450,000**, **Inspection Status as \"Passed\"**, and must not have been **previously rejected**.  \n- **Inspection Status Check:**  \n  - If **Inspection Status is \"Passed\"**, proceed to the next rule validation.  \n  - If **Inspection Status is \"Pending\"**, underwriting **is deferred** until a valid inspection is completed.  \n  - If **Inspection Status is \"Failed\"**, underwriting **is automatically rejected**.  \n- **Coverage Limit Threshold:**  \n  - The property **must meet the minimum required coverage** based on **Property Type**:  \n    - **Single-Family Home** \u2192 **$400,000 minimum**  \n    - **Condo** \u2192 **$350,000 minimum**  \n    - **Apartment** \u2192 **$500,000 minimum**  \n    - **Commercial** \u2192 **$450,000 minimum**  \n  - If the **Coverage Limit is below the threshold**, underwriting is **rejected**.  \n- **Strict Rule Adherence:**  \n  - **Do NOT infer or assume** missing information; rely only on provided details.  \n  - Maintain a **formal, structured, and objective evaluation** process.  \n  - Ensure **confidentiality** and handle customer data responsibly.\n<EndRulesAndConstraints>  \n\n<OutputFormat>  \nProperty Eligibility: [Eligible/Not Eligible]  \nReason for Decision: [Provide a brief explanation based on the predefined underwriting guidelines]  \n<EndOutputFormat>  \n\nExample of Successful Output: \nProperty Eligibility: Eligible \nReason for Decision: The property is a Single-Family Home with a coverage limit of $500,000 and an Inspection Status of \"Passed\". These details align with the predefined underwriting criteria, making it eligible for coverage. ",
+            "description": "The Claim Underwriting Analysis Tool is designed to evaluate claim underwriting requests against established guidelines. It ensures compliance and identifies any discrepancies in the requests. The tool provides a detailed report of the evaluation, maintaining confidentiality and accuracy. It is essential for safeguarding the company's financial stability and regulatory compliance.",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "The Claim Underwriting Analysis Tool is designed to evaluate claim underwriting requests against established guidelines. It ensures compliance and identifies any discrepancies in the requests. The tool provides a detailed report of the evaluation, maintaining confidentiality and accuracy. It is essential for safeguarding the company's financial stability and regulatory compliance.",
+              "icon_src": "",
+              "tool_name": "Claim Underwriting Analysis Tool",
+              "description": "The Claim Underwriting Analysis Tool is designed to evaluate claim underwriting requests against established guidelines. It ensures compliance and identifies any discrepancies in the requests. The tool provides a detailed report of the evaluation, maintaining confidentiality and accuracy. It is essential for safeguarding the company's financial stability and regulatory compliance.",
+              "function_name": "GPTAction_Custom_ClaimUnderwritingAnalysisTool_OqMq",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "f8f2eb4c-a745-430c-8eaa-535d31ba65e9",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "property_verification_status",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "Property Status",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "771da7b8-5f29-4c27-8f6e-17a0f8c3392d"
+              },
+              {
+                "id": "eaebcaed-9adf-467c-b12f-8e39f49e13c7",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "extracted_property_details",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "Property Details",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "771da7b8-5f29-4c27-8f6e-17a0f8c3392d"
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "2f8338dd-7bd8-45f4-bc81-8a8e17d7f935",
+            "sourceAgentGraphNodeId": "66d306a7-3467-4867-a8a8-eedfab518de4",
+            "targetAgentGraphNodeId": "46605bb0-9523-44b8-a13e-db08ad0df6e2",
+            "condition": "If \"Property_Eligibility\" is \"Not Eligible\"",
+            "name": "Property Not Eligible",
+            "isAttachmentDataPulledIn": true
+          },
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "96bdd805-fd5f-4718-9090-48545ed911a4",
+            "sourceAgentGraphNodeId": "66d306a7-3467-4867-a8a8-eedfab518de4",
+            "targetAgentGraphNodeId": "cf4df3a5-b35c-47a1-ab05-d0721162f00a",
+            "condition": "If \"Property_Eligibiility\" is \"Eligible\"",
+            "name": "Eligibility Confirmed",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "ee2dd31c-6bfe-48fa-8395-6945d4ebc9dc",
+            "sourceAgentGraphNodeId": "2a7ffb90-9cb5-424e-9f80-72ec0db7c43c",
+            "targetAgentGraphNodeId": "66d306a7-3467-4867-a8a8-eedfab518de4",
+            "condition": "If \"Verification Status\" is \"Property Verified\"",
+            "name": "Property Verified",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "46605bb0-9523-44b8-a13e-db08ad0df6e2",
+        "customId": null,
+        "objective": "Send a Rejection Email that we can not underwrite the claim request because your property is not eligible",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -546,
+        "yCoordinate": 760,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "1a6c044e-4060-4f37-9eba-6f08378309e7",
+          "toolFunctionName": "GmailAction_ReplyEmail",
+          "toolName": "Reply to Email",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+          "description": "Reply to a Gmail email with given content.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "31367e08-dd15-4737-92fc-5c50f7a0a8d9",
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "6fd9855c-ea24-4e68-9caa-4a8f405110a4",
+              "paramName": "message_id",
+              "agentToolConfigurationId": "1a6c044e-4060-4f37-9eba-6f08378309e7",
+              "paramDescription": "A unique identifier for the email message generated by GMail. Usually under the key messageId or emailId",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "d253c07b-c40c-4a51-afa2-60a2896086c4",
+              "paramName": "body",
+              "agentToolConfigurationId": "1a6c044e-4060-4f37-9eba-6f08378309e7",
+              "paramDescription": "Generate the body content of an email in well-structured HTML format. The email should begin with a professional thank-you message, acknowledging the recipient\u2019s email. Then, clearly communicate that their request cannot be processed because the property does not meet the underwriting eligibility criteria, explicitly stating that it is classified as 'Not Eligible.' Specify that the reason for ineligibility is that the property does not meet the required set of rules for underwriting. Maintain a professional and empathetic tone, ensuring clarity while also offering the recipient an opportunity to seek further clarification if needed.",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Reply to Email",
+            "toolFunctionName": "GmailAction_ReplyEmail",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Reply to a Gmail email with given content.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GmailAction_ReplyEmail: Function to reply to an email using Gmail.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+              "tool_name": "Reply to Email",
+              "data_source": false,
+              "description": "Function to reply to an email using Gmail.",
+              "function_name": "GmailAction_ReplyEmail",
+              "preferred_model": "GPT40",
+              "requires_consent": true,
+              "integrationIdentifier": "google-mail",
+              "optional_extracted_args": [
+                "attachment: string // The attachment, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "message_id: string // The message ID, found in Gmail API lookups or previous node outputs and formatted as provider ID.",
+                "body: string // The body, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Reply to a Gmail email with given content.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "body": "{{string}}",
+                    "attachment": "{{string}}",
+                    "message_id": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-mail/reply-email"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "thread_id": "{{result.data?.thread_id}}",
+                  "message_id": "{{result.data?.message_id}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "681b4b01-3dc5-469f-98e0-3c9610b34f4d",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The message id parameter value",
+                "required": true,
+                "paramName": "message_id",
+                "paramDescription": "The message ID, found in Gmail API lookups or previous node outputs and formatted as provider ID."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The body parameter value",
+                "required": true,
+                "paramName": "body",
+                "paramDescription": "The body, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The attachment parameter value",
+                "required": false,
+                "paramName": "attachment",
+                "paramDescription": "The attachment, found in Gmail API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-mail",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [],
+        "parentEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "2f8338dd-7bd8-45f4-bc81-8a8e17d7f935",
+            "sourceAgentGraphNodeId": "66d306a7-3467-4867-a8a8-eedfab518de4",
+            "targetAgentGraphNodeId": "46605bb0-9523-44b8-a13e-db08ad0df6e2",
+            "condition": "If \"Property_Eligibility\" is \"Not Eligible\"",
+            "name": "Property Not Eligible",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "cf4df3a5-b35c-47a1-ab05-d0721162f00a",
+        "customId": null,
+        "objective": "Make Property_ID, its Verification_Status, and its Eligibility_Critera all comma separated to be placed in separate cells in a single row of the final Underwriting_Approved spreadsheet",
+        "evaluationCriteria": [
+          "Accurately add the Property_ID along with its Verification_Status and Property_Eligibility in the final spreadsheet"
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -146,
+        "yCoordinate": 760,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "b4961eed-8fd4-4954-8b1d-488cfa73c089",
+          "toolFunctionName": "GPTAction_Custom_UnderwritingDataFormatter_e05R",
+          "toolName": "Underwriting Data Formatter",
+          "iconSrc": "",
+          "description": "The Underwriting Data Formatter is designed to organize property information for final approval spreadsheets. It ensures that property IDs, verification statuses, and eligibility criteria are accurately formatted and placed in separate cells. This tool supports the finance team's decision-making by maintaining data integrity and accuracy. It is essential for streamlining the underwriting approval process.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "19a8a43a-990c-4b71-ad1c-f7b1ca6acefc",
+              "paramName": "property_data",
+              "agentToolConfigurationId": "b4961eed-8fd4-4954-8b1d-488cfa73c089",
+              "paramDescription": "The source from which the property data is extracted for formatting.",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Underwriting Data Formatter",
+            "toolFunctionName": "GPTAction_Custom_UnderwritingDataFormatter_e05R",
+            "iconSrc": "",
+            "type": "custom_gpt_tool",
+            "prompt": "You are a skilled data analyst specializing in underwriting processes, tasked with organizing property data for final approval spreadsheets. Your role involves ensuring that each property ID, its verification status, and eligibility criteria are accurately formatted and placed in separate cells within a single row of the Underwriting Approved spreadsheet. Your task is to extract the necessary information from the provided data sources and format it correctly for inclusion in the spreadsheet. @PropertyData: ```{property_data}``` @SpreadsheetContext: ``` The Underwriting Approved spreadsheet is a critical document used by the finance team to finalize property approvals. Accuracy in data entry is essential to ensure that all properties are correctly documented and approved. Your meticulous attention to detail will help maintain the integrity of the approval process and support the team's decision-making. ``` ## Rules & Constraints ``` - Ensure all data is comma-separated and placed in separate cells within a single row. - Verify the accuracy of the property ID, verification status, and eligibility criteria before submission. - Avoid any speculative entries; confirm all details with the provided data sources. - Adhere to a maximum token length of 1000 per entry. ``` ## Output Format Property ID: [Insert Property ID Here] Verification Status: [Insert Verification Status Here] Eligibility Criteria: [Insert Eligibility Criteria Here] ",
+            "description": "The Underwriting Data Formatter is designed to organize property information for final approval spreadsheets. It ensures that property IDs, verification statuses, and eligibility criteria are accurately formatted and placed in separate cells. This tool supports the finance team's decision-making by maintaining data integrity and accuracy. It is essential for streamlining the underwriting approval process.",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "The Underwriting Data Formatter is designed to organize property information for final approval spreadsheets. It ensures that property IDs, verification statuses, and eligibility criteria are accurately formatted and placed in separate cells. This tool supports the finance team's decision-making by maintaining data integrity and accuracy. It is essential for streamlining the underwriting approval process.",
+              "icon_src": "",
+              "tool_name": "Underwriting Data Formatter",
+              "description": "The Underwriting Data Formatter is designed to organize property information for final approval spreadsheets. It ensures that property IDs, verification statuses, and eligibility criteria are accurately formatted and placed in separate cells. This tool supports the finance team's decision-making by maintaining data integrity and accuracy. It is essential for streamlining the underwriting approval process.",
+              "function_name": "GPTAction_Custom_UnderwritingDataFormatter_e05R",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "19a8a43a-990c-4b71-ad1c-f7b1ca6acefc",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "property_data",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "The source from which the property data is extracted for formatting.",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "b4961eed-8fd4-4954-8b1d-488cfa73c089"
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "eb039ba1-e2d5-4ac9-8634-3a5cbc4521b5",
+            "sourceAgentGraphNodeId": "cf4df3a5-b35c-47a1-ab05-d0721162f00a",
+            "targetAgentGraphNodeId": "1483f86c-4a53-4edb-8859-719743a21cc7",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "96bdd805-fd5f-4718-9090-48545ed911a4",
+            "sourceAgentGraphNodeId": "66d306a7-3467-4867-a8a8-eedfab518de4",
+            "targetAgentGraphNodeId": "cf4df3a5-b35c-47a1-ab05-d0721162f00a",
+            "condition": "If \"Property_Eligibiility\" is \"Eligible\"",
+            "name": "Eligibility Confirmed",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "1483f86c-4a53-4edb-8859-719743a21cc7",
+        "customId": null,
+        "objective": "Populate the Property_ID along with its respective verification status and property eligibility in the Underwriting_Approved Spreadsheet",
+        "evaluationCriteria": [
+          "Accurately add the Property_ID along with its Verification_Status and Property_Eligibility in the final spreadsheet"
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -146,
+        "yCoordinate": 912,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "365e1f77-7f18-4b1c-8da4-af8bd331b97f",
+          "toolFunctionName": "GoogleSheetsAction_UpdateCells",
+          "toolName": "Update Sheet Cells",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+          "description": "Update specific cells in a spreadsheet.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "7dcbe028-8768-47c4-813b-10f1eea32584",
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "boolean",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "c44854ef-b836-48fc-b2ef-059769f7e718",
+              "paramName": "viewonly_url",
+              "agentToolConfigurationId": "365e1f77-7f18-4b1c-8da4-af8bd331b97f",
+              "paramDescription": "Set this to true if the user wants to return view-only url of the spreadsheet",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "static",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": "https://docs.google.com/spreadsheets/d/1UM_bWsW0ArbbffHoRkZ3TcEHu2SJCE2l2U8VwKPHj0s/edit?gid=0#gid=0",
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "466caf00-30b2-479c-b504-6691a1f9f17d",
+              "paramName": "spreadsheet_url",
+              "agentToolConfigurationId": "365e1f77-7f18-4b1c-8da4-af8bd331b97f",
+              "paramDescription": "The url of the spreadsheet",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "1d38b5d6-0ec7-4032-8d40-5b165e12cef3",
+              "paramName": "data",
+              "agentToolConfigurationId": "365e1f77-7f18-4b1c-8da4-af8bd331b97f",
+              "paramDescription": "Stringified JSON where the key is the Cell ID (example: C10) and the value is the data to be inserted.",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Update Sheet Cells",
+            "toolFunctionName": "GoogleSheetsAction_UpdateCells",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Update specific cells in a spreadsheet.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GoogleSheetsAction_UpdateCells: Update specific cells in a Google Sheet by providing a map of cell addresses to new values.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+              "tool_name": "Update Sheet Cells",
+              "categories": [
+                "Files and Documents"
+              ],
+              "data_source": false,
+              "description": "Update specific cells in a Google Sheet by map of addresses to values.",
+              "function_name": "GoogleSheetsAction_UpdateCells",
+              "agent_category": {
+                "id": "d118b6fb-f915-4b0b-9f25-9238bb0235a9",
+                "title": "Files and Documents"
+              },
+              "preferred_model": null,
+              "requires_consent": false,
+              "agentos_categories": [],
+              "requires_translation": false,
+              "integrationIdentifier": "google-sheet",
+              "optional_extracted_args": [
+                "viewonly_url: boolean // The viewonly url, found in Google Sheets API responses or user input and formatted as a string."
+              ],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "spreadsheet_url: string // The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string.",
+                "data: string // The data, found in Google Sheets API responses or user input and formatted as a JSON string or object (e.g., ``A1``)."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Update specific cells in a spreadsheet.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "data": "{{string}}",
+                    "viewonly_url": "{{boolean}}",
+                    "spreadsheet_url": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-sheet/update-cells"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "spreadsheet_id": "{{result.data?.spreadsheet_id}}",
+                  "spreadsheet_url": "{{result.data?.spreadsheet_url}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "51445e46-b182-4700-bf7c-ec81091ce97e",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The spreadsheet url parameter value",
+                "required": true,
+                "paramName": "spreadsheet_url",
+                "paramDescription": "The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The data used in Google Sheets (e.g., A1)",
+                "required": true,
+                "paramName": "data",
+                "paramDescription": "The data, found in Google Sheets API responses or user input and formatted as a JSON string or object (e.g., ``A1``)."
+              },
+              {
+                "dataType": "boolean",
+                "fillType": "ai_fill",
+                "paramTip": "The viewonly url parameter value",
+                "required": false,
+                "paramName": "viewonly_url",
+                "paramDescription": "The viewonly url, found in Google Sheets API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-sheet",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "6757d79f-61ee-428d-9d0b-d58f9e1936d5",
+            "sourceAgentGraphNodeId": "1483f86c-4a53-4edb-8859-719743a21cc7",
+            "targetAgentGraphNodeId": "46f9eeba-f9cc-4a20-8f16-f461c939198b",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "eb039ba1-e2d5-4ac9-8634-3a5cbc4521b5",
+            "sourceAgentGraphNodeId": "cf4df3a5-b35c-47a1-ab05-d0721162f00a",
+            "targetAgentGraphNodeId": "1483f86c-4a53-4edb-8859-719743a21cc7",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "46f9eeba-f9cc-4a20-8f16-f461c939198b",
+        "customId": null,
+        "objective": "Send an Acceptance Email that the claim has been underwritten in our database",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -146,
+        "yCoordinate": 1064,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "2d590beb-b2e3-4172-9753-3be00d4dc884",
+          "toolFunctionName": "GmailAction_ReplyEmail",
+          "toolName": "Reply to Email",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+          "description": "Reply to a Gmail email with given content.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "31367e08-dd15-4737-92fc-5c50f7a0a8d9",
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "e9a27713-dda3-4447-8c22-fea3b25367d6",
+              "paramName": "message_id",
+              "agentToolConfigurationId": "2d590beb-b2e3-4172-9753-3be00d4dc884",
+              "paramDescription": "A unique identifier for the email message generated by GMail. Usually under the key messageId or emailId",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "3f3559cc-a187-468a-a7ae-226d2f07f326",
+              "paramName": "body",
+              "agentToolConfigurationId": "2d590beb-b2e3-4172-9753-3be00d4dc884",
+              "paramDescription": "Generate the body content of an email in well-structured HTML format. The email should begin with a professional thank-you message, acknowledging the recipient\u2019s email. Then, clearly communicate that their claim has been successfully underwritten in our database. Specify that the property has met the necessary underwriting eligibility criteria. Maintain a professional and reassuring tone, ensuring clarity while also offering the recipient an opportunity to reach out if they have any questions or need further assistance.",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Reply to Email",
+            "toolFunctionName": "GmailAction_ReplyEmail",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Reply to a Gmail email with given content.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GmailAction_ReplyEmail: Function to reply to an email using Gmail.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+              "tool_name": "Reply to Email",
+              "data_source": false,
+              "description": "Function to reply to an email using Gmail.",
+              "function_name": "GmailAction_ReplyEmail",
+              "preferred_model": "GPT40",
+              "requires_consent": true,
+              "integrationIdentifier": "google-mail",
+              "optional_extracted_args": [
+                "attachment: string // The attachment, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "message_id: string // The message ID, found in Gmail API lookups or previous node outputs and formatted as provider ID.",
+                "body: string // The body, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Reply to a Gmail email with given content.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "body": "{{string}}",
+                    "attachment": "{{string}}",
+                    "message_id": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-mail/reply-email"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "thread_id": "{{result.data?.thread_id}}",
+                  "message_id": "{{result.data?.message_id}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "681b4b01-3dc5-469f-98e0-3c9610b34f4d",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The message id parameter value",
+                "required": true,
+                "paramName": "message_id",
+                "paramDescription": "The message ID, found in Gmail API lookups or previous node outputs and formatted as provider ID."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The body parameter value",
+                "required": true,
+                "paramName": "body",
+                "paramDescription": "The body, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The attachment parameter value",
+                "required": false,
+                "paramName": "attachment",
+                "paramDescription": "The attachment, found in Gmail API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-mail",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [],
+        "parentEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "6757d79f-61ee-428d-9d0b-d58f9e1936d5",
+            "sourceAgentGraphNodeId": "1483f86c-4a53-4edb-8859-719743a21cc7",
+            "targetAgentGraphNodeId": "46f9eeba-f9cc-4a20-8f16-f461c939198b",
+            "condition": "",
+            "name": "",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "13c15475-226e-4136-9755-eba467583370",
+        "customId": null,
+        "objective": "Send a Rejection Email that we cant underwrite the claim request",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": 54,
+        "yCoordinate": 608,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "71f712b6-240a-4409-84f7-c7fc7432e80d",
+          "toolFunctionName": "GmailAction_ReplyEmail",
+          "toolName": "Reply to Email",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+          "description": "Reply to a Gmail email with given content.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "31367e08-dd15-4737-92fc-5c50f7a0a8d9",
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "2a57fba5-177c-418b-b0f5-6d904c33e31f",
+              "paramName": "body",
+              "agentToolConfigurationId": "71f712b6-240a-4409-84f7-c7fc7432e80d",
+              "paramDescription": "Generate the body content of the email in HTML format. Start by professionally thanking the recipient for their email. Then, inform them that their request cannot be processed because the property verification status is 'Not Verified' due to the Property_ID not being registered in our database. Kindly request them to complete the registration process before proceeding.",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "6df01fea-beac-42df-b797-3534fe957970",
+              "paramName": "message_id",
+              "agentToolConfigurationId": "71f712b6-240a-4409-84f7-c7fc7432e80d",
+              "paramDescription": "A unique identifier for the email message generated by GMail. Usually under the key messageId or emailId",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Reply to Email",
+            "toolFunctionName": "GmailAction_ReplyEmail",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Reply to a Gmail email with given content.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GmailAction_ReplyEmail: Function to reply to an email using Gmail.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+              "tool_name": "Reply to Email",
+              "data_source": false,
+              "description": "Function to reply to an email using Gmail.",
+              "function_name": "GmailAction_ReplyEmail",
+              "preferred_model": "GPT40",
+              "requires_consent": true,
+              "integrationIdentifier": "google-mail",
+              "optional_extracted_args": [
+                "attachment: string // The attachment, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "message_id: string // The message ID, found in Gmail API lookups or previous node outputs and formatted as provider ID.",
+                "body: string // The body, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Reply to a Gmail email with given content.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "body": "{{string}}",
+                    "attachment": "{{string}}",
+                    "message_id": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-mail/reply-email"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "thread_id": "{{result.data?.thread_id}}",
+                  "message_id": "{{result.data?.message_id}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "681b4b01-3dc5-469f-98e0-3c9610b34f4d",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The message id parameter value",
+                "required": true,
+                "paramName": "message_id",
+                "paramDescription": "The message ID, found in Gmail API lookups or previous node outputs and formatted as provider ID."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The body parameter value",
+                "required": true,
+                "paramName": "body",
+                "paramDescription": "The body, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The attachment parameter value",
+                "required": false,
+                "paramName": "attachment",
+                "paramDescription": "The attachment, found in Gmail API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-mail",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [],
+        "parentEdges": [
+          {
+            "createdAt": "2025-09-29T19:29:59.859Z",
+            "updatedAt": "2025-09-29T19:29:59.859Z",
+            "deletedAt": null,
+            "id": "04ddb91b-3b1a-4fa8-a2b6-e577c561524c",
+            "sourceAgentGraphNodeId": "2a7ffb90-9cb5-424e-9f80-72ec0db7c43c",
+            "targetAgentGraphNodeId": "13c15475-226e-4136-9755-eba467583370",
+            "condition": "If \"Verification Status\" is \"Property Not Verified\"",
+            "name": "Property Not Verified",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      }
+    ],
+    "agent": {
+      "id": "3aa08542-6f71-43e6-9120-72d78015e7ab",
+      "name": "Underwriting Agent (Demo)",
+      "themeIconUrl": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/2401fd87-d05a-41c4-b9a6-1a53e0fb138f"
+    }
+  }
+}

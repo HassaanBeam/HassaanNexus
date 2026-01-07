@@ -1,0 +1,3656 @@
+{
+  "graph": {
+    "id": "0ce7c99c-6cad-42f7-8ce2-6a76ea0c0709",
+    "agentId": "ea659a9a-1d8c-45da-bff5-2e0cb86aa8cd",
+    "isActive": false,
+    "isDraft": true,
+    "isPublished": false,
+    "publishedAt": null,
+    "isEdited": true,
+    "isEverExecuted": false,
+    "isEverUsedForTemplate": false,
+    "nodes": [
+      {
+        "id": "3099a0d6-d7bf-49c8-b5d6-411656ab93c8",
+        "customId": "4b181bd1-197d-43da-b38b-e9b9141a3b52",
+        "objective": "Create Draft in Gmail",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": 253.61272574200717,
+        "yCoordinate": 959.7627733772374,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "3929e721-2c0b-4282-9f45-45608cbd0396",
+          "toolFunctionName": "GmailAction_DraftEmail",
+          "toolName": "Draft Email",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+          "description": "Draft an email without sending using Gmail.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "908f5c15-25b6-45f1-964d-ca9ea9f8447c",
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T06:19:09.372Z",
+              "updatedAt": "2026-01-06T06:19:09.372Z",
+              "fillType": "ai_fill",
+              "position": 2,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "45304b1c-457e-46c5-8ce4-d5a2c23ac225",
+              "paramName": "body",
+              "agentToolConfigurationId": "3929e721-2c0b-4282-9f45-45608cbd0396",
+              "paramDescription": "Body content of the email in HTML markdown",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:19:09.372Z",
+              "updatedAt": "2026-01-06T06:19:09.372Z",
+              "fillType": "ai_fill",
+              "position": 1,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "cab98bbf-74c5-46d7-be94-c7d044c30142",
+              "paramName": "subject",
+              "agentToolConfigurationId": "3929e721-2c0b-4282-9f45-45608cbd0396",
+              "paramDescription": "Subject of the email",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:19:09.372Z",
+              "updatedAt": "2026-01-06T06:19:09.372Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "c8f05168-c1ad-4a0e-9e3f-0f785e78f84c",
+              "paramName": "email_address",
+              "agentToolConfigurationId": "3929e721-2c0b-4282-9f45-45608cbd0396",
+              "paramDescription": "Email address to which the email is to be sent to",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:19:09.372Z",
+              "updatedAt": "2026-01-06T06:19:09.372Z",
+              "fillType": "ai_fill",
+              "position": 5,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "6d926786-3c1d-4165-b46d-d43c869c0250",
+              "paramName": "sender_name",
+              "agentToolConfigurationId": "3929e721-2c0b-4282-9f45-45608cbd0396",
+              "paramDescription": "Display name of the sender",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:19:09.372Z",
+              "updatedAt": "2026-01-06T06:19:09.372Z",
+              "fillType": "ai_fill",
+              "position": 4,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "4e021d6f-afbd-4959-b502-766913e821b1",
+              "paramName": "cc_list",
+              "agentToolConfigurationId": "3929e721-2c0b-4282-9f45-45608cbd0396",
+              "paramDescription": "Email addresses for CC (carbon copy) recipients, Must be in comma seperated string emails",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:19:09.372Z",
+              "updatedAt": "2026-01-06T06:19:09.372Z",
+              "fillType": "ai_fill",
+              "position": 3,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "725e2975-a0ea-48e3-af75-efe7ba9e72a7",
+              "paramName": "bcc_list",
+              "agentToolConfigurationId": "3929e721-2c0b-4282-9f45-45608cbd0396",
+              "paramDescription": "Email addresses for BCC (blind carbon copy) recipients, Must be in comma seperated string emails",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Draft Email",
+            "toolFunctionName": "GmailAction_DraftEmail",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Draft an email without sending using Gmail.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GmailAction_DraftEmail: Function to draft an email to one or more recipients using Gmail.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+              "tool_name": "Draft Email",
+              "categories": [
+                "Communication"
+              ],
+              "data_source": false,
+              "description": "Function to draft an email using Gmail.",
+              "function_name": "GmailAction_DraftEmail",
+              "agent_category": {
+                "id": "32f94c8f-c3eb-48b3-abbc-8b3ae0088318",
+                "title": "Communication"
+              },
+              "preferred_model": "GPT40",
+              "requires_consent": false,
+              "agentos_categories": [],
+              "requires_translation": false,
+              "integrationIdentifier": "google-mail",
+              "optional_extracted_args": [
+                "bcc_list: string // The bcc list, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "cc_list: string // The cc list, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "sender_name: string // The sender name, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "email_address: string // The email address, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "subject: string // The subject, found in Gmail API responses or user input and formatted as a string.",
+                "body: string // The body, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Draft an email without sending using Gmail.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "body": "{{string}}",
+                    "cc_list": "{{string}}",
+                    "subject": "{{string}}",
+                    "bcc_list": "{{string}}",
+                    "email_address": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-mail/draft-email"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "message_id": "{{result.data?.message_id}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "681b4b01-3dc5-469f-98e0-3c9610b34f4d",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "Email address (e.g., user@example.com)",
+                "required": true,
+                "paramName": "email_address",
+                "paramDescription": "The email address, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The subject parameter value",
+                "required": true,
+                "paramName": "subject",
+                "paramDescription": "The subject, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The body parameter value",
+                "required": true,
+                "paramName": "body",
+                "paramDescription": "The body, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The bcc list parameter value",
+                "required": false,
+                "paramName": "bcc_list",
+                "paramDescription": "The bcc list, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The cc list parameter value",
+                "required": false,
+                "paramName": "cc_list",
+                "paramDescription": "The cc list, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "Name value (e.g., Finalize report)",
+                "required": false,
+                "paramName": "sender_name",
+                "paramDescription": "The sender name, found in Gmail API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-mail",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "495e8ab2-854f-411c-946a-0a665234c772",
+            "sourceAgentGraphNodeId": "4fc845db-dbd0-446c-afec-7f6372bc82de",
+            "targetAgentGraphNodeId": "3099a0d6-d7bf-49c8-b5d6-411656ab93c8",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "5ee79080-3618-4d9d-9c1a-6d3e49b14f53",
+        "customId": "676b49d1-80ec-46ac-b5f6-f08a80f6731f",
+        "objective": "Draft email to confirm the subscription cancellation",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -546,
+        "yCoordinate": 912,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "d04beb9f-7349-47d0-ada5-1a1233a74675",
+          "toolFunctionName": "GmailAction_DraftEmail",
+          "toolName": "Draft Email",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+          "description": "Draft an email without sending using Gmail.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "908f5c15-25b6-45f1-964d-ca9ea9f8447c",
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T06:18:45.496Z",
+              "updatedAt": "2026-01-06T06:18:45.496Z",
+              "fillType": "ai_fill",
+              "position": 5,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "fde91fee-5a25-4c3e-a808-2f0a99ef1acc",
+              "paramName": "sender_name",
+              "agentToolConfigurationId": "d04beb9f-7349-47d0-ada5-1a1233a74675",
+              "paramDescription": "Display name of the sender",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:18:45.496Z",
+              "updatedAt": "2026-01-06T06:18:45.496Z",
+              "fillType": "ai_fill",
+              "position": 4,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "c54046f9-4b7c-4b58-ab4d-efec5a0eb587",
+              "paramName": "cc_list",
+              "agentToolConfigurationId": "d04beb9f-7349-47d0-ada5-1a1233a74675",
+              "paramDescription": "Email addresses for CC (carbon copy) recipients, Must be in comma seperated string emails",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:18:45.496Z",
+              "updatedAt": "2026-01-06T06:18:45.496Z",
+              "fillType": "ai_fill",
+              "position": 3,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "c34a00af-418f-401e-b4f2-dc46904bbe5c",
+              "paramName": "bcc_list",
+              "agentToolConfigurationId": "d04beb9f-7349-47d0-ada5-1a1233a74675",
+              "paramDescription": "Email addresses for BCC (blind carbon copy) recipients, Must be in comma seperated string emails",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:18:45.496Z",
+              "updatedAt": "2026-01-06T06:18:45.496Z",
+              "fillType": "ai_fill",
+              "position": 2,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "124929cf-84ec-4134-a101-be7e2c38187b",
+              "paramName": "body",
+              "agentToolConfigurationId": "d04beb9f-7349-47d0-ada5-1a1233a74675",
+              "paramDescription": "Body content of the email in HTML markdown",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:18:45.496Z",
+              "updatedAt": "2026-01-06T06:18:45.496Z",
+              "fillType": "ai_fill",
+              "position": 1,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "21cc0922-f521-47b4-b1f2-7cb2d0e9134f",
+              "paramName": "subject",
+              "agentToolConfigurationId": "d04beb9f-7349-47d0-ada5-1a1233a74675",
+              "paramDescription": "Subject of the email",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:18:45.496Z",
+              "updatedAt": "2026-01-06T06:18:45.496Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "acc475cf-c15d-45a7-a0f2-7011a2df5995",
+              "paramName": "email_address",
+              "agentToolConfigurationId": "d04beb9f-7349-47d0-ada5-1a1233a74675",
+              "paramDescription": "Email address to which the email is to be sent to",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Draft Email",
+            "toolFunctionName": "GmailAction_DraftEmail",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Draft an email without sending using Gmail.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GmailAction_DraftEmail: Function to draft an email to one or more recipients using Gmail.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+              "tool_name": "Draft Email",
+              "categories": [
+                "Communication"
+              ],
+              "data_source": false,
+              "description": "Function to draft an email using Gmail.",
+              "function_name": "GmailAction_DraftEmail",
+              "agent_category": {
+                "id": "32f94c8f-c3eb-48b3-abbc-8b3ae0088318",
+                "title": "Communication"
+              },
+              "preferred_model": "GPT40",
+              "requires_consent": false,
+              "agentos_categories": [],
+              "requires_translation": false,
+              "integrationIdentifier": "google-mail",
+              "optional_extracted_args": [
+                "bcc_list: string // The bcc list, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "cc_list: string // The cc list, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "sender_name: string // The sender name, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "email_address: string // The email address, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "subject: string // The subject, found in Gmail API responses or user input and formatted as a string.",
+                "body: string // The body, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Draft an email without sending using Gmail.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "body": "{{string}}",
+                    "cc_list": "{{string}}",
+                    "subject": "{{string}}",
+                    "bcc_list": "{{string}}",
+                    "email_address": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-mail/draft-email"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "message_id": "{{result.data?.message_id}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "681b4b01-3dc5-469f-98e0-3c9610b34f4d",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "Email address (e.g., user@example.com)",
+                "required": true,
+                "paramName": "email_address",
+                "paramDescription": "The email address, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The subject parameter value",
+                "required": true,
+                "paramName": "subject",
+                "paramDescription": "The subject, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The body parameter value",
+                "required": true,
+                "paramName": "body",
+                "paramDescription": "The body, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The bcc list parameter value",
+                "required": false,
+                "paramName": "bcc_list",
+                "paramDescription": "The bcc list, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The cc list parameter value",
+                "required": false,
+                "paramName": "cc_list",
+                "paramDescription": "The cc list, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "Name value (e.g., Finalize report)",
+                "required": false,
+                "paramName": "sender_name",
+                "paramDescription": "The sender name, found in Gmail API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-mail",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "34d31a95-957e-4f2c-b00f-4333684853b2",
+            "sourceAgentGraphNodeId": "f03b06f3-f448-44f6-833e-8cf7c250cfce",
+            "targetAgentGraphNodeId": "5ee79080-3618-4d9d-9c1a-6d3e49b14f53",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "f03b06f3-f448-44f6-833e-8cf7c250cfce",
+        "customId": "db452789-ec15-41c4-b247-7e1cca491a1b",
+        "objective": "Draft Reply",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -546,
+        "yCoordinate": 760,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "b81fd19b-5c6a-4490-875d-dd8bfb467ebc",
+          "toolFunctionName": "GPTAction_Custom_SubscriptionCancellationDraft_0odX",
+          "toolName": "Subscription Cancellation Draft",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/0db25a1d-73bf-4a99-8f88-811bd3c3ae0b",
+          "description": "Drafts empathetic subscription cancellation confirmation emails.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "1c206fa6-0b14-4d56-bbf3-729b91cf668e",
+              "paramName": "cell_update_decision",
+              "agentToolConfigurationId": "b81fd19b-5c6a-4490-875d-dd8bfb467ebc",
+              "paramDescription": "the internal decision on how the customer's subscription status has been updated",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "c9b485fa-0a20-4060-8e34-5fb66f967020",
+              "paramName": "customer_query",
+              "agentToolConfigurationId": "b81fd19b-5c6a-4490-875d-dd8bfb467ebc",
+              "paramDescription": "the customer's request or reason for canceling the subscription including their email adress",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Subscription Cancellation Draft",
+            "toolFunctionName": "GPTAction_Custom_SubscriptionCancellationDraft_0odX",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/0db25a1d-73bf-4a99-8f88-811bd3c3ae0b",
+            "type": "custom_gpt_tool",
+            "prompt": "Role\nYou are a customer service specialist with expertise in handling subscription cancellations. Your primary goal is to draft clear and empathetic cancellation confirmation emails based on customer queries and internal decisions.\n\nTask\nYour task is to create a subscription cancellation confirmation email. You will use the provided customer query and the internal decision on how to update the customer's subscription status.\n\nParameter Context\nCustomer Query:\n'''\n{customer_query}\n'''\nCell Update Decision:\n'''\n{cell_update_decision}\n'''\n\nOutput Format\nSubject: Confirmation of Your Subscription Cancellation\n\nDear [Customer Name],\n\nWe have received your request to cancel your subscription. Based on your query, we have updated your subscription status as follows:\n\n[Describe the update that was made]\n\nIf you have any questions or need further assistance, please do not hesitate to contact us.\n\nThank you for being a valued customer.\n\nBest regards,\nBeam AI\nCustomer Service Team",
+            "description": "Drafts empathetic subscription cancellation confirmation emails.",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "Drafts empathetic subscription cancellation confirmation emails.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/0db25a1d-73bf-4a99-8f88-811bd3c3ae0b",
+              "tool_name": "Subscription Cancellation Draft",
+              "description": "Drafts empathetic subscription cancellation confirmation emails.",
+              "function_name": "GPTAction_Custom_SubscriptionCancellationDraft_0odX",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "b569a25f-cf42-49aa-b032-5b9414ba7960",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "cell_update_decision",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "the internal decision on how the customer's subscription status has been updated",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "a234e6bd-406c-4c95-82ea-36113afd4648"
+              },
+              {
+                "id": "9ac4d5db-8ace-47a3-9cdb-fae358464021",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "customer_query",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "the customer's request or reason for canceling the subscription including their email adress",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "a234e6bd-406c-4c95-82ea-36113afd4648"
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "34d31a95-957e-4f2c-b00f-4333684853b2",
+            "sourceAgentGraphNodeId": "f03b06f3-f448-44f6-833e-8cf7c250cfce",
+            "targetAgentGraphNodeId": "5ee79080-3618-4d9d-9c1a-6d3e49b14f53",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "3a1a2c12-26df-4568-a95d-9cc0f6ed6150",
+            "sourceAgentGraphNodeId": "9534c8cb-0236-4f8c-9c3f-f1a041f2d3dd",
+            "targetAgentGraphNodeId": "f03b06f3-f448-44f6-833e-8cf7c250cfce",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "7629a78a-4510-45b0-a481-a54adc013a13",
+        "customId": "92cb88c1-df16-46ff-a791-fe20369dd036",
+        "objective": "Create Draft for appointment scheduling email",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -146,
+        "yCoordinate": 760,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "c7b796af-1df4-4c79-87e7-b08328114560",
+          "toolFunctionName": "GmailAction_DraftEmail",
+          "toolName": "Draft Email",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+          "description": "Draft an email without sending using Gmail.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "908f5c15-25b6-45f1-964d-ca9ea9f8447c",
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T06:18:57.491Z",
+              "updatedAt": "2026-01-06T06:18:57.491Z",
+              "fillType": "ai_fill",
+              "position": 5,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "db3f2423-efd2-4f1d-939c-a5fb5039bbcb",
+              "paramName": "sender_name",
+              "agentToolConfigurationId": "c7b796af-1df4-4c79-87e7-b08328114560",
+              "paramDescription": "Display name of the sender",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:18:57.491Z",
+              "updatedAt": "2026-01-06T06:18:57.491Z",
+              "fillType": "ai_fill",
+              "position": 4,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "7648a232-5b62-42da-80c1-8b8b72aeb681",
+              "paramName": "cc_list",
+              "agentToolConfigurationId": "c7b796af-1df4-4c79-87e7-b08328114560",
+              "paramDescription": "Email addresses for CC (carbon copy) recipients, Must be in comma seperated string emails",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:18:57.491Z",
+              "updatedAt": "2026-01-06T06:18:57.491Z",
+              "fillType": "ai_fill",
+              "position": 3,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "2221ab72-f785-4b8b-8e3f-a9633855d5f4",
+              "paramName": "bcc_list",
+              "agentToolConfigurationId": "c7b796af-1df4-4c79-87e7-b08328114560",
+              "paramDescription": "Email addresses for BCC (blind carbon copy) recipients, Must be in comma seperated string emails",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:18:57.491Z",
+              "updatedAt": "2026-01-06T06:18:57.491Z",
+              "fillType": "ai_fill",
+              "position": 2,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "a6f38e59-721c-43ef-b3f1-2f5dc2d36309",
+              "paramName": "body",
+              "agentToolConfigurationId": "c7b796af-1df4-4c79-87e7-b08328114560",
+              "paramDescription": "Body content of the email in HTML markdown",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:18:57.491Z",
+              "updatedAt": "2026-01-06T06:18:57.491Z",
+              "fillType": "ai_fill",
+              "position": 1,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "3973c6ff-e8f2-4e07-b768-65939810d7b5",
+              "paramName": "subject",
+              "agentToolConfigurationId": "c7b796af-1df4-4c79-87e7-b08328114560",
+              "paramDescription": "Subject of the email",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:18:57.491Z",
+              "updatedAt": "2026-01-06T06:18:57.491Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "8357b45a-afcb-4d5e-8165-e7f8520e265e",
+              "paramName": "email_address",
+              "agentToolConfigurationId": "c7b796af-1df4-4c79-87e7-b08328114560",
+              "paramDescription": "Email address to which the email is to be sent to",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Draft Email",
+            "toolFunctionName": "GmailAction_DraftEmail",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Draft an email without sending using Gmail.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GmailAction_DraftEmail: Function to draft an email to one or more recipients using Gmail.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+              "tool_name": "Draft Email",
+              "categories": [
+                "Communication"
+              ],
+              "data_source": false,
+              "description": "Function to draft an email using Gmail.",
+              "function_name": "GmailAction_DraftEmail",
+              "agent_category": {
+                "id": "32f94c8f-c3eb-48b3-abbc-8b3ae0088318",
+                "title": "Communication"
+              },
+              "preferred_model": "GPT40",
+              "requires_consent": false,
+              "agentos_categories": [],
+              "requires_translation": false,
+              "integrationIdentifier": "google-mail",
+              "optional_extracted_args": [
+                "bcc_list: string // The bcc list, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "cc_list: string // The cc list, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "sender_name: string // The sender name, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "email_address: string // The email address, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "subject: string // The subject, found in Gmail API responses or user input and formatted as a string.",
+                "body: string // The body, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Draft an email without sending using Gmail.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "body": "{{string}}",
+                    "cc_list": "{{string}}",
+                    "subject": "{{string}}",
+                    "bcc_list": "{{string}}",
+                    "email_address": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-mail/draft-email"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "message_id": "{{result.data?.message_id}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "681b4b01-3dc5-469f-98e0-3c9610b34f4d",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "Email address (e.g., user@example.com)",
+                "required": true,
+                "paramName": "email_address",
+                "paramDescription": "The email address, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The subject parameter value",
+                "required": true,
+                "paramName": "subject",
+                "paramDescription": "The subject, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The body parameter value",
+                "required": true,
+                "paramName": "body",
+                "paramDescription": "The body, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The bcc list parameter value",
+                "required": false,
+                "paramName": "bcc_list",
+                "paramDescription": "The bcc list, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The cc list parameter value",
+                "required": false,
+                "paramName": "cc_list",
+                "paramDescription": "The cc list, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "Name value (e.g., Finalize report)",
+                "required": false,
+                "paramName": "sender_name",
+                "paramDescription": "The sender name, found in Gmail API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-mail",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "5668d319-e012-46dd-8370-9ce3a430e165",
+            "sourceAgentGraphNodeId": "41f8b937-0663-4029-a4a2-f9011b636cd5",
+            "targetAgentGraphNodeId": "7629a78a-4510-45b0-a481-a54adc013a13",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "4fc845db-dbd0-446c-afec-7f6372bc82de",
+        "customId": "4cf6d0df-14c3-4de0-975e-abcd312d7e31",
+        "objective": "Generate E-Mail Response",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": 254,
+        "yCoordinate": 760,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "0f4704f6-9fda-4d10-9efb-7b5820db45b1",
+          "toolFunctionName": "GPTAction_Custom_CustomerE-MailResponseGenerator_SpFk",
+          "toolName": "Customer E-Mail Response Generator",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730910457411-mail.png",
+          "description": "Generate empathetic, professional customer service emails.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "4b8bbee6-e43c-42b9-898f-6e45de637130",
+              "paramName": "reasoned_reply_content",
+              "agentToolConfigurationId": "0f4704f6-9fda-4d10-9efb-7b5820db45b1",
+              "paramDescription": "the reasoned content generated to address the customer's inquiry",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "bc34dcde-dc4a-4ebc-a5ad-0f8f4888d6b1",
+              "paramName": "customer_email",
+              "agentToolConfigurationId": "0f4704f6-9fda-4d10-9efb-7b5820db45b1",
+              "paramDescription": "the email content sent by the customer",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Customer E-Mail Response Generator",
+            "toolFunctionName": "GPTAction_Custom_CustomerE-MailResponseGenerator_SpFk",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730910457411-mail.png",
+            "type": "custom_gpt_tool",
+            "prompt": "Role\r\nYou are a customer service email specialist, skilled in empathetic replies based on customer inquiries. Your primary goal is to create an email reply to the user based on the reasoned content provided.\r\n\r\nTask\r\nYour task is to generate a draft reply based on the reasoned content and the customer inquiry. The reply should address the customer's concerns, provide relevant information, and maintain a tone of empathy and professionalism.\r\n\r\nParameter Context\r\nCustomer Email:\r\n'''\r\n{customer_email}\r\n'''\r\n\r\nReasoned Reply Content:\r\n'''\r\n{reasoned_reply_content}\r\n'''\r\n\r\nRules & Constraints\r\n'''\r\nEnsure the reply is empathetic and addresses all points raised by the customer.\r\nDo not include any speculative or unverified information.\r\nMaintain a professional and courteous tone throughout the email.\r\n'''\r\n\r\nOutput Format\r\n'''\r\nSubject: [Insert Subject Here]\r\n\r\nDear [Customer Name],\r\n\r\nThank you for reaching out to us. [Insert reasoned reply content here, addressing the customer's inquiry and providing relevant information.]\r\n\r\nIf you have any further questions or need additional assistance, please do not hesitate to contact us.\r\n\r\nBest regards,\r\nBeamAI\r\nCustomer Service Team",
+            "description": "Generate empathetic, professional customer service emails.",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "Generate empathetic, professional customer service emails.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730910457411-mail.png",
+              "tool_name": "Customer E-Mail Response Generator",
+              "description": "Generate empathetic, professional customer service emails.",
+              "function_name": "GPTAction_Custom_CustomerE-MailResponseGenerator_SpFk",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "beaae7cf-caa4-466c-b310-02682797618d",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "customer_email",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "the email content sent by the customer",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "98626ccd-a20d-40aa-88bb-e1f1124d0083"
+              },
+              {
+                "id": "0147764a-b7d3-44a4-b902-c77a94f8767d",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "reasoned_reply_content",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "the reasoned content generated to address the customer's inquiry",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "98626ccd-a20d-40aa-88bb-e1f1124d0083"
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "495e8ab2-854f-411c-946a-0a665234c772",
+            "sourceAgentGraphNodeId": "4fc845db-dbd0-446c-afec-7f6372bc82de",
+            "targetAgentGraphNodeId": "3099a0d6-d7bf-49c8-b5d6-411656ab93c8",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "5da791fd-dc9e-47fa-8907-840d3ae26cdc",
+            "sourceAgentGraphNodeId": "0f02439a-e1ee-44a0-8b94-68b9f5b5856a",
+            "targetAgentGraphNodeId": "4fc845db-dbd0-446c-afec-7f6372bc82de",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "0f02439a-e1ee-44a0-8b94-68b9f5b5856a",
+        "customId": "1344d387-b540-4ecf-8b3d-80b95e94922f",
+        "objective": "Reasoning and deciding for email reply content",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": 254,
+        "yCoordinate": 608,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "e21db046-8870-4dc3-8941-cb1c52e2dd72",
+          "toolFunctionName": "GPTAction_Custom_Reasonanddecideonorderstatusinquiry_kbx2",
+          "toolName": "Reason and decide on order status inquiry",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730910423754-brain-circuit.png",
+          "description": "Reason and decide on order status inquiry",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "47d23b96-9f4a-40d8-86b5-314bab33aef0",
+              "paramName": "customer_email_details",
+              "agentToolConfigurationId": "e21db046-8870-4dc3-8941-cb1c52e2dd72",
+              "paramDescription": "complete customer email details",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "af26fdf8-0e11-4c88-accc-69ee98484fbf",
+              "paramName": "order_status",
+              "agentToolConfigurationId": "e21db046-8870-4dc3-8941-cb1c52e2dd72",
+              "paramDescription": "complete order status table",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "652cb48d-6819-442f-a356-862d49c0e6e6",
+              "paramName": "customer_email",
+              "agentToolConfigurationId": "e21db046-8870-4dc3-8941-cb1c52e2dd72",
+              "paramDescription": "the entire content of the customer email",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Reason and decide on order status inquiry",
+            "toolFunctionName": "GPTAction_Custom_Reasonanddecideonorderstatusinquiry_kbx2",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730910423754-brain-circuit.png",
+            "type": "custom_gpt_tool",
+            "prompt": "Role\r\nYou are a customer service email specialist, skilled in reasoning on and understanding customer inquiries. Your primary goal is to accurately reason based on the customer's inquiry and customer data.\r\n\r\nParameter Context\r\ncustomer_email:\r\n'''\r\n{customer_email}\r\n'''\r\n\r\norder_status:\r\n'''\r\n{order_status}\r\n'''\r\n\r\ncustomer_email_details\r\n'''\r\n{customer_email_details}\r\n'''\r\n\r\nRules & Constraints\r\nDo not generate new information; only use details provided in the customer's email.\r\nBe precise in your language.\r\n\r\nOutput Format\r\nReasoning: [Reasoning // 6 sentences]\r\nTask: [Instruction // 4 sentences instructions on how to write the reply]\r\nDecision and thoughts for reply: [Decision // 4 sentences]\r\n",
+            "description": "Reason and decide on order status inquiry",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "Reason and decide on order status inquiry",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730910423754-brain-circuit.png",
+              "tool_name": "Reason and decide on order status inquiry",
+              "description": "Reason and decide on order status inquiry",
+              "function_name": "GPTAction_Custom_Reasonanddecideonorderstatusinquiry_kbx2",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "aeccff33-282d-42fa-8dd4-4d301ddfae36",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "customer_email_details",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "complete customer email details",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "05d84c06-4cc1-4e4f-9d29-8fb2a74e3ee4"
+              },
+              {
+                "id": "e916d156-e493-475e-8e4a-c534cb8cd389",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "customer_email",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "the entire content of the customer email",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "05d84c06-4cc1-4e4f-9d29-8fb2a74e3ee4"
+              },
+              {
+                "id": "4ad063e0-3e8c-4f78-b04c-dd0cd7dd58e0",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "order_status",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "complete order status table",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "05d84c06-4cc1-4e4f-9d29-8fb2a74e3ee4"
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "5da791fd-dc9e-47fa-8907-840d3ae26cdc",
+            "sourceAgentGraphNodeId": "0f02439a-e1ee-44a0-8b94-68b9f5b5856a",
+            "targetAgentGraphNodeId": "4fc845db-dbd0-446c-afec-7f6372bc82de",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "9e023cb3-1b0a-437d-8d01-5a6d6400ce91",
+            "sourceAgentGraphNodeId": "cbce3d39-a1cd-44e2-9085-baf9e887880a",
+            "targetAgentGraphNodeId": "0f02439a-e1ee-44a0-8b94-68b9f5b5856a",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "41f8b937-0663-4029-a4a2-f9011b636cd5",
+        "customId": "ff9fce84-d25a-4a92-95c6-8c9b425c8aaa",
+        "objective": "Draft appointment scheduling reply",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -146,
+        "yCoordinate": 608,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "5e39d37e-bc17-4bd4-a88c-4a9970faf75b",
+          "toolFunctionName": "GPTAction_Custom_CustomerAppointmentReply_GeX9",
+          "toolName": "Customer Appointment Reply",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/c973ad9a-247d-4ed4-9e26-b379338643ca",
+          "description": "A specialized tool designed to handle the scheduling of customer appointments with utmost respect for their preferences and confidentiality, ensuring an efficient and courteous interaction.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "43b13a7a-8db9-488f-88cd-952f0f4ef383",
+              "paramName": "appointment_suggestion",
+              "agentToolConfigurationId": "5e39d37e-bc17-4bd4-a88c-4a9970faf75b",
+              "paramDescription": "the complete suggestion on how to handle the appointment",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "68003655-4567-4555-9e39-ceb9baf20662",
+              "paramName": "available_appointment_slots",
+              "agentToolConfigurationId": "5e39d37e-bc17-4bd4-a88c-4a9970faf75b",
+              "paramDescription": "The time at which the appointment for the customer is to be booked",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "090c09e1-55e7-4564-b947-0bb6c9a42d21",
+              "paramName": "customer_email_content",
+              "agentToolConfigurationId": "5e39d37e-bc17-4bd4-a88c-4a9970faf75b",
+              "paramDescription": "the complete unchanged body of the email",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "fe5cd722-a56e-4603-8b86-206ba40684d4",
+              "paramName": "customer_email_address",
+              "agentToolConfigurationId": "5e39d37e-bc17-4bd4-a88c-4a9970faf75b",
+              "paramDescription": "the complete email adress of the user",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Customer Appointment Reply",
+            "toolFunctionName": "GPTAction_Custom_CustomerAppointmentReply_GeX9",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/c973ad9a-247d-4ed4-9e26-b379338643ca",
+            "type": "custom_gpt_tool",
+            "prompt": "You are a professional appointment scheduling coordinator, specialized in efficiently and courteously handling appointment requests for clients. Your role involves crafting clear and concise appointment confirmation messages, ensuring that all client preferences and availability are respected, while maintaining professionalism and attention to detail.\r\n\r\nYour task is to draft a reply to an appointment scheduling request, confirming the details and offering alternative options if necessary. The reply should be courteous, clear, and ensure that the client understands the available options and next steps.\r\n\r\ncustomer_email_address\r\n'''\r\n{customer_email_address}\r\n'''\r\n\r\ncustomer_email_content\r\n'''\r\n{customer_email_content}\r\n'''\r\n\r\n<Available Appointment Slots>\r\n{available_appointment_slots}\r\n</Available Appointment Slots>\r\n\r\n<Appointment suggestion>\r\n{appointment_suggestion}\r\n</Appointment suggestion>\r\n\r\nRules & Constraints:\r\n'''\r\n1. Ensure all communication maintains a polite and professional tone.\r\n2. Do not suggest appointment slots that are not confirmed as available.\r\n3. Avoid speculative or unclear language; all information should be accurate and confirmed.\r\n4. Provide at least two alternative scheduling options if the client's preferred time is not available.\r\n'''\r\n\r\nOutput Format:\r\nSubject: Confirmation of Your Appointment Request\r\n\r\nDear [Client Name],\r\n\r\nThank you for reaching out to schedule an appointment with us.\r\n\r\n--IF available_appointment_slots is not empty\r\nWe are pleased to confirm the following options for your appointment:\r\n\r\n1. Option 1: [Insert Date and Time]\r\n2. Option 2: [Insert Date and Time]\r\n3. Option 3: [Insert Date and Time]\r\n\r\nPlease let us know which option best suits your schedule, or if you have any other preferences.\r\n--ELSE\r\nUnfortunately, the requested time slots are not available. Could you please provide us with a few alternative dates and times that would work for you? We will do our best to accommodate your schedule.\r\n--ENDIF\r\n\r\nWe look forward to your confirmation.\r\n\r\nBest regards,\r\nBeamAI\r\nAppointment Coordination Team",
+            "description": "A specialized tool designed to handle the scheduling of customer appointments with utmost respect for their preferences and confidentiality, ensuring an efficient and courteous interaction.",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "A specialized tool designed to handle the scheduling of customer appointments with utmost respect for their preferences and confidentiality, ensuring an efficient and courteous interaction.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/c973ad9a-247d-4ed4-9e26-b379338643ca",
+              "tool_name": "Customer Appointment Reply",
+              "description": "A specialized tool designed to handle the scheduling of customer appointments with utmost respect for their preferences and confidentiality, ensuring an efficient and courteous interaction.",
+              "function_name": "GPTAction_Custom_CustomerAppointmentReply_GeX9",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "bef7e7b0-dc3d-4b7d-be5b-7327915b0326",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "customer_email_content",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "the complete unchanged body of the email",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "86e0720f-b4db-41d9-a276-6e44c78bddc5"
+              },
+              {
+                "id": "6090153e-935c-4592-8cdd-a364fe34a4dc",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "appointment_suggestion",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "the complete suggestion on how to handle the appointment",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "86e0720f-b4db-41d9-a276-6e44c78bddc5"
+              },
+              {
+                "id": "f30b9687-7ca3-4452-a6e0-8c8c65d7c8a1",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "available_appointment_slots",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "The time at which the appointment for the customer is to be booked",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "86e0720f-b4db-41d9-a276-6e44c78bddc5"
+              },
+              {
+                "id": "e0fd175d-1312-474d-8288-52a637a5fbae",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "customer_email_address",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "the complete email adress of the user",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "86e0720f-b4db-41d9-a276-6e44c78bddc5"
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "5668d319-e012-46dd-8370-9ce3a430e165",
+            "sourceAgentGraphNodeId": "41f8b937-0663-4029-a4a2-f9011b636cd5",
+            "targetAgentGraphNodeId": "7629a78a-4510-45b0-a481-a54adc013a13",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "6fd453e2-ee6f-4290-bdfd-b9c2c659b91e",
+            "sourceAgentGraphNodeId": "30144da9-6020-43fd-af3b-9bcc604d4570",
+            "targetAgentGraphNodeId": "41f8b937-0663-4029-a4a2-f9011b636cd5",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "9534c8cb-0236-4f8c-9c3f-f1a041f2d3dd",
+        "customId": "7e07b34f-fa67-4d7b-be96-08809b79bb04",
+        "objective": "Update Subscription",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -546,
+        "yCoordinate": 608,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "e1babe45-91b5-49ca-b6cc-c22e96582efa",
+          "toolFunctionName": "GoogleSheetsAction_UpdateCells",
+          "toolName": "Update Sheet Cells",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+          "description": "Update specific cells in a spreadsheet.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "7c1b20c2-a707-4038-853f-1f7c1d6262fb",
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T06:17:32.819Z",
+              "updatedAt": "2026-01-06T06:17:32.819Z",
+              "fillType": "ai_fill",
+              "position": 2,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "boolean",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "d969b210-5dd9-487d-b3ab-c913367cd446",
+              "paramName": "viewonly_url",
+              "agentToolConfigurationId": "e1babe45-91b5-49ca-b6cc-c22e96582efa",
+              "paramDescription": "Set this to true if the user wants to return view-only url of the spreadsheet",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:17:32.819Z",
+              "updatedAt": "2026-01-06T06:17:32.819Z",
+              "fillType": "ai_fill",
+              "position": 1,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "5ccb8bb1-e149-4d78-8686-c49b08c2cd9d",
+              "paramName": "data",
+              "agentToolConfigurationId": "e1babe45-91b5-49ca-b6cc-c22e96582efa",
+              "paramDescription": "Stringified JSON where the key is the Cell ID (example: C10) and the value is the data to be inserted.",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:17:32.819Z",
+              "updatedAt": "2026-01-06T06:17:32.819Z",
+              "fillType": "static",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": "https://docs.google.com/spreadsheets/d/1rBThRJGGcGGDCmDFVPMAzOgZfeT9omJQQxKSG6PeGO4/edit?gid=0#gid=0",
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "86c68a16-ca2a-445b-9f4e-23e47de994c5",
+              "paramName": "spreadsheet_url",
+              "agentToolConfigurationId": "e1babe45-91b5-49ca-b6cc-c22e96582efa",
+              "paramDescription": "The url of the spreadsheet",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Update Sheet Cells",
+            "toolFunctionName": "GoogleSheetsAction_UpdateCells",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Update specific cells in a spreadsheet.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GoogleSheetsAction_UpdateCells: Update specific cells in a Google Sheet by providing a map of cell addresses to new values.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+              "tool_name": "Update Sheet Cells",
+              "categories": [
+                "Files and Documents"
+              ],
+              "data_source": false,
+              "description": "Update specific cells in a Google Sheet by map of addresses to values.",
+              "function_name": "GoogleSheetsAction_UpdateCells",
+              "agent_category": {
+                "id": "d118b6fb-f915-4b0b-9f25-9238bb0235a9",
+                "title": "Files and Documents"
+              },
+              "preferred_model": null,
+              "requires_consent": false,
+              "agentos_categories": [],
+              "requires_translation": false,
+              "integrationIdentifier": "google-sheet",
+              "optional_extracted_args": [
+                "viewonly_url: boolean // The viewonly url, found in Google Sheets API responses or user input and formatted as a string."
+              ],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "spreadsheet_url: string // The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string.",
+                "data: string // The data, found in Google Sheets API responses or user input and formatted as a JSON string or object (e.g., ``A1``)."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Update specific cells in a spreadsheet.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "data": "{{string}}",
+                    "viewonly_url": "{{boolean}}",
+                    "spreadsheet_url": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-sheet/update-cells"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "spreadsheet_id": "{{result.data?.spreadsheet_id}}",
+                  "spreadsheet_url": "{{result.data?.spreadsheet_url}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "51445e46-b182-4700-bf7c-ec81091ce97e",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The spreadsheet url parameter value",
+                "required": true,
+                "paramName": "spreadsheet_url",
+                "paramDescription": "The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The data used in Google Sheets (e.g., A1)",
+                "required": true,
+                "paramName": "data",
+                "paramDescription": "The data, found in Google Sheets API responses or user input and formatted as a JSON string or object (e.g., ``A1``)."
+              },
+              {
+                "dataType": "boolean",
+                "fillType": "ai_fill",
+                "paramTip": "The viewonly url parameter value",
+                "required": false,
+                "paramName": "viewonly_url",
+                "paramDescription": "The viewonly url, found in Google Sheets API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-sheet",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "3a1a2c12-26df-4568-a95d-9cc0f6ed6150",
+            "sourceAgentGraphNodeId": "9534c8cb-0236-4f8c-9c3f-f1a041f2d3dd",
+            "targetAgentGraphNodeId": "f03b06f3-f448-44f6-833e-8cf7c250cfce",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "7a5dd7de-6dee-4f8b-a733-acc9a1f03d48",
+            "sourceAgentGraphNodeId": "1972a83e-736e-4cd3-9cc0-a209d803b02c",
+            "targetAgentGraphNodeId": "9534c8cb-0236-4f8c-9c3f-f1a041f2d3dd",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "1972a83e-736e-4cd3-9cc0-a209d803b02c",
+        "customId": "2dbce016-09b7-4cf2-86a8-4d013d9397b7",
+        "objective": "Evaluate Subscription update",
+        "evaluationCriteria": [
+          "The 'Interpret User Database' field must contain exactly three sentences that accurately describe how the lists translate to rows and columns in the user database, starting from cell A1, ensuring clarity and correctness in mapping the data structure.",
+          "The 'Reasoning' field must contain exactly five sentences that logically explain the decision-making process regarding the customer's subscription update, based on the provided database and email query, without making any assumptions beyond the given data.",
+          "The 'Cell to update' field must specify the correct cell reference and the expected value (either 'Yes' or 'No') for the subscription update, ensuring that the output reflects the correct action based on the user's email query and current database status."
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -546,
+        "yCoordinate": 456,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "7968042b-e381-4ee7-8572-bc5e07aaa053",
+          "toolFunctionName": "GPTAction_Custom_Evaluatesusersubscriptionupdates_d5ds",
+          "toolName": "Evaluates user subscription updates",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730910148369-messages-square.png",
+          "description": "Evaluation of updating ecommerce or saas subscriptions plans",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": 1,
+          "integrationProviderId": null,
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T13:43:33.845Z",
+              "updatedAt": "2026-01-06T13:43:33.845Z",
+              "fillType": "ai_fill",
+              "position": 1,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "1912699a-dd2d-4fbc-b8df-abb9784649fe",
+              "paramName": "email_query",
+              "agentToolConfigurationId": "7968042b-e381-4ee7-8572-bc5e07aaa053",
+              "paramDescription": "the user's email query regarding their subscription",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:43:33.845Z",
+              "updatedAt": "2026-01-06T13:43:33.845Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "6f828155-71cb-4c9e-971f-6ac58cb29996",
+              "paramName": "subscription_data",
+              "agentToolConfigurationId": "7968042b-e381-4ee7-8572-bc5e07aaa053",
+              "paramDescription": "the user's current subscription details from the database",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Evaluates user subscription updates",
+            "toolFunctionName": "GPTAction_Custom_Evaluatesusersubscriptionupdates_d5ds",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730910148369-messages-square.png",
+            "type": "custom_gpt_tool",
+            "prompt": "Role\r\nYou are a subscription management specialist, skilled in analyzing user data and email queries to determine necessary updates to subscription plans. Your objective is to ensure that user subscriptions are accurately updated based on their current database information and specific requests.\r\n\r\nTask\r\nYour task is to review the user's current subscription details from the database and their email query to decide if an update to their subscription is needed. You will then generate a response indicating whether the subscription has been updated or if further action is required.\r\n\r\nParameter Context\r\n'''\r\n{subscription_data}\r\n'''\r\n\r\nEmail Query:\r\n'''\r\n{email_query}\r\n'''\r\n\r\nContext:\r\n<User Database> resembles and excel file which is represented in lists.\r\nThe outer list inside <User Database> contains the rows, while each inner list contains the respective columns.\r\n\r\nRules & Constraints\r\n'''\r\nEnsure that all updates are based strictly on the information provided in the user database and email query.\r\nDo not infer or assume any details not explicitly stated in the email query or user database.\r\nThe that Subscription in the database can have are only \"Yes\" and \"No\". So when updating the cell, you will put the value to yes or no.\r\nMake sure you only output a cell update of the customer email who sent the query.\r\n'''\r\n\r\n\r\nOutput Format\r\nInterpret User Database: [3 Sentences Mapping to understand how the lists translate to rows and columns, the values start at A1]\r\nReasoning: [5 sentences on what should happen with the customer data]\r\nCell to update: [The correct value of the cell which should be updated and the value of it, you will always output the expected value for the cell even if its already correct // (e.g.: \"D3\": \"No\")]",
+            "description": "Evaluation of updating ecommerce or saas subscriptions plans",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "prompt": "Role\r\nYou are a subscription management specialist, skilled in analyzing user data and email queries to determine necessary updates to subscription plans. Your objective is to ensure that user subscriptions are accurately updated based on their current database information and specific requests.\r\n\r\nTask\r\nYour task is to review the user's current subscription details from the database and their email query to decide if an update to their subscription is needed. You will then generate a response indicating whether the subscription has been updated or if further action is required.\r\n\r\nParameter Context\r\n'''\r\n{subscription_data}\r\n'''\r\n\r\nEmail Query:\r\n'''\r\n{email_query}\r\n'''\r\n\r\nContext:\r\n<User Database> resembles and excel file which is represented in lists.\r\nThe outer list inside <User Database> contains the rows, while each inner list contains the respective columns.\r\n\r\nRules & Constraints\r\n'''\r\nEnsure that all updates are based strictly on the information provided in the user database and email query.\r\nDo not infer or assume any details not explicitly stated in the email query or user database.\r\nThe that Subscription in the database can have are only \"Yes\" and \"No\". So when updating the cell, you will put the value to yes or no.\r\nMake sure you only output a cell update of the customer email who sent the query.\r\n'''\r\n\r\n\r\nOutput Format\r\nInterpret User Database: [3 Sentences Mapping to understand how the lists translate to rows and columns, the values start at A1]\r\nReasoning: [5 sentences on what should happen with the customer data]\r\nCell to update: [The correct value of the cell which should be updated and the value of it, you will always output the expected value for the cell even if its already correct // (e.g.: \"D3\": \"No\")]",
+              "content": "Evaluation of updating ecommerce or saas subscriptions plans",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730910148369-messages-square.png",
+              "tool_name": "Evaluates user subscription updates",
+              "description": "Evaluation of updating ecommerce or saas subscriptions plans",
+              "function_name": "GPTAction_Custom_Evaluatesusersubscriptionupdates_d5ds",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "isArray": false,
+                "options": null,
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": null,
+                "position": 0,
+                "required": true,
+                "paramName": "subscription_data",
+                "reloadProps": false,
+                "staticValue": null,
+                "remoteOptions": false,
+                "paramDescription": "the user's current subscription details from the database",
+                "linkParamOutputId": null
+              },
+              {
+                "isArray": false,
+                "options": null,
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": null,
+                "position": 1,
+                "required": true,
+                "paramName": "email_query",
+                "reloadProps": false,
+                "staticValue": null,
+                "remoteOptions": false,
+                "paramDescription": "the user's email query regarding their subscription",
+                "linkParamOutputId": null
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "7a5dd7de-6dee-4f8b-a733-acc9a1f03d48",
+            "sourceAgentGraphNodeId": "1972a83e-736e-4cd3-9cc0-a209d803b02c",
+            "targetAgentGraphNodeId": "9534c8cb-0236-4f8c-9c3f-f1a041f2d3dd",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "82bfad10-31f2-4b15-a470-4c8016f4644e",
+            "sourceAgentGraphNodeId": "d552082f-43d4-4d8d-8892-c8f6ce60413c",
+            "targetAgentGraphNodeId": "1972a83e-736e-4cd3-9cc0-a209d803b02c",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "f550d015-9c85-4cba-b43f-518c96f56aec",
+        "customId": "80d36ad6-9c98-487e-9f45-e773b39cc6fd",
+        "objective": "Draft the generated response in Gmail",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": 654,
+        "yCoordinate": 456,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "90264e87-43cb-4397-8126-e70cf78dcd52",
+          "toolFunctionName": "GmailAction_DraftEmail",
+          "toolName": "Draft Email",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+          "description": "Draft an email without sending using Gmail.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "908f5c15-25b6-45f1-964d-ca9ea9f8447c",
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T06:19:18.350Z",
+              "updatedAt": "2026-01-06T06:40:47.985Z",
+              "fillType": "ai_fill",
+              "position": 5,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": "Customer Support Representative",
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "49f242d5-d3dd-4a51-879b-72877debb001",
+              "paramName": "sender_name",
+              "agentToolConfigurationId": "90264e87-43cb-4397-8126-e70cf78dcd52",
+              "paramDescription": "Display name of the sender",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:19:18.350Z",
+              "updatedAt": "2026-01-06T06:40:47.985Z",
+              "fillType": "ai_fill",
+              "position": 2,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": "Dear Alex Thompson,\n\nThank you for reaching out to us.\n\n[Insert the response here]\n\nWe appreciate your patience and understanding. If you have any additional questions or need further assistance, please do not hesitate to contact us.\n\nBest regards,  \nCustomer Support Representative",
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "9b049099-a96c-4f06-be23-3f0c68bd8b29",
+              "paramName": "body",
+              "agentToolConfigurationId": "90264e87-43cb-4397-8126-e70cf78dcd52",
+              "paramDescription": "Body content of the email in HTML markdown",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:19:18.350Z",
+              "updatedAt": "2026-01-06T06:19:18.350Z",
+              "fillType": "ai_fill",
+              "position": 4,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "b51d808d-5f17-432d-bc60-31cdff8dc2ac",
+              "paramName": "cc_list",
+              "agentToolConfigurationId": "90264e87-43cb-4397-8126-e70cf78dcd52",
+              "paramDescription": "Email addresses for CC (carbon copy) recipients, Must be in comma seperated string emails",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:19:18.350Z",
+              "updatedAt": "2026-01-06T06:19:18.350Z",
+              "fillType": "ai_fill",
+              "position": 3,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": false,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "386ab3ff-4d84-400b-9a62-d34e267bf678",
+              "paramName": "bcc_list",
+              "agentToolConfigurationId": "90264e87-43cb-4397-8126-e70cf78dcd52",
+              "paramDescription": "Email addresses for BCC (blind carbon copy) recipients, Must be in comma seperated string emails",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:19:18.350Z",
+              "updatedAt": "2026-01-06T06:40:47.985Z",
+              "fillType": "ai_fill",
+              "position": 1,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": "Customer Service Demo",
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "4bb865be-64d0-4fa3-bb40-9cf55b3b0d58",
+              "paramName": "subject",
+              "agentToolConfigurationId": "90264e87-43cb-4397-8126-e70cf78dcd52",
+              "paramDescription": "Subject of the email",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T06:19:18.350Z",
+              "updatedAt": "2026-01-06T06:40:47.985Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": "alex.thompson@techify.com",
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "50911b8f-3c43-47c2-bdbf-e94f714dc8d5",
+              "paramName": "email_address",
+              "agentToolConfigurationId": "90264e87-43cb-4397-8126-e70cf78dcd52",
+              "paramDescription": "Email address to which the email is to be sent to",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [
+            {
+              "isArray": false,
+              "id": "b019ed13-5baa-4e4b-988e-fed4a8c37ef0",
+              "paramName": "message",
+              "position": 0,
+              "paramDescription": "-",
+              "agentToolConfigurationId": "90264e87-43cb-4397-8126-e70cf78dcd52",
+              "parentId": null,
+              "paramPath": "message",
+              "outputExample": "Email successfully drafted for alex.thompson@techify.com",
+              "dataType": "string",
+              "typeOptions": null,
+              "createdAt": "2026-01-06T06:40:47.886Z",
+              "updatedAt": "2026-01-06T06:40:47.964Z"
+            },
+            {
+              "isArray": false,
+              "id": "b313040d-efe7-4c7d-a2b1-caa387af0251",
+              "paramName": "message_id",
+              "position": 0,
+              "paramDescription": "-",
+              "agentToolConfigurationId": "90264e87-43cb-4397-8126-e70cf78dcd52",
+              "parentId": null,
+              "paramPath": "message_id",
+              "outputExample": "19b920962400ee46",
+              "dataType": "string",
+              "typeOptions": null,
+              "createdAt": "2026-01-06T06:40:47.886Z",
+              "updatedAt": "2026-01-06T06:40:47.964Z"
+            }
+          ],
+          "originalTool": {
+            "toolName": "Draft Email",
+            "toolFunctionName": "GmailAction_DraftEmail",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Draft an email without sending using Gmail.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GmailAction_DraftEmail: Function to draft an email to one or more recipients using Gmail.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1733312631779-43959279-d4d3-4e1c-ab25-b79fa4224a6d.png",
+              "tool_name": "Draft Email",
+              "categories": [
+                "Communication"
+              ],
+              "data_source": false,
+              "description": "Function to draft an email using Gmail.",
+              "function_name": "GmailAction_DraftEmail",
+              "agent_category": {
+                "id": "32f94c8f-c3eb-48b3-abbc-8b3ae0088318",
+                "title": "Communication"
+              },
+              "preferred_model": "GPT40",
+              "requires_consent": false,
+              "agentos_categories": [],
+              "requires_translation": false,
+              "integrationIdentifier": "google-mail",
+              "optional_extracted_args": [
+                "bcc_list: string // The bcc list, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "cc_list: string // The cc list, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "sender_name: string // The sender name, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "email_address: string // The email address, found in Gmail API responses or user input and formatted as comma-separated values.",
+                "subject: string // The subject, found in Gmail API responses or user input and formatted as a string.",
+                "body: string // The body, found in Gmail API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Draft an email without sending using Gmail.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "body": "{{string}}",
+                    "cc_list": "{{string}}",
+                    "subject": "{{string}}",
+                    "bcc_list": "{{string}}",
+                    "email_address": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-mail/draft-email"
+                },
+                "response": {
+                  "message": "{{result.data?.message}}",
+                  "message_id": "{{result.data?.message_id}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "681b4b01-3dc5-469f-98e0-3c9610b34f4d",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "Email address (e.g., user@example.com)",
+                "required": true,
+                "paramName": "email_address",
+                "paramDescription": "The email address, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The subject parameter value",
+                "required": true,
+                "paramName": "subject",
+                "paramDescription": "The subject, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The body parameter value",
+                "required": true,
+                "paramName": "body",
+                "paramDescription": "The body, found in Gmail API responses or user input and formatted as a string."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The bcc list parameter value",
+                "required": false,
+                "paramName": "bcc_list",
+                "paramDescription": "The bcc list, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The cc list parameter value",
+                "required": false,
+                "paramName": "cc_list",
+                "paramDescription": "The cc list, found in Gmail API responses or user input and formatted as comma-separated values."
+              },
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "Name value (e.g., Finalize report)",
+                "required": false,
+                "paramName": "sender_name",
+                "paramDescription": "The sender name, found in Gmail API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-mail",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "964a6bc5-7bc0-4ab7-af81-29edd7d4f1a3",
+            "sourceAgentGraphNodeId": "1c8b350a-2447-4e0f-b6fd-92d8ce8ea7a6",
+            "targetAgentGraphNodeId": "f550d015-9c85-4cba-b43f-518c96f56aec",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "30144da9-6020-43fd-af3b-9bcc604d4570",
+        "customId": "a6e417a8-1235-4810-ba32-a283e3855956",
+        "objective": "Retrieve Appointment timeslots",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -146,
+        "yCoordinate": 456,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "4413a719-c1b5-4497-834e-a38f0fd7e7bd",
+          "toolFunctionName": "GoogleSheetsAction_GetAllRows",
+          "toolName": "Retrieve All Rows",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+          "description": "Retrieve all rows from a spreadsheet.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "7c1b20c2-a707-4038-853f-1f7c1d6262fb",
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T06:14:09.237Z",
+              "updatedAt": "2026-01-06T06:14:09.237Z",
+              "fillType": "static",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": "https://docs.google.com/spreadsheets/d/1GwLIoe0Mm5aJwwc__2xjOfST6gL6ErO0gBC3F2uqPNs/edit?gid=0#gid=0",
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "0aa24f21-3088-4659-a6f5-f4fed44e9c19",
+              "paramName": "spreadsheet_url",
+              "agentToolConfigurationId": "4413a719-c1b5-4497-834e-a38f0fd7e7bd",
+              "paramDescription": "The url of the spreadsheet",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Retrieve All Rows",
+            "toolFunctionName": "GoogleSheetsAction_GetAllRows",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Retrieve all rows from a spreadsheet.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GoogleSheetsAction_GetAllRows: Function to retrieve all rows in a Google Sheet spreadsheet.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+              "tool_name": "Retrieve All Rows",
+              "categories": [
+                "Files and Documents"
+              ],
+              "data_source": false,
+              "description": "Retrieve every row of data from a Google Sheets spreadsheet.",
+              "function_name": "GoogleSheetsAction_GetAllRows",
+              "agent_category": {
+                "id": "d118b6fb-f915-4b0b-9f25-9238bb0235a9",
+                "title": "Files and Documents"
+              },
+              "preferred_model": "GPT40",
+              "requires_consent": false,
+              "agentos_categories": [],
+              "requires_translation": false,
+              "integrationIdentifier": "google-sheet",
+              "optional_extracted_args": [],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "spreadsheet_url: string // The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Retrieve all rows from a spreadsheet.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "spreadsheet_url": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-sheet/get-all-rows"
+                },
+                "response": {
+                  "data": "{{result.data?.data}}",
+                  "message": "{{result.data?.message}}",
+                  "spreadsheet_id": "{{result.data?.spreadsheet_id}}",
+                  "spreadsheet_url": "{{result.data?.spreadsheet_url}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "51445e46-b182-4700-bf7c-ec81091ce97e",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The spreadsheet url parameter value",
+                "required": true,
+                "paramName": "spreadsheet_url",
+                "paramDescription": "The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-sheet",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "6fd453e2-ee6f-4290-bdfd-b9c2c659b91e",
+            "sourceAgentGraphNodeId": "30144da9-6020-43fd-af3b-9bcc604d4570",
+            "targetAgentGraphNodeId": "41f8b937-0663-4029-a4a2-f9011b636cd5",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "1c78dc16-301e-48f8-b8f0-2a2b668ddfec",
+            "sourceAgentGraphNodeId": "7f6e2517-8489-42cf-bd2b-2106dd92cc39",
+            "targetAgentGraphNodeId": "30144da9-6020-43fd-af3b-9bcc604d4570",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "cbce3d39-a1cd-44e2-9085-baf9e887880a",
+        "customId": "6e63a26d-810d-43c8-9c1f-e4326cde68a0",
+        "objective": "Query order status database and retrieve information",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": 254,
+        "yCoordinate": 456,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "0e1c2331-90dc-4e55-b825-cf32a79beb40",
+          "toolFunctionName": "GoogleSheetsAction_GetAllRows",
+          "toolName": "Retrieve All Rows",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+          "description": "Retrieve all rows from a spreadsheet.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "7c1b20c2-a707-4038-853f-1f7c1d6262fb",
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T06:17:23.191Z",
+              "updatedAt": "2026-01-06T06:17:23.191Z",
+              "fillType": "static",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": "https://docs.google.com/spreadsheets/d/1q-W2XVyDrwMPhx3rjeE7JHo6lHdtKvnT1Pk3mMXFwF4/edit?gid=388797566#gid=388797566",
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "0577d42c-b744-463a-b7f9-335678dacd62",
+              "paramName": "spreadsheet_url",
+              "agentToolConfigurationId": "0e1c2331-90dc-4e55-b825-cf32a79beb40",
+              "paramDescription": "The url of the spreadsheet",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Retrieve All Rows",
+            "toolFunctionName": "GoogleSheetsAction_GetAllRows",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Retrieve all rows from a spreadsheet.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GoogleSheetsAction_GetAllRows: Function to retrieve all rows in a Google Sheet spreadsheet.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+              "tool_name": "Retrieve All Rows",
+              "categories": [
+                "Files and Documents"
+              ],
+              "data_source": false,
+              "description": "Retrieve every row of data from a Google Sheets spreadsheet.",
+              "function_name": "GoogleSheetsAction_GetAllRows",
+              "agent_category": {
+                "id": "d118b6fb-f915-4b0b-9f25-9238bb0235a9",
+                "title": "Files and Documents"
+              },
+              "preferred_model": "GPT40",
+              "requires_consent": false,
+              "agentos_categories": [],
+              "requires_translation": false,
+              "integrationIdentifier": "google-sheet",
+              "optional_extracted_args": [],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "spreadsheet_url: string // The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Retrieve all rows from a spreadsheet.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "spreadsheet_url": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-sheet/get-all-rows"
+                },
+                "response": {
+                  "data": "{{result.data?.data}}",
+                  "message": "{{result.data?.message}}",
+                  "spreadsheet_id": "{{result.data?.spreadsheet_id}}",
+                  "spreadsheet_url": "{{result.data?.spreadsheet_url}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "51445e46-b182-4700-bf7c-ec81091ce97e",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The spreadsheet url parameter value",
+                "required": true,
+                "paramName": "spreadsheet_url",
+                "paramDescription": "The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-sheet",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "9e023cb3-1b0a-437d-8d01-5a6d6400ce91",
+            "sourceAgentGraphNodeId": "cbce3d39-a1cd-44e2-9085-baf9e887880a",
+            "targetAgentGraphNodeId": "0f02439a-e1ee-44a0-8b94-68b9f5b5856a",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "a09d7e16-5560-450b-bf92-6a5ab918e367",
+            "sourceAgentGraphNodeId": "cae6f484-8c12-42af-a1a1-ff4447759e5b",
+            "targetAgentGraphNodeId": "cbce3d39-a1cd-44e2-9085-baf9e887880a",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "cae6f484-8c12-42af-a1a1-ff4447759e5b",
+        "customId": "5aa9a19d-052a-4352-9fd9-4161f110fe85",
+        "objective": "Understand Customer Email",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": 254,
+        "yCoordinate": 304,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "64b3261f-ce9d-4de4-a068-098d8cc6e4f7",
+          "toolFunctionName": "GPTAction_Custom_UnderstandCustomerEmail_FhN3",
+          "toolName": "Understand Customer Email",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/aee763ea-7e4d-43c0-aa45-9bcfacbcb665",
+          "description": "Extract and interpret customer email inquiries.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "aa1dd4f9-addf-4dd1-a373-fac8e7fd3b1f",
+              "paramName": "customer_email",
+              "agentToolConfigurationId": "64b3261f-ce9d-4de4-a068-098d8cc6e4f7",
+              "paramDescription": "the entire content of customer_email including a potential email or names",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Understand Customer Email",
+            "toolFunctionName": "GPTAction_Custom_UnderstandCustomerEmail_FhN3",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/aee763ea-7e4d-43c0-aa45-9bcfacbcb665",
+            "type": "custom_gpt_tool",
+            "prompt": "Role\nYou are a customer service email specialist, skilled in reasoning on and understanding customer inquirie. Your primary goal is to accurately interpret the customer's email inquiry and provide a well-structured output of the relevant information for the next step.\n\nTask\nYour task is to read and understand the customer's email inquiry, extract the key details. The input will be the customer's email, and the expected output is a structured reasoning on what to do with that email..\n\nParameter Context\n\nCustomer Email:\n'''\n{customer_email}\n'''\n\nRules & Constraints\n'''\nDo not generate new information; only use details provided in the customer's email.\nBe precise in your language.\n'''\n\nOutput Format\nReasoning: [Reasoning on what type of email this is and what should happen with in // 4 sentences]\nData: [List of all relevant information for the next process]",
+            "description": "Extract and interpret customer email inquiries.",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "Extract and interpret customer email inquiries.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/aee763ea-7e4d-43c0-aa45-9bcfacbcb665",
+              "tool_name": "Understand Customer Email",
+              "description": "Extract and interpret customer email inquiries.",
+              "function_name": "GPTAction_Custom_UnderstandCustomerEmail_FhN3",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "b50d31cd-db8a-408c-b466-0b7cbd2ffa9c",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "customer_email",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "the entire content of customer_email including a potential email or names",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "fc964b62-a6f9-4a00-8973-575929abbca7"
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "a09d7e16-5560-450b-bf92-6a5ab918e367",
+            "sourceAgentGraphNodeId": "cae6f484-8c12-42af-a1a1-ff4447759e5b",
+            "targetAgentGraphNodeId": "cbce3d39-a1cd-44e2-9085-baf9e887880a",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "d4b2cd83-41e5-4085-a839-245531ebddea",
+            "sourceAgentGraphNodeId": "e1ab9edb-f0d3-4fb3-848f-14e2d4b1b3cc",
+            "targetAgentGraphNodeId": "cae6f484-8c12-42af-a1a1-ff4447759e5b",
+            "condition": "Order Status Handling",
+            "name": "Order Inquiry Response",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "7f6e2517-8489-42cf-bd2b-2106dd92cc39",
+        "customId": "d3757faa-0e87-423c-998b-efb9a95bdbb2",
+        "objective": "Understand Request",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -146,
+        "yCoordinate": 304,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "732b8d8e-aca8-4d73-a3b4-8bab5ba214b9",
+          "toolFunctionName": "GPTAction_Custom_UnderstandSchedulingRequest_syrd",
+          "toolName": "Understand Scheduling Request",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730969157628-brain-cog.png",
+          "description": "Generate clear, concise scheduling action plans",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "272de9ed-74f7-4e8d-b7a7-f31181643554",
+              "paramName": "customer_email_content",
+              "agentToolConfigurationId": "732b8d8e-aca8-4d73-a3b4-8bab5ba214b9",
+              "paramDescription": "the complete unchanged body of the email",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2025-07-15T21:08:59.017Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "089c6934-3772-41e9-a17b-b97d289df5ed",
+              "paramName": "customer_email_address",
+              "agentToolConfigurationId": "732b8d8e-aca8-4d73-a3b4-8bab5ba214b9",
+              "paramDescription": "the complete email adress of the user",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Understand Scheduling Request",
+            "toolFunctionName": "GPTAction_Custom_UnderstandSchedulingRequest_syrd",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730969157628-brain-cog.png",
+            "type": "custom_gpt_tool",
+            "prompt": "Role\r\nYou are a proficient scheduling assistant, specializing in understanding and processing scheduling requests to determine the required actions. Your role involves interpreting the details of scheduling requests, identifying the necessary steps, and ensuring that all actions are clearly communicated and executed efficiently.\r\n\r\nTask\r\nYour task is to understand the scheduling request provided, determine the required actions, and output a clear and concise action plan. The input will be a scheduling request, and the expected output is a detailed action plan outlining the necessary steps to fulfill the request.\r\n\r\n\r\ncustomer_email_address\r\n'''\r\n{customer_email_address}\r\n'''\r\n\r\ncustomer_email_content\r\n'''\r\n{customer_email_content}\r\n'''\r\n\r\n\r\nRules & Constraints\r\n'''\r\nEnsure that all actions are clearly defined and feasible within the given constraints.\r\nDo not assume any details not provided in the scheduling request.\r\nOnly output the information present in the request\r\n'''\r\n\r\nOutput Format\r\nUnderstanding Scheduling Request:\r\n\r\n1. Request Details:\r\n- Requester: [Insert Requester Name]\r\n- Date of Request: [Insert Date]\r\n- Requested Schedule: [Insert Requested Schedule Details]\r\n\r\n2. Required Actions:\r\n- Action 1: [Insert First Required Action]\r\n// add more if required\r\n\r\n3. Additional Notes:\r\n- [Insert any additional notes or considerations]\r\n",
+            "description": "Generate clear, concise scheduling action plans",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "Generate clear, concise scheduling action plans",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730969157628-brain-cog.png",
+              "tool_name": "Understand Scheduling Request",
+              "description": "Generate clear, concise scheduling action plans",
+              "function_name": "GPTAction_Custom_UnderstandSchedulingRequest_syrd",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "ff6af860-b4fb-449c-b359-2005590749d6",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "customer_email_content",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "the complete unchanged body of the email",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "a2a6c50d-7bf5-4b15-86f2-2889da60f29c"
+              },
+              {
+                "id": "e88e753d-c5bb-4562-aa0b-118237d0a1f0",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "customer_email_address",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "the complete email adress of the user",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "a2a6c50d-7bf5-4b15-86f2-2889da60f29c"
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "1c78dc16-301e-48f8-b8f0-2a2b668ddfec",
+            "sourceAgentGraphNodeId": "7f6e2517-8489-42cf-bd2b-2106dd92cc39",
+            "targetAgentGraphNodeId": "30144da9-6020-43fd-af3b-9bcc604d4570",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "191fc417-080b-497d-8200-bc87c2f00c71",
+            "sourceAgentGraphNodeId": "e1ab9edb-f0d3-4fb3-848f-14e2d4b1b3cc",
+            "targetAgentGraphNodeId": "7f6e2517-8489-42cf-bd2b-2106dd92cc39",
+            "condition": "Appointment Coordination",
+            "name": "Appointment Scheduling",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "1c8b350a-2447-4e0f-b6fd-92d8ce8ea7a6",
+        "customId": "3d4799fd-b0b8-4823-92d5-ceafb321af2f",
+        "objective": "Draft a response to the customer email in the same language as the language of the email based on the extracted details and agent guidelines",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": 654,
+        "yCoordinate": 304,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "d2453e68-1e92-401c-a8e3-dbd55531cd55",
+          "toolFunctionName": "GPTAction_Custom_EmailResponseGeneration_ej2N",
+          "toolName": "Email Response Generation",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730705403663-users.png",
+          "description": "A tool designed to answer customer query provided within the email details. These queries are answered based on the relevant agent guidelines uploaded within the database",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": 0,
+          "integrationProviderId": null,
+          "dynamicPropsId": null,
+          "inputParams": [
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2026-01-06T06:40:56.008Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": "{\"content\":\"Expert 1 Reasoning: The customer email clearly indicates a request to return a product due to a defect, specifically a Bluetooth speaker with a battery issue. Therefore, the appropriate category for this request is \\\"Product Return Requests Handling.\\\"\\n\\nExpert 2 Reasoning: The email from Alex Thompson is focused on initiating a return process for a recently purchased item, citing a problem with the product's battery. This aligns with the category \\\"Product Return Requests Handling.\\\"\\n\\nExpert 3 Reasoning: Alex Thompson's email is a straightforward request for returning a product, as it includes details such as the product name, order number, and reason for return. Thus, the correct category is \\\"Product Return Requests Handling.\\\"\\n\\ncategory of the customer request: Product Return Requests Handling\"}",
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "9b2eed16-26a2-4c56-b8bc-b9a4999b5886",
+              "paramName": "agentGuidelines",
+              "agentToolConfigurationId": "d2453e68-1e92-401c-a8e3-dbd55531cd55",
+              "paramDescription": "The instructions and response guidelines which are to be used to answer the given customer query within the emailDetails. These agent guidelines are to be used to answer the exact query provided in the emailDetails",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2025-07-15T21:08:59.017Z",
+              "updatedAt": "2026-01-06T06:40:56.008Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": "Dear Customer Support,\r\n\r\nI hope this message finds you well. I am writing to request a return for a\r\nproduct I recently purchased. Below are the details of the return:\r\n\r\nProduct Name: Bluetooth Speaker\r\n\r\nOrder Number: 987654\r\n\r\nReason for Return: Battery not holding charge\r\n\r\nDate of Purchase: August 10, 2023\r\n\r\nCustomer Details:\r\n\r\nName: Alex Thompson\r\n\r\nEmail: alex.thompson@techify.com\r\n\r\nPhone: 555-7890\r\n\r\nAddress: 456 Oak Avenue, Rivertown, CA\r\n\r\nPlease let me know the next steps for processing this return. I look\r\nforward to your assistance in resolving this issue.\r\n\r\nThank you for your attention to this matter.\r\n\r\nBest regards,\r\n\r\nAlex Thompson\r\n\r\nalex.thompson@techify.com\r\n\r\n555-7890\r\n\r\nTechify Inc.\r\n",
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "2e368996-decf-4b39-9048-a5b0e7012fb2",
+              "paramName": "emailDetails",
+              "agentToolConfigurationId": "d2453e68-1e92-401c-a8e3-dbd55531cd55",
+              "paramDescription": "The content of the customer's email that needs to be addressed.",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [],
+          "originalTool": {
+            "toolName": "Email Response Generation",
+            "toolFunctionName": "GPTAction_Custom_EmailResponseGeneration_ej2N",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730705403663-users.png",
+            "type": "custom_gpt_tool",
+            "prompt": "### \r\nRole \r\nYou are an expert customer support specialist, specializing in crafting detailed and accurate email responses based on the agent guidelines uploaded in your database. Your role involves addressing customer inquiries with precision and professionalism, ensuring that all responses are aligned with the provided guidelines and demonstrate empathy and commitment to resolving customer issues effectively.\r\n### \r\n\r\n\r\n### \r\nTask \r\nYour task is to address a customer's inquiry using the agent guidelines provided. You must review the customer's email, consult the agent guidelines uploaded in the database for specific procedures or steps, and draft a comprehensive and empathetic response. Ensure that your response includes the customer platform login link and addresses all aspects of the customer's inquiry clearly and effectively. \r\n### \r\n\r\n\r\n### \r\nParameter Context \r\nEmail to Respond To:\r\n'''\r\n```{emailDetails}```\r\n'''\r\n\r\n\r\nAgent Guidelines:\r\n'''\r\n```{agentGuidelines}```\r\n'''\r\n\r\n\r\n### \r\n\r\n\r\n\r\n###\r\nInstructions:\r\n\r\n\r\n1. The output should be in text format\r\n2. In case the response to the customer query is not part of the agent guidelines, in the response body, instead of the resolution, you should mention \"[Insert the response here]\".\r\n3. You **MUST** ensure that the language of the output  is the  same as the language used in the email that has been received\r\n\r\n\r\n\r\n\r\n###\r\n\r\n\r\n### \r\nOutput Format \r\nDear [Insert Customer Name. (This will be the \"SenderName\" from the initial email) ],\r\n\r\n\r\n\r\nThank you for reaching out to us. \r\n\r\n\r\n[Insert detailed response based on agent guidelines here]\r\n\r\n\r\n\r\nWe appreciate your patience and understanding. If you have any additional questions or need further assistance, please do not hesitate to contact us.\r\n\r\n\r\nBest regards,\r\n[Insert the Customer Support Representative name here. (This will be the \"RecipientName\" from the initial email)]\r\n###",
+            "description": "A tool designed to answer customer query provided within the email details. These queries are answered based on the relevant agent guidelines uploaded within the database",
+            "preferredModel": null,
+            "meta": {
+              "type": "custom_gpt_tool",
+              "content": "A tool designed to answer customer query provided within the email details. These queries are answered based on the relevant agent guidelines uploaded within the database",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730705403663-users.png",
+              "tool_name": "Email Response Generation",
+              "description": "A tool designed to answer customer query provided within the email details. These queries are answered based on the relevant agent guidelines uploaded within the database",
+              "function_name": "GPTAction_Custom_EmailResponseGeneration_ej2N",
+              "preferred_model": null
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "id": "891ff700-dd53-44fb-b8fc-0cfa822e19f9",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "agentGuidelines",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "The instructions and response guidelines which are to be used to answer the given customer query within the emailDetails. These agent guidelines are to be used to answer the exact query provided in the emailDetails",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "10bb1c54-acca-49e4-b9d8-7e055e25db9b"
+              },
+              {
+                "id": "188ae74b-3740-43c1-af82-241aa71fda53",
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "question": null,
+                "required": true,
+                "createdAt": "2025-07-15T21:08:59.017Z",
+                "paramName": "emailDetails",
+                "updatedAt": "2025-07-15T21:08:59.017Z",
+                "staticValue": null,
+                "linkOutputParam": null,
+                "paramDescription": "The content of the customer's email that needs to be addressed.",
+                "linkParamOutputId": null,
+                "agentToolConfigurationId": "10bb1c54-acca-49e4-b9d8-7e055e25db9b"
+              }
+            ],
+            "outputParams": []
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "964a6bc5-7bc0-4ab7-af81-29edd7d4f1a3",
+            "sourceAgentGraphNodeId": "1c8b350a-2447-4e0f-b6fd-92d8ce8ea7a6",
+            "targetAgentGraphNodeId": "f550d015-9c85-4cba-b43f-518c96f56aec",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "3bccb90c-4149-47fb-bf26-38748ecf185f",
+            "sourceAgentGraphNodeId": "e1ab9edb-f0d3-4fb3-848f-14e2d4b1b3cc",
+            "targetAgentGraphNodeId": "1c8b350a-2447-4e0f-b6fd-92d8ce8ea7a6",
+            "condition": "General Customer Support Request\n",
+            "name": "Customer Support Response",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "d552082f-43d4-4d8d-8892-c8f6ce60413c",
+        "customId": "f25a134d-8584-4a22-b286-5bd479cbb44e",
+        "objective": "Retrieve Product Details",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -546,
+        "yCoordinate": 304,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "dd648fcb-9322-4a90-a08d-ff86aba5b4af",
+          "toolFunctionName": "GoogleSheetsAction_GetAllRows",
+          "toolName": "Retrieve All Rows",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+          "description": "Retrieve all rows from a spreadsheet.",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": null,
+          "integrationProviderId": "7c1b20c2-a707-4038-853f-1f7c1d6262fb",
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T06:17:14.333Z",
+              "updatedAt": "2026-01-06T13:41:47.445Z",
+              "fillType": "static",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": "https://docs.google.com/spreadsheets/d/1rBThRJGGcGGDCmDFVPMAzOgZfeT9omJQQxKSG6PeGO4/edit?gid=0#gid=0",
+              "required": true,
+              "dataType": "string",
+              "outputExample": "https://docs.google.com/spreadsheets/d/1rBThRJGGcGGDCmDFVPMAzOgZfeT9omJQQxKSG6PeGO4/edit?gid=0#gid=0",
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "3d571263-c439-4f4a-99dd-5fec15d4e60d",
+              "paramName": "spreadsheet_url",
+              "agentToolConfigurationId": "dd648fcb-9322-4a90-a08d-ff86aba5b4af",
+              "paramDescription": "The url of the spreadsheet",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [
+            {
+              "isArray": false,
+              "id": "c02db04a-46a2-43b0-8f80-97b7bd53fb7c",
+              "paramName": "spreadsheet_url",
+              "position": 3,
+              "paramDescription": "-",
+              "agentToolConfigurationId": "dd648fcb-9322-4a90-a08d-ff86aba5b4af",
+              "parentId": null,
+              "paramPath": "spreadsheet_url",
+              "outputExample": "https://docs.google.com/spreadsheets/d/1rBThRJGGcGGDCmDFVPMAzOgZfeT9omJQQxKSG6PeGO4/edit?gid=0#gid=0",
+              "dataType": "string",
+              "typeOptions": null,
+              "createdAt": "2025-11-25T09:40:36.058Z",
+              "updatedAt": "2026-01-06T06:17:14.316Z"
+            },
+            {
+              "isArray": false,
+              "id": "31252b77-e503-4e24-9ea2-b61162ed7322",
+              "paramName": "spreadsheet_id",
+              "position": 2,
+              "paramDescription": "-",
+              "agentToolConfigurationId": "dd648fcb-9322-4a90-a08d-ff86aba5b4af",
+              "parentId": null,
+              "paramPath": "spreadsheet_id",
+              "outputExample": "1rBThRJGGcGGDCmDFVPMAzOgZfeT9omJQQxKSG6PeGO4",
+              "dataType": "string",
+              "typeOptions": null,
+              "createdAt": "2025-11-25T09:40:36.058Z",
+              "updatedAt": "2026-01-06T06:17:14.316Z"
+            },
+            {
+              "isArray": false,
+              "id": "70161f65-392f-43d3-b28a-9442e7108bd3",
+              "paramName": "message",
+              "position": 1,
+              "paramDescription": "-",
+              "agentToolConfigurationId": "dd648fcb-9322-4a90-a08d-ff86aba5b4af",
+              "parentId": null,
+              "paramPath": "message",
+              "outputExample": "Spreadsheet data successfully retrieved",
+              "dataType": "string",
+              "typeOptions": null,
+              "createdAt": "2025-11-25T09:40:36.058Z",
+              "updatedAt": "2026-01-06T06:17:14.316Z"
+            },
+            {
+              "isArray": true,
+              "id": "e844d9e9-a1ec-42cc-843c-34aa8d2f12aa",
+              "paramName": "data",
+              "position": 0,
+              "paramDescription": "-",
+              "agentToolConfigurationId": "dd648fcb-9322-4a90-a08d-ff86aba5b4af",
+              "parentId": null,
+              "paramPath": "data",
+              "outputExample": "[[\"Email Address\",\"Customer Name\",\"No\",\"Total Spent (USD)\",\"Subscription Status\",\"Roaming Status\"],[\"jakobhanke@kpmg.com\",\"Jakob Hanke    \",\"2\",\"No\",\"No\",\"Yes\"],[\"jakobhanke@kpmg.com\",\"Michael Nieder\u00e9e\",\"2\",\"No\",\"Yes\",\"Yes\"],[\"jakobhanke@kpmg.com\",\"Katharina Buss\",\"2\",\"No\",\"Yes\",\"Yes\"]]",
+              "dataType": "string",
+              "typeOptions": null,
+              "createdAt": "2025-11-25T09:40:36.058Z",
+              "updatedAt": "2025-11-25T09:40:36.112Z"
+            }
+          ],
+          "originalTool": {
+            "toolName": "Retrieve All Rows",
+            "toolFunctionName": "GoogleSheetsAction_GetAllRows",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+            "type": "beam_tool",
+            "prompt": null,
+            "description": "Retrieve all rows from a spreadsheet.",
+            "preferredModel": null,
+            "meta": {
+              "type": "beam_tool",
+              "content": "GoogleSheetsAction_GetAllRows: Function to retrieve all rows in a Google Sheet spreadsheet.",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/9d31c522-6a08-4840-ad21-d6c32ceffd4d",
+              "tool_name": "Retrieve All Rows",
+              "categories": [
+                "Files and Documents"
+              ],
+              "data_source": false,
+              "description": "Retrieve every row of data from a Google Sheets spreadsheet.",
+              "function_name": "GoogleSheetsAction_GetAllRows",
+              "agent_category": {
+                "id": "d118b6fb-f915-4b0b-9f25-9238bb0235a9",
+                "title": "Files and Documents"
+              },
+              "preferred_model": "GPT40",
+              "requires_consent": false,
+              "agentos_categories": [],
+              "requires_translation": false,
+              "integrationIdentifier": "google-sheet",
+              "optional_extracted_args": [],
+              "optional_generated_args": [],
+              "required_extracted_args": [
+                "spreadsheet_url: string // The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string."
+              ],
+              "required_generated_args": [],
+              "integration_provider_auth": "nango_cloud",
+              "description_human_readable": "Retrieve all rows from a spreadsheet.",
+              "integration_provider_details": {
+                "request": {
+                  "body": {
+                    "spreadsheet_url": "{{string}}"
+                  },
+                  "query": [],
+                  "method": "post",
+                  "endpoint": "https://api.nango.dev/v1/google-sheet/get-all-rows"
+                },
+                "response": {
+                  "data": "{{result.data?.data}}",
+                  "message": "{{result.data?.message}}",
+                  "spreadsheet_id": "{{result.data?.spreadsheet_id}}",
+                  "spreadsheet_url": "{{result.data?.spreadsheet_url}}"
+                }
+              },
+              "integration_provider_executor": "nango_cloud"
+            },
+            "integrationId": "51445e46-b182-4700-bf7c-ec81091ce97e",
+            "isIntegrationRequired": true,
+            "isIntegrationConnected": true,
+            "inputParams": [
+              {
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": "The spreadsheet url parameter value",
+                "required": true,
+                "paramName": "spreadsheet_url",
+                "paramDescription": "The spreadsheet url, found in Google Sheets API responses or user input and formatted as a string."
+              }
+            ],
+            "outputParams": [],
+            "integration": {
+              "systemIntegrationProvider": "nango_cloud",
+              "systemIntegrationIdentifier": "google-sheet",
+              "customAuthParameters": {}
+            }
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "82bfad10-31f2-4b15-a470-4c8016f4644e",
+            "sourceAgentGraphNodeId": "d552082f-43d4-4d8d-8892-c8f6ce60413c",
+            "targetAgentGraphNodeId": "1972a83e-736e-4cd3-9cc0-a209d803b02c",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "8271522d-05ab-4189-abb1-3542c78336bd",
+            "sourceAgentGraphNodeId": "e1ab9edb-f0d3-4fb3-848f-14e2d4b1b3cc",
+            "targetAgentGraphNodeId": "d552082f-43d4-4d8d-8892-c8f6ce60413c",
+            "condition": "Subscription Requests Handling",
+            "name": "Subscription Management",
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "e1ab9edb-f0d3-4fb3-848f-14e2d4b1b3cc",
+        "customId": "816e971e-06f5-4cfb-8d16-59fec50bb797",
+        "objective": "Identify the right category for the customer query",
+        "evaluationCriteria": [
+          ""
+        ],
+        "isEntryNode": false,
+        "isExitNode": false,
+        "xCoordinate": -146,
+        "yCoordinate": 152,
+        "isEvaluationEnabled": true,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "toolConfiguration": {
+          "id": "749d3e41-591e-4076-a6b2-cd0940c7a475",
+          "toolFunctionName": "GPTAction_Custom_ProvideEmailAgentDatabase_ep3f",
+          "toolName": "Query category Identifier",
+          "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730909698904-database.png",
+          "description": "Selection of the correct category of the customer request",
+          "requiresConsent": false,
+          "isMemoryTool": false,
+          "memoryLookupInstruction": "",
+          "isBackgroundTool": false,
+          "isBatchExecutionEnabled": false,
+          "isCodeExecutionEnabled": false,
+          "accuracyScore": 1,
+          "integrationProviderId": null,
+          "dynamicPropsId": "",
+          "inputParams": [
+            {
+              "createdAt": "2026-01-06T13:39:33.921Z",
+              "updatedAt": "2026-01-06T13:39:33.921Z",
+              "fillType": "ai_fill",
+              "position": 1,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "3187ef0f-2980-42f3-8b7c-49a432ddc0f2",
+              "paramName": "customerEmailAddress",
+              "agentToolConfigurationId": "749d3e41-591e-4076-a6b2-cd0940c7a475",
+              "paramDescription": "Email address of the customer",
+              "paramTip": null,
+              "linkOutputParam": null
+            },
+            {
+              "createdAt": "2026-01-06T13:39:33.921Z",
+              "updatedAt": "2026-01-06T13:39:33.921Z",
+              "fillType": "ai_fill",
+              "position": 0,
+              "question": null,
+              "linkParamOutputId": null,
+              "staticValue": null,
+              "required": true,
+              "dataType": "string",
+              "outputExample": null,
+              "reloadProps": false,
+              "remoteOptions": false,
+              "options": null,
+              "id": "fa1bdef2-441c-48a5-9ceb-13e8e95f4081",
+              "paramName": "customerEmailContent",
+              "agentToolConfigurationId": "749d3e41-591e-4076-a6b2-cd0940c7a475",
+              "paramDescription": "Content of the email sent by the customer",
+              "paramTip": null,
+              "linkOutputParam": null
+            }
+          ],
+          "outputParams": [
+            {
+              "isArray": false,
+              "id": "23929b05-ba7f-4961-acc2-784deca41adf",
+              "paramName": "Identified_Category",
+              "position": 0,
+              "paramDescription": "The category that ahs been identified for the customer qurery",
+              "agentToolConfigurationId": "749d3e41-591e-4076-a6b2-cd0940c7a475",
+              "parentId": null,
+              "paramPath": null,
+              "outputExample": null,
+              "dataType": "string",
+              "typeOptions": {
+                "enumValues": null
+              },
+              "createdAt": "2026-01-06T13:39:16.775Z",
+              "updatedAt": "2026-01-06T13:39:16.775Z"
+            }
+          ],
+          "originalTool": {
+            "toolName": "Query category Identifier",
+            "toolFunctionName": "GPTAction_Custom_ProvideEmailAgentDatabase_ep3f",
+            "iconSrc": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730909698904-database.png",
+            "type": "custom_gpt_tool",
+            "prompt": "You are 3 experts discussing which <URL> to select.\r\n\r\nThe task is to provide the correct category of the customer request based on customer_email. \n\r\nOnly select the <category of the customer request> based on the content of <customer_email> you will select the right <category of the customer request> required for the task.\r\n\r\n<customer_emai_address>\r\n```{customerEmailAddress}``` \n</customer_email_address>\r\n\r\n<customer_email_content>\r\n```{customerEmailContent}``` \n</customer_email_content>\r\n\r\n\n<category of the customer request>\r\n\r\n1. Select IF: User Request is about handling or changing a subscription. \n\u2018\u2019\u2019\r\nSubscription Requests Handling\r\n\u2018\u2019\u2019\r\n\r\n\r\n\n2. Select IF: User Request wants to return a product or see the order status. \n\u2018\u2019\u2019\r\nProduct Return Requests Handling\r\n\u2018\u2019\u2019\r\n\r\n\r\n\n3. Select IF: User Request wants to schedule or change an appointment. \n\u2018\u2019\u2019\r\nAppointment Coordination\r\n\u2018\u2019\u2019\r\n\r\n\r\n\n4. Select IF: User Request is about a specific order that has been made. \n\u2018\u2019\u2019\r\nOrder Status Handling\n\u2018\u2019\u2019\n5. Select IF: User Request is about any topic apart from one of the above\n\u2018\u2019\u2019 \nGeneral Customer Support Request\n\u2018\u2019\u2019\n\r\n<category of the customer request>\n\n\r\n\r\nYou will output the right URLs for this task.\r\n\r\nOutput Format:\r\nExpert 1 Reasoning: [2 sentences what <category of the customer request> to pick based on customer_email]\r\nExpert 2 Reasoning:  [2 sentences what <category of the customer request> to pick based on customer_email]\r\nExpert 3 Reasoning:  [2 sentences what <category of the customer request> to pick based on customer_email]\r\nExpert 1 Reasoning: [2 sentences what <category of the customer request> to pick based on customer_email]\r\nExpert 2 Reasoning:  [2 sentences what <category of the customer request> to pick based on customer_email]\r\nExpert 3 Reasoning:  [2 sentences what <category of the customer request> to pick based on customer_email]\r\ncategory of the customer request: [Selected category of the customer request]",
+            "description": "Selection of the correct category of the customer request",
+            "preferredModel": "GPT40",
+            "meta": {
+              "type": "custom_gpt_tool",
+              "prompt": "You are 3 experts discussing which <URL> to select.\r\n\r\nThe task is to provide the correct category of the customer request based on customer_email. \n\r\nOnly select the <category of the customer request> based on the content of <customer_email> you will select the right <category of the customer request> required for the task.\r\n\r\n<customer_emai_address>\r\n```{customerEmailAddress}``` \n</customer_email_address>\r\n\r\n<customer_email_content>\r\n```{customerEmailContent}``` \n</customer_email_content>\r\n\r\n\n<category of the customer request>\r\n\r\n1. Select IF: User Request is about handling or changing a subscription. \n\u2018\u2019\u2019\r\nSubscription Requests Handling\r\n\u2018\u2019\u2019\r\n\r\n\r\n\n2. Select IF: User Request wants to return a product or see the order status. \n\u2018\u2019\u2019\r\nProduct Return Requests Handling\r\n\u2018\u2019\u2019\r\n\r\n\r\n\n3. Select IF: User Request wants to schedule or change an appointment. \n\u2018\u2019\u2019\r\nAppointment Coordination\r\n\u2018\u2019\u2019\r\n\r\n\r\n\n4. Select IF: User Request is about a specific order that has been made. \n\u2018\u2019\u2019\r\nOrder Status Handling\n\u2018\u2019\u2019\n5. Select IF: User Request is about any topic apart from one of the above\n\u2018\u2019\u2019 \nGeneral Customer Support Request\n\u2018\u2019\u2019\n\r\n<category of the customer request>\n\n\r\n\r\nYou will output the right URLs for this task.\r\n\r\nOutput Format:\r\nExpert 1 Reasoning: [2 sentences what <category of the customer request> to pick based on customer_email]\r\nExpert 2 Reasoning:  [2 sentences what <category of the customer request> to pick based on customer_email]\r\nExpert 3 Reasoning:  [2 sentences what <category of the customer request> to pick based on customer_email]\r\nExpert 1 Reasoning: [2 sentences what <category of the customer request> to pick based on customer_email]\r\nExpert 2 Reasoning:  [2 sentences what <category of the customer request> to pick based on customer_email]\r\nExpert 3 Reasoning:  [2 sentences what <category of the customer request> to pick based on customer_email]\r\ncategory of the customer request: [Selected category of the customer request]",
+              "content": "Provide Email Agent Database",
+              "icon_src": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/1730909698904-database.png",
+              "tool_name": "Provide Email Agent Database",
+              "description": "Provide Email Agent Database",
+              "function_name": "GPTAction_Custom_ProvideEmailAgentDatabase_ep3f",
+              "preferred_model": "GPT40"
+            },
+            "integrationId": null,
+            "isIntegrationRequired": false,
+            "isIntegrationConnected": false,
+            "inputParams": [
+              {
+                "isArray": false,
+                "options": null,
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": null,
+                "position": 0,
+                "required": true,
+                "paramName": "customerEmailContent",
+                "reloadProps": false,
+                "staticValue": null,
+                "remoteOptions": false,
+                "paramDescription": "Content of the email sent by the customer",
+                "linkParamOutputId": null
+              },
+              {
+                "isArray": false,
+                "options": null,
+                "dataType": "string",
+                "fillType": "ai_fill",
+                "paramTip": null,
+                "position": 1,
+                "required": true,
+                "paramName": "customerEmailAddress",
+                "reloadProps": false,
+                "staticValue": null,
+                "remoteOptions": false,
+                "paramDescription": "Email address of the customer",
+                "linkParamOutputId": null
+              }
+            ],
+            "outputParams": [
+              {
+                "id": "19fa1dcf-b110-4e0a-85f7-b6cacc412ea1",
+                "isArray": false,
+                "dataType": "string",
+                "position": 0,
+                "paramName": "Identified_Category",
+                "typeOptions": {
+                  "enumValues": null
+                },
+                "paramDescription": "The category that ahs been identified for the customer qurery"
+              }
+            ]
+          }
+        },
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "8271522d-05ab-4189-abb1-3542c78336bd",
+            "sourceAgentGraphNodeId": "e1ab9edb-f0d3-4fb3-848f-14e2d4b1b3cc",
+            "targetAgentGraphNodeId": "d552082f-43d4-4d8d-8892-c8f6ce60413c",
+            "condition": "Subscription Requests Handling",
+            "name": "Subscription Management",
+            "isAttachmentDataPulledIn": true
+          },
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "3bccb90c-4149-47fb-bf26-38748ecf185f",
+            "sourceAgentGraphNodeId": "e1ab9edb-f0d3-4fb3-848f-14e2d4b1b3cc",
+            "targetAgentGraphNodeId": "1c8b350a-2447-4e0f-b6fd-92d8ce8ea7a6",
+            "condition": "General Customer Support Request\n",
+            "name": "Customer Support Response",
+            "isAttachmentDataPulledIn": true
+          },
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "191fc417-080b-497d-8200-bc87c2f00c71",
+            "sourceAgentGraphNodeId": "e1ab9edb-f0d3-4fb3-848f-14e2d4b1b3cc",
+            "targetAgentGraphNodeId": "7f6e2517-8489-42cf-bd2b-2106dd92cc39",
+            "condition": "Appointment Coordination",
+            "name": "Appointment Scheduling",
+            "isAttachmentDataPulledIn": true
+          },
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "d4b2cd83-41e5-4085-a839-245531ebddea",
+            "sourceAgentGraphNodeId": "e1ab9edb-f0d3-4fb3-848f-14e2d4b1b3cc",
+            "targetAgentGraphNodeId": "cae6f484-8c12-42af-a1a1-ff4447759e5b",
+            "condition": "Order Status Handling",
+            "name": "Order Inquiry Response",
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "0609a711-2d85-4457-88ec-71e1208e6cf8",
+            "sourceAgentGraphNodeId": "c6d68959-8ce9-4a1b-865c-5f605f4394f1",
+            "targetAgentGraphNodeId": "e1ab9edb-f0d3-4fb3-848f-14e2d4b1b3cc",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ]
+      },
+      {
+        "id": "c6d68959-8ce9-4a1b-865c-5f605f4394f1",
+        "customId": "5e4aadee-0ff6-40ba-b4cd-b95bfe63bb51",
+        "objective": "Entry Node",
+        "evaluationCriteria": [],
+        "isEntryNode": true,
+        "isExitNode": false,
+        "xCoordinate": 0,
+        "yCoordinate": 0,
+        "isEvaluationEnabled": false,
+        "isAttachmentDataPulledIn": true,
+        "onError": "STOP",
+        "autoRetryWhenAccuracyLessThan": 80,
+        "autoRetryLimitWhenAccuracyIsLow": 1,
+        "autoRetryCountWhenFailure": 1,
+        "autoRetryWaitTimeWhenFailureInMs": 1000,
+        "enableAutoRetryWhenAccuracyIsLow": false,
+        "enableAutoRetryWhenFailure": false,
+        "childEdges": [
+          {
+            "createdAt": "2026-01-06T13:40:29.168Z",
+            "updatedAt": "2026-01-06T13:40:29.168Z",
+            "deletedAt": null,
+            "id": "0609a711-2d85-4457-88ec-71e1208e6cf8",
+            "sourceAgentGraphNodeId": "c6d68959-8ce9-4a1b-865c-5f605f4394f1",
+            "targetAgentGraphNodeId": "e1ab9edb-f0d3-4fb3-848f-14e2d4b1b3cc",
+            "condition": "",
+            "name": null,
+            "isAttachmentDataPulledIn": true
+          }
+        ],
+        "parentEdges": []
+      }
+    ],
+    "agent": {
+      "id": "ea659a9a-1d8c-45da-bff5-2e0cb86aa8cd",
+      "name": "Customer Service Agent (Demo)",
+      "themeIconUrl": "https://production-beam-assets-bucket.s3.eu-central-1.amazonaws.com/a7d81b53-9c8d-4f77-b4b2-a84868edfd51"
+    }
+  }
+}

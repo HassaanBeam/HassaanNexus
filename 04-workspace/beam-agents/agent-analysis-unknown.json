@@ -1,0 +1,319 @@
+{
+  "info": {
+    "agent_id": "3aa08542-6f71-43e6-9120-72d78015e7ab",
+    "graph_id": "19bf6c9a-ce74-438f-84ac-af2cf2403b05",
+    "is_active": true,
+    "is_published": true,
+    "is_draft": true,
+    "total_nodes": 10,
+    "total_edges": 0
+  },
+  "nodes": [
+    {
+      "step": 1,
+      "id": "0152b57e-1f88-4615-bba2-bc511e52307e",
+      "objective": "Entry Node",
+      "is_entry": true,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": null,
+      "tool_name": null,
+      "tool_description": null,
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "step": 2,
+      "id": "66c87e25-f1a5-4421-a616-71670f301cb8",
+      "objective": "Email Input is received from the customer based on the customer's property details to check if they meet the underwriting criteria.",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GPTAction_Custom_PropertyUnderwritingChecker_sgKJ",
+      "tool_name": "Property Underwriting Checker",
+      "tool_description": "The Property Underwriting Eligibility Checker is designed to evaluate customer-provided property details against underwriting criteria. It ensures accurate assessment of risk and eligibility for insurance coverage. The tool identifies discrepancies and missing information, maintaining confidentiality and integrity throughout the process. It provides a detailed report on eligibility status and criteria met or not met.",
+      "inputs": [
+        {
+          "name": "email_input",
+          "description": "The email input received from the customer containing property details.",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "property_details",
+          "description": "Specific details about the customer's property that need to be evaluated.",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "step": 3,
+      "id": "17777118-c874-4515-a816-8584b49e3689",
+      "objective": "Get underwriting master dataset from the provided spreadsheet link",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GoogleSheetsAction_GetAllRows",
+      "tool_name": "Retrieve All Rows",
+      "tool_description": "Retrieve all rows from a spreadsheet.",
+      "inputs": [
+        {
+          "name": "spreadsheet_url",
+          "description": "The url of the spreadsheet",
+          "fill_type": "static",
+          "required": true,
+          "static_value": "https://docs.google.com/spreadsheets/d/1DdduD6o5ijtlQf3-RyZutklgLOUdUp-R4VakbcZ8Lf4/edit?gid=0#gid=0"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "step": 4,
+      "id": "2a7ffb90-9cb5-424e-9f80-72ec0db7c43c",
+      "objective": "Verify Property_ID of the sender against the Underwriting Master Database Property_ID Column",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GPTAction_Custom_PropertyIDVerificationTool_68uz",
+      "tool_name": "Property ID Verification Tool",
+      "tool_description": "The Property ID Verification Tool is designed to ensure the accuracy of property information by cross-referencing sender Property_IDs against the Underwriting Master Database. It helps prevent errors in underwriting decisions by verifying data integrity. The tool maintains confidentiality and data security throughout the verification process. It provides a detailed report of verification status and any discrepancies found.",
+      "inputs": [
+        {
+          "name": "underwriting_master_dataset",
+          "description": "Underwriting Master Dataset",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "sender_property_id",
+          "description": "The Property_ID that needs to be verified against the database.",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "step": 5,
+      "id": "66d306a7-3467-4867-a8a8-eedfab518de4",
+      "objective": "Analyze Claim Underwriting Request Against Claim Underwriting Set of Rule / Guidelines",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GPTAction_Custom_ClaimUnderwritingAnalysisTool_OqMq",
+      "tool_name": "Claim Underwriting Analysis Tool",
+      "tool_description": "The Claim Underwriting Analysis Tool is designed to evaluate claim underwriting requests against established guidelines. It ensures compliance and identifies any discrepancies in the requests. The tool provides a detailed report of the evaluation, maintaining confidentiality and accuracy. It is essential for safeguarding the company's financial stability and regulatory compliance.",
+      "inputs": [
+        {
+          "name": "extracted_property_details",
+          "description": "Property Details",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "property_verification_status",
+          "description": "Property Status",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "step": 6,
+      "id": "46605bb0-9523-44b8-a13e-db08ad0df6e2",
+      "objective": "Send a Rejection Email that we can not underwrite the claim request because your property is not eligible",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GmailAction_ReplyEmail",
+      "tool_name": "Reply to Email",
+      "tool_description": "Reply to a Gmail email with given content.",
+      "inputs": [
+        {
+          "name": "message_id",
+          "description": "A unique identifier for the email message generated by GMail. Usually under the key messageId or emailId",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "body",
+          "description": "Generate the body content of an email in well-structured HTML format. The email should begin with a professional thank-you message, acknowledging the recipient\u2019s email. Then, clearly communicate that their request cannot be processed because the property does not meet the underwriting eligibility criteria, explicitly stating that it is classified as 'Not Eligible.' Specify that the reason for ineligibility is that the property does not meet the required set of rules for underwriting. Maintain a professional and empathetic tone, ensuring clarity while also offering the recipient an opportunity to seek further clarification if needed.",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "step": 7,
+      "id": "cf4df3a5-b35c-47a1-ab05-d0721162f00a",
+      "objective": "Make Property_ID, its Verification_Status, and its Eligibility_Critera all comma separated to be placed in separate cells in a single row of the final Underwriting_Approved spreadsheet",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GPTAction_Custom_UnderwritingDataFormatter_e05R",
+      "tool_name": "Underwriting Data Formatter",
+      "tool_description": "The Underwriting Data Formatter is designed to organize property information for final approval spreadsheets. It ensures that property IDs, verification statuses, and eligibility criteria are accurately formatted and placed in separate cells. This tool supports the finance team's decision-making by maintaining data integrity and accuracy. It is essential for streamlining the underwriting approval process.",
+      "inputs": [
+        {
+          "name": "property_data",
+          "description": "The source from which the property data is extracted for formatting.",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "step": 8,
+      "id": "1483f86c-4a53-4edb-8859-719743a21cc7",
+      "objective": "Populate the Property_ID along with its respective verification status and property eligibility in the Underwriting_Approved Spreadsheet",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GoogleSheetsAction_UpdateCells",
+      "tool_name": "Update Sheet Cells",
+      "tool_description": "Update specific cells in a spreadsheet.",
+      "inputs": [
+        {
+          "name": "viewonly_url",
+          "description": "Set this to true if the user wants to return view-only url of the spreadsheet",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        },
+        {
+          "name": "spreadsheet_url",
+          "description": "The url of the spreadsheet",
+          "fill_type": "static",
+          "required": true,
+          "static_value": "https://docs.google.com/spreadsheets/d/1UM_bWsW0ArbbffHoRkZ3TcEHu2SJCE2l2U8VwKPHj0s/edit?gid=0#gid=0"
+        },
+        {
+          "name": "data",
+          "description": "Stringified JSON where the key is the Cell ID (example: C10) and the value is the data to be inserted.",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "step": 9,
+      "id": "46f9eeba-f9cc-4a20-8f16-f461c939198b",
+      "objective": "Send an Acceptance Email that the claim has been underwritten in our database",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GmailAction_ReplyEmail",
+      "tool_name": "Reply to Email",
+      "tool_description": "Reply to a Gmail email with given content.",
+      "inputs": [
+        {
+          "name": "message_id",
+          "description": "A unique identifier for the email message generated by GMail. Usually under the key messageId or emailId",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "body",
+          "description": "Generate the body content of an email in well-structured HTML format. The email should begin with a professional thank-you message, acknowledging the recipient\u2019s email. Then, clearly communicate that their claim has been successfully underwritten in our database. Specify that the property has met the necessary underwriting eligibility criteria. Maintain a professional and reassuring tone, ensuring clarity while also offering the recipient an opportunity to reach out if they have any questions or need further assistance.",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "step": 10,
+      "id": "13c15475-226e-4136-9755-eba467583370",
+      "objective": "Send a Rejection Email that we cant underwrite the claim request",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GmailAction_ReplyEmail",
+      "tool_name": "Reply to Email",
+      "tool_description": "Reply to a Gmail email with given content.",
+      "inputs": [
+        {
+          "name": "body",
+          "description": "Generate the body content of the email in HTML format. Start by professionally thanking the recipient for their email. Then, inform them that their request cannot be processed because the property verification status is 'Not Verified' due to the Property_ID not being registered in our database. Kindly request them to complete the registration process before proceeding.",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "message_id",
+          "description": "A unique identifier for the email message generated by GMail. Usually under the key messageId or emailId",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        }
+      ],
+      "outputs": []
+    }
+  ],
+  "connections": [],
+  "integrations": {
+    "Google": {
+      "purpose": "Google Workspace services",
+      "tools": [
+        "Retrieve All Rows",
+        "Update Sheet Cells"
+      ],
+      "functions": [
+        "GoogleSheetsAction_GetAllRows",
+        "GoogleSheetsAction_UpdateCells"
+      ]
+    },
+    "Gmail": {
+      "purpose": "Email operations",
+      "tools": [
+        "Reply to Email",
+        "Reply to Email",
+        "Reply to Email"
+      ],
+      "functions": [
+        "GmailAction_ReplyEmail",
+        "GmailAction_ReplyEmail",
+        "GmailAction_ReplyEmail"
+      ]
+    }
+  },
+  "inputs": {
+    "email_input": "The email input received from the customer containing property details.",
+    "underwriting_master_dataset": "Underwriting Master Dataset",
+    "sender_property_id": "The Property_ID that needs to be verified against the database.",
+    "extracted_property_details": "Property Details",
+    "property_verification_status": "Property Status",
+    "message_id": "A unique identifier for the email message generated by GMail. Usually under the key messageId or emailId",
+    "body": "Generate the body content of an email in well-structured HTML format. The email should begin with a professional thank-you message, acknowledging the recipient\u2019s email. Then, clearly communicate that their request cannot be processed because the property does not meet the underwriting eligibility criteria, explicitly stating that it is classified as 'Not Eligible.' Specify that the reason for ineligibility is that the property does not meet the required set of rules for underwriting. Maintain a professional and empathetic tone, ensuring clarity while also offering the recipient an opportunity to seek further clarification if needed.",
+    "property_data": "The source from which the property data is extracted for formatting.",
+    "data": "Stringified JSON where the key is the Cell ID (example: C10) and the value is the data to be inserted."
+  },
+  "outputs": {},
+  "tools": [
+    "Claim Underwriting Analysis Tool",
+    "Property ID Verification Tool",
+    "Property Underwriting Checker",
+    "Reply to Email",
+    "Retrieve All Rows",
+    "Underwriting Data Formatter",
+    "Update Sheet Cells"
+  ]
+}
