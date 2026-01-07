@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPO Transcript Analysis Agent - Sample Transcripts</title>
+    <style>
+        @media print {
+            .scenario { page-break-after: always; }
+            .scenario:last-child { page-break-after: avoid; }
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #1a1a2e;
+            border-bottom: 3px solid #4361ee;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #4361ee;
+            margin-top: 40px;
+        }
+        .meta {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .meta p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .scenario {
+            margin-bottom: 50px;
+        }
+        .scenario-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 0;
+        }
+        .scenario-desc {
+            background: #f0f0f0;
+            padding: 10px 20px;
+            border-radius: 0 0 8px 8px;
+            margin-top: 0;
+            font-style: italic;
+        }
+        .transcript {
+            background: #1a1a2e;
+            color: #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+        .transcript-header {
+            color: #4cc9f0;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .timestamp {
+            color: #7b7b7b;
+        }
+        .agent-line {
+            color: #4ade80;
+        }
+        .customer-line {
+            color: #f472b6;
+        }
+        .expected {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+        .expected h4 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        .flagged { border-left-color: #f44336; background: #ffebee; }
+        .flagged h4 { color: #c62828; }
+        .compliance { border-left-color: #ff9800; background: #fff3e0; }
+        .compliance h4 { color: #e65100; }
+    </style>
+</head>
+<body>
+    <h1>BPO Transcript Analysis Agent</h1>
+    <p style="font-size: 20px; color: #666;">Sample Input Transcripts</p>
+
+    <div class="meta">
+        <p><strong>Agent ID:</strong> a1b9bee3-1e15-4c11-a6d5-739d8a4f01ea</p>
+        <p><strong>Workspace ID:</strong> 400f6086-88e0-43b8-9020-aaa1c0bb2ad0</p>
+        <p><strong>Generated:</strong> January 7, 2026</p>
+    </div>
+
+    <!-- Scenario 1 -->
+    <div class="scenario">
+        <h2 class="scenario-header">Scenario 1: Happy Path (Order Found, Not Flagged)</h2>
+        <p class="scenario-desc">Standard customer inquiry about order status. Positive interaction with no issues detected.</p>
+
+        <div class="transcript"><span class="transcript-header">CALL TRANSCRIPT</span>
+<strong>Date:</strong> January 5, 2026
+<strong>Duration:</strong> 4 minutes 23 seconds
+<strong>Agent:</strong> Sarah Mitchell
+<strong>Customer:</strong> John Anderson
+<strong>Order Number:</strong> ORD-2026-00142
+
+<span class="timestamp">[00:00:00]</span> <span class="agent-line">Agent: Thank you for calling TechGear Support. My name is Sarah, how may I assist you today?</span>
+
+<span class="timestamp">[00:00:08]</span> <span class="customer-line">Customer: Hi Sarah. I'm calling about my order ORD-2026-00142. I placed it three days ago and wanted to check on the shipping status.</span>
+
+<span class="timestamp">[00:00:18]</span> <span class="agent-line">Agent: I'd be happy to help you with that, John. Let me pull up your order now. I can see your order for the wireless headphones was processed and shipped yesterday via express delivery.</span>
+
+<span class="timestamp">[00:00:35]</span> <span class="customer-line">Customer: Oh that's great news! Do you have a tracking number?</span>
+
+<span class="timestamp">[00:00:40]</span> <span class="agent-line">Agent: Yes, absolutely. Your tracking number is 1Z999AA10123456784. You should receive delivery by Thursday.</span>
+
+<span class="timestamp">[00:00:52]</span> <span class="customer-line">Customer: Perfect, thank you so much for your help!</span>
+
+<span class="timestamp">[00:00:56]</span> <span class="agent-line">Agent: You're welcome! Is there anything else I can help you with today?</span>
+
+<span class="timestamp">[00:01:02]</span> <span class="customer-line">Customer: No, that's all I needed. Have a great day!</span>
+
+<span class="timestamp">[00:01:06]</span> <span class="agent-line">Agent: Thank you for choosing TechGear. Have a wonderful day, John!</span>
+
+<strong>Customer Email:</strong> john.anderson@email.com</div>
+
+        <div class="expected">
+            <h4>Expected Result</h4>
+            <p><strong>Flag Status:</strong> Not Flagged</p>
+            <p><strong>Outcome:</strong> No notifications sent. Task completes successfully.</p>
+        </div>
+    </div>
+
+    <!-- Scenario 2 -->
+    <div class="scenario">
+        <h2 class="scenario-header">Scenario 2: Flagged (Negative Sentiment - Angry Customer)</h2>
+        <p class="scenario-desc">Customer expresses frustration and dissatisfaction. Transcript flagged for negative sentiment requiring review.</p>
+
+        <div class="transcript"><span class="transcript-header">CALL TRANSCRIPT</span>
+<strong>Date:</strong> January 6, 2026
+<strong>Duration:</strong> 8 minutes 47 seconds
+<strong>Agent:</strong> Michael Torres
+<strong>Customer:</strong> Rebecca Williams
+<strong>Order Number:</strong> ORD-2026-00089
+
+<span class="timestamp">[00:00:00]</span> <span class="agent-line">Agent: Thank you for calling TechGear Support. My name is Michael, how may I assist you today?</span>
+
+<span class="timestamp">[00:00:07]</span> <span class="customer-line">Customer: Finally! I've been on hold for 45 minutes! This is absolutely ridiculous!</span>
+
+<span class="timestamp">[00:00:14]</span> <span class="agent-line">Agent: I sincerely apologize for the long wait time, ma'am. How can I help you today?</span>
+
+<span class="timestamp">[00:00:20]</span> <span class="customer-line">Customer: My order number is ORD-2026-00089. I ordered a laptop two weeks ago and it still hasn't arrived. This is completely unacceptable!</span>
+
+<span class="timestamp">[00:00:32]</span> <span class="agent-line">Agent: I understand your frustration. Let me look into this for you right away.</span>
+
+<span class="timestamp">[00:00:40]</span> <span class="customer-line">Customer: You people are the worst! I paid extra for expedited shipping and nothing! I want a full refund AND I'm going to leave bad reviews everywhere!</span>
+
+<span class="timestamp">[00:00:55]</span> <span class="agent-line">Agent: I completely understand, Mrs. Williams. I can see your order was delayed due to a warehouse issue. I want to make this right for you.</span>
+
+<span class="timestamp">[00:01:08]</span> <span class="customer-line">Customer: Make it right? It's too late for that! I needed this laptop for my daughter's school. Now she's missed a week of online classes because of your incompetence!</span>
+
+<span class="timestamp">[00:01:22]</span> <span class="agent-line">Agent: I am truly sorry for the impact this has had. Let me arrange expedited overnight shipping at no additional cost and provide you with a 20% discount on your next order.</span>
+
+<span class="timestamp">[00:01:38]</span> <span class="customer-line">Customer: I don't want a discount, I want my laptop! And I want to speak to a manager right now!</span>
+
+<span class="timestamp">[00:01:46]</span> <span class="agent-line">Agent: Absolutely, I can connect you with a supervisor. Before I do, I want to confirm the overnight shipping upgrade has been processed. Your new delivery date is tomorrow by 10 AM.</span>
+
+<span class="timestamp">[00:02:01]</span> <span class="customer-line">Customer: Fine. But this is the last time I'm ordering from your company.</span>
+
+<span class="timestamp">[00:02:08]</span> <span class="agent-line">Agent: I understand, and again, I sincerely apologize. Let me transfer you to our customer experience manager now.</span>
+
+<strong>Customer Email:</strong> rebecca.williams@email.com</div>
+
+        <div class="expected flagged">
+            <h4>Expected Result - FLAGGED</h4>
+            <p><strong>Flag Status:</strong> Flagged</p>
+            <p><strong>Flag Reason:</strong> Negative sentiment detected - customer expressed frustration, threatened bad reviews, requested manager escalation</p>
+            <p><strong>Outcome:</strong> Email sent to customer + Slack notification to #demo-notifications</p>
+        </div>
+    </div>
+
+    <!-- Scenario 3 -->
+    <div class="scenario">
+        <h2 class="scenario-header">Scenario 3: Flagged (Compliance Issue - PII Handling)</h2>
+        <p class="scenario-desc">Agent mishandles customer personal information, triggering a critical compliance flag.</p>
+
+        <div class="transcript"><span class="transcript-header">CALL TRANSCRIPT</span>
+<strong>Date:</strong> January 4, 2026
+<strong>Duration:</strong> 6 minutes 12 seconds
+<strong>Agent:</strong> David Chen
+<strong>Customer:</strong> Margaret Thompson
+<strong>Order Number:</strong> ORD-2026-00156
+
+<span class="timestamp">[00:00:00]</span> <span class="agent-line">Agent: TechGear Support, David speaking. How can I help?</span>
+
+<span class="timestamp">[00:00:05]</span> <span class="customer-line">Customer: Hi, I need to update my credit card information for my subscription.</span>
+
+<span class="timestamp">[00:00:11]</span> <span class="agent-line">Agent: Sure thing! Can you give me your full credit card number?</span>
+
+<span class="timestamp">[00:00:17]</span> <span class="customer-line">Customer: It's 4532 7891 2345 6789.</span>
+
+<span class="timestamp">[00:00:24]</span> <span class="agent-line">Agent: Got it. And what's the expiration date and the three-digit code on the back?</span>
+
+<span class="timestamp">[00:00:30]</span> <span class="customer-line">Customer: 09/28 and the code is 847.</span>
+
+<span class="timestamp">[00:00:35]</span> <span class="agent-line">Agent: Perfect, let me write that down... 4532 7891 2345 6789, expiring 09/28, CVV 847. Your order number?</span>
+
+<span class="timestamp">[00:00:48]</span> <span class="customer-line">Customer: ORD-2026-00156.</span>
+
+<span class="timestamp">[00:00:52]</span> <span class="agent-line">Agent: Thanks. I've updated everything. Your card is now on file.</span>
+
+<span class="timestamp">[00:00:58]</span> <span class="customer-line">Customer: Great, thanks for your help.</span>
+
+<span class="timestamp">[00:01:02]</span> <span class="agent-line">Agent: No problem. Anything else?</span>
+
+<span class="timestamp">[00:01:05]</span> <span class="customer-line">Customer: No, that's all.</span>
+
+<span class="timestamp">[00:01:08]</span> <span class="agent-line">Agent: Have a great day!</span>
+
+<strong>Customer Email:</strong> margaret.thompson@email.com</div>
+
+        <div class="expected compliance">
+            <h4>Expected Result - COMPLIANCE VIOLATION</h4>
+            <p><strong>Flag Status:</strong> Flagged (CRITICAL)</p>
+            <p><strong>Flag Reason:</strong> PCI-DSS breach - Agent verbally repeated full credit card number, expiration, and CVV on recorded call</p>
+            <p><strong>Outcome:</strong> URGENT notification sent via email and Slack</p>
+        </div>
+    </div>
+
+    <!-- Scenario 4 -->
+    <div class="scenario">
+        <h2 class="scenario-header">Scenario 4: No Orders Found (Invalid Order Number)</h2>
+        <p class="scenario-desc">Customer provides order number that doesn't exist in database. Agent exits without flag analysis.</p>
+
+        <div class="transcript"><span class="transcript-header">CALL TRANSCRIPT</span>
+<strong>Date:</strong> January 7, 2026
+<strong>Duration:</strong> 3 minutes 05 seconds
+<strong>Agent:</strong> Emily Rodriguez
+<strong>Customer:</strong> James Wilson
+<strong>Order Number:</strong> ORD-9999-INVALID
+
+<span class="timestamp">[00:00:00]</span> <span class="agent-line">Agent: Thank you for calling TechGear Support. My name is Emily, how may I assist you today?</span>
+
+<span class="timestamp">[00:00:08]</span> <span class="customer-line">Customer: Hi, I'm calling about order ORD-9999-INVALID. I think there might be an issue with my shipment.</span>
+
+<span class="timestamp">[00:00:18]</span> <span class="agent-line">Agent: Let me look that up for you. Could you spell out the order number again?</span>
+
+<span class="timestamp">[00:00:24]</span> <span class="customer-line">Customer: O-R-D-9999-INVALID.</span>
+
+<span class="timestamp">[00:00:32]</span> <span class="agent-line">Agent: I'm not finding that order in our system. Are you sure that's the correct order number? Do you have a confirmation email?</span>
+
+<span class="timestamp">[00:00:42]</span> <span class="customer-line">Customer: Let me check... oh, I think I might have the wrong company. This might be from another store.</span>
+
+<span class="timestamp">[00:00:52]</span> <span class="agent-line">Agent: No problem! Would you like me to help you verify if you have any orders with us?</span>
+
+<span class="timestamp">[00:00:58]</span> <span class="customer-line">Customer: No, I think I made a mistake. Sorry to bother you!</span>
+
+<span class="timestamp">[00:01:03]</span> <span class="agent-line">Agent: Not a bother at all. Have a great day!</span>
+
+<strong>Customer Email:</strong> james.wilson@email.com</div>
+
+        <div class="expected">
+            <h4>Expected Result</h4>
+            <p><strong>Flag Status:</strong> N/A (No analysis performed)</p>
+            <p><strong>Outcome:</strong> Task exits via "No Orders Found" path. No notifications sent.</p>
+        </div>
+    </div>
+
+    <!-- Scenario 5 -->
+    <div class="scenario">
+        <h2 class="scenario-header">Scenario 5: Edge Case (Mixed Sentiment - Resolved Complaint)</h2>
+        <p class="scenario-desc">Customer starts angry but ends satisfied. Tests edge case handling for sentiment analysis.</p>
+
+        <div class="transcript"><span class="transcript-header">CALL TRANSCRIPT</span>
+<strong>Date:</strong> January 6, 2026
+<strong>Duration:</strong> 5 minutes 33 seconds
+<strong>Agent:</strong> Jennifer Park
+<strong>Customer:</strong> Robert Martinez
+<strong>Order Number:</strong> ORD-2026-00178
+
+<span class="timestamp">[00:00:00]</span> <span class="agent-line">Agent: Thank you for calling TechGear Support. My name is Jennifer, how may I assist you today?</span>
+
+<span class="timestamp">[00:00:07]</span> <span class="customer-line">Customer: I'm really upset right now. My order ORD-2026-00178 arrived damaged and nobody has been able to help me!</span>
+
+<span class="timestamp">[00:00:18]</span> <span class="agent-line">Agent: I'm so sorry to hear that, Mr. Martinez. That must be very frustrating. Let me take care of this for you right now.</span>
+
+<span class="timestamp">[00:00:28]</span> <span class="customer-line">Customer: I've already called twice before and nothing has happened!</span>
+
+<span class="timestamp">[00:00:33]</span> <span class="agent-line">Agent: I completely understand, and I apologize for the previous experiences. I'm going to personally ensure this gets resolved today. First, let me arrange a replacement to ship out today with overnight delivery at no charge.</span>
+
+<span class="timestamp">[00:00:50]</span> <span class="customer-line">Customer: Okay... that would help.</span>
+
+<span class="timestamp">[00:00:54]</span> <span class="agent-line">Agent: I've also applied a $50 credit to your account as an apology for the inconvenience. Would you like me to arrange a pickup for the damaged item, or should I send a return label?</span>
+
+<span class="timestamp">[00:01:10]</span> <span class="customer-line">Customer: A return label would be easier.</span>
+
+<span class="timestamp">[00:01:14]</span> <span class="agent-line">Agent: Perfect. I'm sending that to your email now, along with confirmation of your replacement shipment and the $50 credit. Is there anything else I can help with?</span>
+
+<span class="timestamp">[00:01:28]</span> <span class="customer-line">Customer: No, actually... thank you, Jennifer. You've been really helpful. I appreciate you actually solving this for me.</span>
+
+<span class="timestamp">[00:01:38]</span> <span class="agent-line">Agent: It's my pleasure, Mr. Martinez. I'm sorry again for the trouble. Your replacement will arrive tomorrow by noon. Have a wonderful day!</span>
+
+<span class="timestamp">[00:01:48]</span> <span class="customer-line">Customer: You too! Thanks again.</span>
+
+<strong>Customer Email:</strong> robert.martinez@email.com</div>
+
+        <div class="expected">
+            <h4>Expected Result</h4>
+            <p><strong>Flag Status:</strong> Not Flagged</p>
+            <p><strong>Analysis:</strong> Initial negative sentiment successfully resolved. Customer expressed gratitude at call end.</p>
+            <p><strong>Outcome:</strong> No notifications sent. Task completes successfully.</p>
+        </div>
+    </div>
+
+    <footer style="margin-top: 50px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px;">
+        <p>Document Version: 1.0 | Generated: January 7, 2026</p>
+        <p>To save as PDF: Press Cmd+P (Mac) or Ctrl+P (Windows) and select "Save as PDF"</p>
+    </footer>
+</body>
+</html>

@@ -52,10 +52,24 @@ desktop.ini
 .mcp.local.json
 
 # Credential files (contain secrets - use .example templates)
+# System skills
 00-system/skills/google/credentials/google-credentials.json
 00-system/skills/slack/credentials/slack-credentials.json
 00-system/google-credentials.json
 01-memory/integrations/google-token.json
+
+# User skills credentials
+03-skills/google/credentials/google-credentials.json
+03-skills/slack/credentials/slack-credentials.json
+
+# Catch-all for any credential files that might be added
+**/credentials/*.json
+!**/credentials/*.example.json
+
+# Token files (OAuth tokens)
+**/google-token.json
+**/slack-token.json
+**/*-token.json
 
 # User-specific memory (optional - uncomment if you want to keep private)
 # 01-memory/session-reports/
