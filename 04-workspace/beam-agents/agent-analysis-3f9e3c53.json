@@ -1,0 +1,604 @@
+{
+  "info": {
+    "agent_id": "3f9e3c53-d193-4f35-9227-3d274628b019",
+    "graph_id": "3d8defdd-490a-4deb-93fa-ea11d8c47702",
+    "is_active": false,
+    "is_published": false,
+    "is_draft": true,
+    "total_nodes": 8,
+    "total_edges": 0
+  },
+  "nodes": [
+    {
+      "step": 1,
+      "id": "67fdaa4a-11b8-461d-b1cd-e6cc1705ff38",
+      "objective": "Send the entire personalized feedback to tenant channel.\n\nThe body of the email needs o be HTML to ensure line breaks and formatting",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GmailAction_SendEmail",
+      "tool_name": "Send Email",
+      "tool_description": "Send an email to one or more recipients.",
+      "inputs": [
+        {
+          "name": "body",
+          "description": "HTML or markdown content of the email",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "email_address",
+          "description": "Comma-separated recipient email addresses",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "subject",
+          "description": "Subject line of the email",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "bcc_list",
+          "description": "Comma-separated BCC recipient email addresses",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        },
+        {
+          "name": "cc_list",
+          "description": "Comma-separated CC recipient email addresses",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        },
+        {
+          "name": "sender_name",
+          "description": "Display name shown as the sender",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        },
+        {
+          "name": "reply_to",
+          "description": "Email address where replies should be directed",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        },
+        {
+          "name": "reply_to_sender_only",
+          "description": "If true, replies go only to the original sender",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "message_id",
+          "description": "-"
+        },
+        {
+          "name": "message",
+          "description": "-"
+        },
+        {
+          "name": "email_address",
+          "description": "-"
+        },
+        {
+          "name": "label_ids",
+          "description": "-"
+        },
+        {
+          "name": "thread_id",
+          "description": "-"
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "id": "ff1daa5e-4228-41b3-bf0f-1bd4deb373c4",
+      "objective": "Generate tailored responses for each tenant based on their specific inquiry, and tenant profile",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GPTAction_Custom_TenantResponseGenerator_e0wo",
+      "tool_name": "Tenant Response Generator",
+      "tool_description": "The Tenant Response Generator is designed to create personalized responses for each tenant based on their specific inquiry and tenant profile. It analyzes tenant profiles to understand their needs and concerns, ensuring that responses are tailored to the tenant's specific context and requirements. The tool synthesizes information from various sources to create comprehensive tenant profiles, maintaining data integrity and providing well-informed responses. It is crucial for enhancing tenant satisfaction and improving communication efficiency. The tool facilitates effective communication and resolution by providing accurate and relevant responses.",
+      "inputs": [
+        {
+          "name": "tenant_profile",
+          "description": "A unified tenant profile or issue summary that aggregates all information related to a specific tenant or property unit.",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tenant_profile",
+          "description": "A unified tenant profile or issue summary that aggregates all information related to a specific tenant or property unit."
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "id": "71bac969-c328-4d95-8a39-c638484259fc",
+      "objective": "Aggregate all information related to a specific tenant or property unit from multiple communications and create a unified tenant profile/issue summary. This would involve combining the information from airtable and the extracted info from the documents",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GPTAction_Custom_TenantProfileAggregator_gyEF",
+      "tool_name": "Tenant Profile Aggregator",
+      "tool_description": "The Tenant Profile Aggregator is a tool designed to aggregate all information related to a specific tenant or property unit from multiple communications. It combines data from Airtable and extracted information from documents to create a unified tenant profile or issue summary. The tool ensures data integrity and accuracy while synthesizing information from various sources. It provides a comprehensive overview of tenant information and issues, facilitating decision-making and further analysis. The tool is essential for creating detailed profiles that enable effective management and resolution.",
+      "inputs": [
+        {
+          "name": "communication_type",
+          "description": "Identified communication type",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "priority_level",
+          "description": "Determined priority level",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "tenant_info",
+          "description": "Extracted tenant information",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "tenant_profile",
+          "description": "A unified tenant profile or issue summary that aggregates all information related to a specific tenant or property unit."
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "id": "430f62d6-c37f-4f0f-8ce6-eebfe0072e67",
+      "objective": "Send email to internal team member for manually handle this usecaase as the details of the customer are not found in the database.\n\nMake sure the body of the email also contiains available core details of the customer as well.\n\nThe body of the email should be in HTML format so that line breaks and formatting can be preserved",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GmailAction_SendEmail",
+      "tool_name": "Send Email",
+      "tool_description": "Send an email to one or more recipients.",
+      "inputs": [
+        {
+          "name": "body",
+          "description": "HTML or markdown content of the email",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "bcc_list",
+          "description": "Comma-separated BCC recipient email addresses",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        },
+        {
+          "name": "cc_list",
+          "description": "Comma-separated CC recipient email addresses",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        },
+        {
+          "name": "sender_name",
+          "description": "Display name shown as the sender",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        },
+        {
+          "name": "reply_to",
+          "description": "Email address where replies should be directed",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        },
+        {
+          "name": "reply_to_sender_only",
+          "description": "If true, replies go only to the original sender",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        },
+        {
+          "name": "email_address",
+          "description": "Comma-separated recipient email addresses",
+          "fill_type": "static",
+          "required": true,
+          "static_value": "service@beam.ai"
+        },
+        {
+          "name": "subject",
+          "description": "Property Management Customer Support",
+          "fill_type": "static",
+          "required": true,
+          "static_value": "Property Management Customer Support"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "message",
+          "description": "-"
+        },
+        {
+          "name": "email_address",
+          "description": "-"
+        },
+        {
+          "name": "label_ids",
+          "description": "-"
+        },
+        {
+          "name": "message_id",
+          "description": "-"
+        },
+        {
+          "name": "thread_id",
+          "description": "-"
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "id": "735b3343-69e9-4430-bec7-7cbad9abeec9",
+      "objective": "Fetch further details of the candidate from Airtable database.",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "AirtableAction_GetRecords",
+      "tool_name": "Retrieve Airtable Records",
+      "tool_description": "Retrieves records from an Airtable table, with optional filtering by field values.",
+      "inputs": [
+        {
+          "name": "filter",
+          "description": "Use the following json here and use the insturtions within the placeholder [] to input the value\n\n{\"Contact Email\":\"[insert the email of the contact here who has sent the request]\"})",
+          "fill_type": "ai_fill",
+          "required": false,
+          "static_value": null
+        },
+        {
+          "name": "base_id",
+          "description": "Airtable base ID (e.g., \"app123ABC\")",
+          "fill_type": "static",
+          "required": true,
+          "static_value": "appaJAfTi3RohG8AB"
+        },
+        {
+          "name": "table",
+          "description": "Table name or ID (e.g., \"Contacts\")",
+          "fill_type": "static",
+          "required": true,
+          "static_value": "tblxpNFVTdc6rZKgY"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "records",
+          "description": "-"
+        },
+        {
+          "name": "id",
+          "description": "-"
+        },
+        {
+          "name": "Last Contact Date",
+          "description": "-"
+        },
+        {
+          "name": "Risk Level",
+          "description": "-"
+        },
+        {
+          "name": "Tenant Since Duration",
+          "description": "-"
+        },
+        {
+          "name": "Account Manager",
+          "description": "-"
+        },
+        {
+          "name": "Preferred Language",
+          "description": "-"
+        },
+        {
+          "name": "Payment Status",
+          "description": "-"
+        },
+        {
+          "name": "Tenant Type",
+          "description": "-"
+        },
+        {
+          "name": "Contact Phone",
+          "description": "-"
+        },
+        {
+          "name": "Contact Email",
+          "description": "-"
+        },
+        {
+          "name": "Lease End Date",
+          "description": "-"
+        },
+        {
+          "name": "Lease Start Date",
+          "description": "-"
+        },
+        {
+          "name": "Property Location",
+          "description": "-"
+        },
+        {
+          "name": "Unit Number",
+          "description": "-"
+        },
+        {
+          "name": "Tenant Name",
+          "description": "-"
+        },
+        {
+          "name": "Tenant ID",
+          "description": "-"
+        },
+        {
+          "name": "fields",
+          "description": "-"
+        },
+        {
+          "name": "createdTime",
+          "description": "-"
+        },
+        {
+          "name": "message",
+          "description": "-"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "id": "5c80f396-1c5a-4aa4-b60b-03e4729f68ff",
+      "objective": "Create communication log in Airtable",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "AirtableAction_RecordCreate",
+      "tool_name": "Create Airtable Records",
+      "tool_description": "Creates new record(s) in an Airtable table with specified field values.",
+      "inputs": [
+        {
+          "name": "records",
+          "description": "[\n  {\n    \"Communication ID\": \"[Generate unique identifier in format COM-XXX where XXX is a sequential number]\",\n    \"Tenant ID\": \"[Insert the Tenant ID from Tenant Master Information table that matches this communication's tenant]\",\n    \"Timestamp\": \"[Insert the date and time when the communication was received in ISO 8601 format: YYYY-MM-DDTHH:mm:ss]\",\n    \"Communication Type\": \"[Select ONE from: Maintenance Request, Inquiry, Complaint, Contract Renewal, Invoice, Bill, General]\",\n    \"Issue Category\": \"[Select ONE from: Plumbing, Electrical, HVAC, Appliance, Structural, Payment, Contract, Parking, Noise, Other]\",\n    \"Channel\": \"[Select ONE from: Email, Phone, Portal, In-person]\",\n    \"Subject\": \"[Insert the subject line or brief title of the communication]\",\n    \"Issue Description\": \"[Insert the full detailed description of the issue, request, or inquiry as provided by the tenant in their communication]\",\n    \"Attachment Info\": \"[Insert comma-separated list of attachment filenames if any were included, e.g., 'photo_001.jpg, invoice.pdf'. Leave blank if no attachments]\",\n    \"Priority Level\": \"[Select ONE from: Urgent, Normal, Low based on the severity and time-sensitivity of the issue]\",\n    \"Status\": \"[Select ONE from: Open, In Progress, Resolved, Closed based on current state of the communication]\",\n    \"Response Sent\": \"In Progress\",\n    \"Assigned To\": \"[Insert the name of the person, team, or contractor responsible for handling this communication, e.g., 'Sato Kenji', 'Tokyo HVAC Solutions', 'Accounting Department']\",\n    \"Cost Amount\": [Insert the cost amount in EUR as a number without currency symbol if there are costs associated with this communication, e.g., 15000. Leave blank if no costs. Do not make this a string. leave as integer],\n    \"Notes\": \"[Insert internal notes, updates, or comments about how this communication was handled, current status, or any follow-up actions needed]\"\n  }\n]",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        },
+        {
+          "name": "base_id",
+          "description": "Airtable base ID (e.g., \"app123ABC\")",
+          "fill_type": "static",
+          "required": true,
+          "static_value": "appaJAfTi3RohG8AB"
+        },
+        {
+          "name": "table",
+          "description": "Table name or ID (e.g., \"Contacts\")",
+          "fill_type": "static",
+          "required": true,
+          "static_value": "tbl8DneFQUnFVURqo"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "fields",
+          "description": "-"
+        },
+        {
+          "name": "records",
+          "description": "-"
+        },
+        {
+          "name": "Issue Description",
+          "description": "-"
+        },
+        {
+          "name": "Communication Type",
+          "description": "-"
+        },
+        {
+          "name": "createdTime",
+          "description": "-"
+        },
+        {
+          "name": "Timestamp",
+          "description": "-"
+        },
+        {
+          "name": "Issue Category",
+          "description": "-"
+        },
+        {
+          "name": "Priority Level",
+          "description": "-"
+        },
+        {
+          "name": "id",
+          "description": "-"
+        },
+        {
+          "name": "Tenant ID",
+          "description": "-"
+        },
+        {
+          "name": "Channel",
+          "description": "-"
+        },
+        {
+          "name": "Subject",
+          "description": "-"
+        },
+        {
+          "name": "Status",
+          "description": "-"
+        },
+        {
+          "name": "Response Sent",
+          "description": "-"
+        },
+        {
+          "name": "Communication ID",
+          "description": "-"
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "id": "886beacb-fc50-4899-8fed-42aa6809b77b",
+      "objective": "Analyze incoming communication to identify tenant information, communication type, priority level, and extract structured data from unstructured text",
+      "is_entry": false,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": "GPTAction_Custom_CommunicationAnalysisTool_AQmI",
+      "tool_name": "Communication Analysis Tool",
+      "tool_description": "This tool analyzes incoming communications to extract structured data. It identifies tenant information, communication type, and priority level from unstructured text. The tool ensures that all relevant information is captured accurately. It maintains data integrity and provides clear and concise output. The tool is crucial for decision-making and further analysis in the agent graph.",
+      "inputs": [
+        {
+          "name": "initial_data",
+          "description": "All necessary fields for processing",
+          "fill_type": "ai_fill",
+          "required": true,
+          "static_value": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "communication_type",
+          "description": "Identified communication type"
+        },
+        {
+          "name": "priority_level",
+          "description": "Determined priority level"
+        },
+        {
+          "name": "tenant_info",
+          "description": "Extracted tenant information"
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "id": "73009ece-1706-420b-b148-e12c1d179e49",
+      "objective": "Entry Node",
+      "is_entry": true,
+      "is_exit": false,
+      "on_error": "STOP",
+      "tool": null,
+      "tool_name": null,
+      "tool_description": null,
+      "inputs": [],
+      "outputs": []
+    }
+  ],
+  "connections": [],
+  "integrations": {
+    "Gmail": {
+      "purpose": "Email operations",
+      "tools": [
+        "Send Email",
+        "Send Email"
+      ],
+      "functions": [
+        "GmailAction_SendEmail",
+        "GmailAction_SendEmail"
+      ]
+    },
+    "Airtable": {
+      "purpose": "Database storage and query",
+      "tools": [
+        "Retrieve Airtable Records",
+        "Create Airtable Records"
+      ],
+      "functions": [
+        "AirtableAction_GetRecords",
+        "AirtableAction_RecordCreate"
+      ]
+    }
+  },
+  "inputs": {
+    "body": "HTML or markdown content of the email",
+    "email_address": "Comma-separated recipient email addresses",
+    "subject": "Subject line of the email",
+    "tenant_profile": "A unified tenant profile or issue summary that aggregates all information related to a specific tenant or property unit.",
+    "communication_type": "Identified communication type",
+    "priority_level": "Determined priority level",
+    "tenant_info": "Extracted tenant information",
+    "records": "[\n  {\n    \"Communication ID\": \"[Generate unique identifier in format COM-XXX where XXX is a sequential number]\",\n    \"Tenant ID\": \"[Insert the Tenant ID from Tenant Master Information table that matches this communication's tenant]\",\n    \"Timestamp\": \"[Insert the date and time when the communication was received in ISO 8601 format: YYYY-MM-DDTHH:mm:ss]\",\n    \"Communication Type\": \"[Select ONE from: Maintenance Request, Inquiry, Complaint, Contract Renewal, Invoice, Bill, General]\",\n    \"Issue Category\": \"[Select ONE from: Plumbing, Electrical, HVAC, Appliance, Structural, Payment, Contract, Parking, Noise, Other]\",\n    \"Channel\": \"[Select ONE from: Email, Phone, Portal, In-person]\",\n    \"Subject\": \"[Insert the subject line or brief title of the communication]\",\n    \"Issue Description\": \"[Insert the full detailed description of the issue, request, or inquiry as provided by the tenant in their communication]\",\n    \"Attachment Info\": \"[Insert comma-separated list of attachment filenames if any were included, e.g., 'photo_001.jpg, invoice.pdf'. Leave blank if no attachments]\",\n    \"Priority Level\": \"[Select ONE from: Urgent, Normal, Low based on the severity and time-sensitivity of the issue]\",\n    \"Status\": \"[Select ONE from: Open, In Progress, Resolved, Closed based on current state of the communication]\",\n    \"Response Sent\": \"In Progress\",\n    \"Assigned To\": \"[Insert the name of the person, team, or contractor responsible for handling this communication, e.g., 'Sato Kenji', 'Tokyo HVAC Solutions', 'Accounting Department']\",\n    \"Cost Amount\": [Insert the cost amount in EUR as a number without currency symbol if there are costs associated with this communication, e.g., 15000. Leave blank if no costs. Do not make this a string. leave as integer],\n    \"Notes\": \"[Insert internal notes, updates, or comments about how this communication was handled, current status, or any follow-up actions needed]\"\n  }\n]",
+    "initial_data": "All necessary fields for processing"
+  },
+  "outputs": {
+    "message_id": "-",
+    "message": "-",
+    "email_address": "-",
+    "label_ids": "-",
+    "thread_id": "-",
+    "tenant_profile": "A unified tenant profile or issue summary that aggregates all information related to a specific tenant or property unit.",
+    "records": "-",
+    "id": "-",
+    "Last Contact Date": "-",
+    "Risk Level": "-",
+    "Tenant Since Duration": "-",
+    "Account Manager": "-",
+    "Preferred Language": "-",
+    "Payment Status": "-",
+    "Tenant Type": "-",
+    "Contact Phone": "-",
+    "Contact Email": "-",
+    "Lease End Date": "-",
+    "Lease Start Date": "-",
+    "Property Location": "-",
+    "Unit Number": "-",
+    "Tenant Name": "-",
+    "Tenant ID": "-",
+    "fields": "-",
+    "createdTime": "-",
+    "Issue Description": "-",
+    "Communication Type": "-",
+    "Timestamp": "-",
+    "Issue Category": "-",
+    "Priority Level": "-",
+    "Channel": "-",
+    "Subject": "-",
+    "Status": "-",
+    "Response Sent": "-",
+    "Communication ID": "-",
+    "communication_type": "Identified communication type",
+    "priority_level": "Determined priority level",
+    "tenant_info": "Extracted tenant information"
+  },
+  "tools": [
+    "Communication Analysis Tool",
+    "Create Airtable Records",
+    "Retrieve Airtable Records",
+    "Send Email",
+    "Tenant Profile Aggregator",
+    "Tenant Response Generator"
+  ]
+}
