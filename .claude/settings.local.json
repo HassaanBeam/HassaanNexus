@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(ls:*)",
+      "Bash(wc -l echo \"System skills \\(00-system/skills\\):\")",
+      "Bash(done)",
+      "Bash(gh auth:*)",
+      "Bash(git remote add:*)",
+      "Bash(__NEW_LINE__ echo \"\")"
     ]
   }
 }
