@@ -6,7 +6,7 @@ Handles OAuth 2.0 flow for ALL Google APIs (Gmail, Docs, Sheets, Calendar).
 Single authentication grants access to all Google services.
 
 Token stored in: 01-memory/integrations/google-token.json
-Credentials from: 00-system/google-credentials.json
+Credentials from: .env (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET) or google-credentials.json
 """
 
 import os
@@ -25,33 +25,38 @@ def find_nexus_root():
 
 NEXUS_ROOT = find_nexus_root()
 TOKEN_PATH = NEXUS_ROOT / "01-memory" / "integrations" / "google-token.json"
-CREDENTIALS_PATH = NEXUS_ROOT / "00-system" / "google-credentials.json"
+CREDENTIALS_PATH = NEXUS_ROOT / "google-credentials.json"
 
 def load_env():
-    """Load environment variables from .env file."""
+    """Load .env file into environment variables."""
     env_path = NEXUS_ROOT / ".env"
-    env_vars = {}
     if env_path.exists():
-        with open(env_path) as f:
+        with open(env_path, 'r') as f:
             for line in f:
                 line = line.strip()
                 if line and not line.startswith('#') and '=' in line:
-                    key, _, value = line.partition('=')
-                    env_vars[key.strip()] = value.strip()
-    return env_vars
+                    key, value = line.split('=', 1)
+                    os.environ.setdefault(key.strip(), value.strip())
 
-def get_credentials_from_env():
-    """Get Google OAuth credentials from .env file."""
-    env_vars = load_env()
-    client_id = env_vars.get('GOOGLE_CLIENT_ID') or os.getenv('GOOGLE_CLIENT_ID')
-    client_secret = env_vars.get('GOOGLE_CLIENT_SECRET') or os.getenv('GOOGLE_CLIENT_SECRET')
-    project_id = env_vars.get('GOOGLE_PROJECT_ID') or os.getenv('GOOGLE_PROJECT_ID')
+# Load .env on import
+load_env()
+
+def get_credentials_config():
+    """
+    Get Google OAuth credentials from .env or JSON file.
+    Priority: .env > google-credentials.json
+    Returns dict in the format expected by google-auth library.
+    """
+    client_id = os.environ.get('GOOGLE_CLIENT_ID')
+    client_secret = os.environ.get('GOOGLE_CLIENT_SECRET')
+    project_id = os.environ.get('GOOGLE_PROJECT_ID', 'nexus')
 
     if client_id and client_secret:
+        # Build credentials dict from .env
         return {
             "installed": {
                 "client_id": client_id,
-                "project_id": project_id or "nexus-integration",
+                "project_id": project_id,
                 "auth_uri": "https://accounts.google.com/o/oauth2/auth",
                 "token_uri": "https://oauth2.googleapis.com/token",
                 "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
@@ -59,7 +64,12 @@ def get_credentials_from_env():
                 "redirect_uris": ["http://localhost"]
             }
         }
-    return None
+    elif CREDENTIALS_PATH.exists():
+        # Fall back to JSON file
+        with open(CREDENTIALS_PATH, 'r') as f:
+            return json.load(f)
+    else:
+        return None
 
 # All scopes for all Google services
 SCOPES = {
@@ -81,6 +91,19 @@ SCOPES = {
     'calendar': [
         'https://www.googleapis.com/auth/calendar',
         'https://www.googleapis.com/auth/calendar.events'
+    ],
+    'drive': [
+        'https://www.googleapis.com/auth/drive',
+        'https://www.googleapis.com/auth/drive.file',
+        'https://www.googleapis.com/auth/drive.metadata.readonly'
+    ],
+    'tasks': [
+        'https://www.googleapis.com/auth/tasks',
+        'https://www.googleapis.com/auth/tasks.readonly'
+    ],
+    'slides': [
+        'https://www.googleapis.com/auth/presentations',
+        'https://www.googleapis.com/auth/drive.file'
     ]
 }
 
@@ -90,7 +113,9 @@ SERVICE_VERSIONS = {
     'docs': ('docs', 'v1'),
     'sheets': ('sheets', 'v4'),
     'calendar': ('calendar', 'v3'),
-    'drive': ('drive', 'v3')
+    'drive': ('drive', 'v3'),
+    'tasks': ('tasks', 'v1'),
+    'slides': ('slides', 'v1')
 }
 
 def get_all_scopes():
@@ -156,31 +181,18 @@ def get_credentials(scopes=None):
                 creds = None
 
         if not creds:
-            # Try to get credentials from .env first
-            env_creds = get_credentials_from_env()
-
-            if env_creds:
-                # Use credentials from .env
-                flow = InstalledAppFlow.from_client_config(env_creds, scopes)
-            elif CREDENTIALS_PATH.exists():
-                # Fall back to JSON file
-                flow = InstalledAppFlow.from_client_secrets_file(
-                    str(CREDENTIALS_PATH), scopes
-                )
-            else:
+            credentials_config = get_credentials_config()
+            if not credentials_config:
                 print("[ERROR] OAuth credentials not found")
-                print("\nTo set up Google authentication, add to your .env file:")
-                print("  GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com")
+                print("\nTo set up Google authentication, add to .env:")
+                print("  GOOGLE_CLIENT_ID=your-client-id")
                 print("  GOOGLE_CLIENT_SECRET=your-client-secret")
-                print("\nOr download OAuth credentials JSON from Google Cloud Console:")
-                print("1. Go to https://console.cloud.google.com/")
-                print("2. Create a project (or select existing)")
-                print("3. Enable APIs: Gmail, Docs, Sheets, Calendar")
-                print("4. Go to APIs & Services > Credentials")
-                print("5. Create OAuth 2.0 Client ID (Desktop app)")
-                print("6. Download JSON and save as:")
-                print(f"   {CREDENTIALS_PATH}")
+                print("  GOOGLE_PROJECT_ID=your-project-id")
+                print("\nOr save credentials JSON to:")
+                print(f"  {CREDENTIALS_PATH}")
                 return None
+
+            flow = InstalledAppFlow.from_client_config(credentials_config, scopes)
             creds = flow.run_local_server(port=0)
 
         # Save token
@@ -227,11 +239,17 @@ def get_service(service_name, version=None):
 def check_config(service=None, json_output=False):
     """Check authentication configuration status."""
     scopes = get_scopes_for_service(service)
+    credentials_config = get_credentials_config()
+    has_credentials = credentials_config is not None
+
+    # Check source of credentials
+    has_env_creds = bool(os.environ.get('GOOGLE_CLIENT_ID') and os.environ.get('GOOGLE_CLIENT_SECRET'))
+    credentials_source = ".env" if has_env_creds else ("JSON file" if CREDENTIALS_PATH.exists() else "none")
 
     status = {
         "service": service or "all",
-        "credentials_file": CREDENTIALS_PATH.exists(),
-        "credentials_path": str(CREDENTIALS_PATH),
+        "credentials_configured": has_credentials,
+        "credentials_source": credentials_source,
         "token_file": TOKEN_PATH.exists(),
         "token_path": str(TOKEN_PATH),
         "dependencies_installed": check_dependencies(),
@@ -239,17 +257,13 @@ def check_config(service=None, json_output=False):
         "scopes_requested": scopes
     }
 
-    # Check if credentials exist in .env
-    env_creds = get_credentials_from_env()
-    status["credentials_in_env"] = env_creds is not None
-
     if not status["dependencies_installed"]:
         status["error"] = "Missing dependencies"
         status["ai_action"] = "install_dependencies"
         status["fix"] = "pip install google-auth google-auth-oauthlib google-api-python-client"
         status["exit_code"] = 2
-    elif not status["credentials_file"] and not status["credentials_in_env"]:
-        status["error"] = f"OAuth credentials not found"
+    elif not has_credentials:
+        status["error"] = "OAuth credentials not found"
         status["ai_action"] = "need_credentials"
         status["fix"] = "Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to .env"
         status["exit_code"] = 2
@@ -284,8 +298,7 @@ def check_config(service=None, json_output=False):
         print("=" * 60)
         print(f"GOOGLE AUTHENTICATION CHECK ({service_name})")
         print("=" * 60)
-        print(f"Credentials: {'OK' if status['credentials_file'] else 'MISSING'}")
-        print(f"  Path: {CREDENTIALS_PATH}")
+        print(f"Credentials: {'OK' if has_credentials else 'MISSING'} (source: {credentials_source})")
         print(f"Token: {'OK' if status['token_file'] else 'MISSING'}")
         print(f"  Path: {TOKEN_PATH}")
         print(f"Dependencies: {'OK' if status['dependencies_installed'] else 'MISSING'}")
@@ -311,27 +324,22 @@ def login(service=None):
         print("  pip install google-auth google-auth-oauthlib google-api-python-client")
         sys.exit(2)
 
-    env_creds = get_credentials_from_env()
-    if not CREDENTIALS_PATH.exists() and not env_creds:
+    credentials_config = get_credentials_config()
+    if not credentials_config:
         print("[ERROR] OAuth credentials not found")
-        print("\nTo set up, add to your .env file:")
-        print("  GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com")
+        print("\nTo set up, add to .env:")
+        print("  GOOGLE_CLIENT_ID=your-client-id")
         print("  GOOGLE_CLIENT_SECRET=your-client-secret")
-        print("\nOr download OAuth credentials JSON from Google Cloud Console:")
-        print("1. Go to https://console.cloud.google.com/")
-        print("2. Create a project (or select existing)")
-        print("3. Enable APIs: Gmail API, Google Docs API, Google Sheets API, Google Calendar API")
-        print("4. Go to APIs & Services > Credentials")
-        print("5. Create OAuth 2.0 Client ID (Desktop app)")
-        print("6. Download JSON and save as:")
-        print(f"   {CREDENTIALS_PATH}")
+        print("  GOOGLE_PROJECT_ID=your-project-id")
+        print("\nOr download JSON from Google Cloud Console and save as:")
+        print(f"  {CREDENTIALS_PATH}")
         sys.exit(2)
 
     scopes = get_scopes_for_service(service)
 
     print("[INFO] Starting OAuth flow for Google services...")
     print("[INFO] A browser window will open for authentication.")
-    print("[INFO] You'll grant access to: Gmail, Docs, Sheets, Calendar")
+    print("[INFO] You'll grant access to: Gmail, Docs, Sheets, Calendar, Drive, Tasks, Slides")
     print()
 
     # Remove existing token to force new auth
@@ -348,6 +356,9 @@ def login(service=None):
         print("  - Google Docs")
         print("  - Google Sheets")
         print("  - Google Calendar")
+        print("  - Google Drive")
+        print("  - Google Tasks")
+        print("  - Google Slides")
     else:
         print("\nAuthentication failed")
         sys.exit(1)
@@ -425,7 +436,7 @@ Examples:
     parser.add_argument("--login", action="store_true", help="Initiate OAuth login")
     parser.add_argument("--logout", action="store_true", help="Remove stored token")
     parser.add_argument("--status", action="store_true", help="Show detailed status")
-    parser.add_argument("--service", choices=['gmail', 'docs', 'sheets', 'calendar', 'all'],
+    parser.add_argument("--service", choices=['gmail', 'docs', 'sheets', 'calendar', 'drive', 'tasks', 'slides', 'all'],
                        default='all', help="Specific service (default: all)")
     parser.add_argument("--json", action="store_true", help="Output as JSON (for --check)")
 

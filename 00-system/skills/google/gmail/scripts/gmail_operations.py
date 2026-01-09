@@ -573,6 +573,14 @@ def unstar_email(message_id: str):
 # =============================================================================
 
 def main():
+    # Fix Windows encoding for emoji output
+    if sys.platform == 'win32':
+        try:
+            sys.stdout.reconfigure(encoding='utf-8')
+            sys.stderr.reconfigure(encoding='utf-8')
+        except AttributeError:
+            pass
+
     parser = argparse.ArgumentParser(description="Gmail Operations")
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
 

@@ -4,8 +4,11 @@ Google Configuration Check
 
 Quick pre-flight check for Google integration.
 Returns structured output for AI consumption.
+
+Credentials from: .env (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET) or google-credentials.json
 """
 
+import os
 import sys
 import json
 import argparse
@@ -21,7 +24,31 @@ def find_nexus_root():
 
 NEXUS_ROOT = find_nexus_root()
 TOKEN_PATH = NEXUS_ROOT / "01-memory" / "integrations" / "google-token.json"
-CREDENTIALS_PATH = NEXUS_ROOT / "00-system" / "google-credentials.json"
+CREDENTIALS_PATH = NEXUS_ROOT / "google-credentials.json"
+
+def load_env():
+    """Load .env file into environment variables."""
+    env_path = NEXUS_ROOT / ".env"
+    if env_path.exists():
+        with open(env_path, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    key, value = line.split('=', 1)
+                    os.environ.setdefault(key.strip(), value.strip())
+
+# Load .env on import
+load_env()
+
+def has_credentials():
+    """Check if credentials are available from .env or JSON file."""
+    # Check .env first
+    if os.environ.get('GOOGLE_CLIENT_ID') and os.environ.get('GOOGLE_CLIENT_SECRET'):
+        return True, ".env"
+    # Fall back to JSON file
+    if CREDENTIALS_PATH.exists():
+        return True, "JSON file"
+    return False, "none"
 
 def check_dependencies():
     """Check if required packages are installed."""
@@ -37,7 +64,7 @@ def check_dependencies():
 def check_config(json_output=False):
     """Check Google configuration status."""
     deps_ok = check_dependencies()
-    creds_ok = CREDENTIALS_PATH.exists()
+    creds_ok, creds_source = has_credentials()
     token_ok = TOKEN_PATH.exists()
 
     # Determine status and action
@@ -51,12 +78,12 @@ def check_config(json_output=False):
         status = "not_configured"
         ai_action = "need_credentials"
         message = "OAuth credentials not found"
-        fix = "Download credentials from Google Cloud Console"
+        fix = "Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to .env"
         exit_code = 2
     elif not token_ok:
         status = "partial"
         ai_action = "need_login"
-        message = "Credentials found, but not authenticated"
+        message = f"Credentials found ({creds_source}), but not authenticated"
         fix = "python 00-system/skills/google/google-master/scripts/google_auth.py --login"
         exit_code = 1
     else:
@@ -110,11 +137,11 @@ def check_config(json_output=False):
         "message": message,
         "checks": {
             "dependencies": deps_ok,
-            "credentials_file": creds_ok,
+            "credentials_configured": creds_ok,
+            "credentials_source": creds_source,
             "token_file": token_ok
         },
         "paths": {
-            "credentials": str(CREDENTIALS_PATH),
             "token": str(TOKEN_PATH)
         }
     }
@@ -127,7 +154,7 @@ def check_config(json_output=False):
     else:
         if exit_code == 0:
             print("ALL CHECKS PASSED")
-            print("Ready to use Google services (Gmail, Docs, Sheets, Calendar)")
+            print(f"Ready to use Google services (credentials from {creds_source})")
         else:
             print(f"STATUS: {status.upper()}")
             print(f"Issue: {message}")

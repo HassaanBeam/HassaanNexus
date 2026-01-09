@@ -147,6 +147,11 @@ First-time setup: [../google-master/references/setup-guide.md](../google-master/
 
 **Quick start:**
 1. `pip install google-auth google-auth-oauthlib google-api-python-client`
-2. Create OAuth credentials in Google Cloud Console (enable Gmail API)
-3. Save as `00-system/google-credentials.json`
+2. Create OAuth credentials in Google Cloud Console (enable Gmail API, choose "Desktop app")
+3. Add to `.env` file at Nexus root:
+   ```
+   GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+   GOOGLE_CLIENT_SECRET=your-client-secret
+   GOOGLE_PROJECT_ID=your-project-id
+   ```
 4. Run `python3 00-system/skills/google/google-master/scripts/google_auth.py --login`

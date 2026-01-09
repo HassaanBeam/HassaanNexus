@@ -1,6 +1,6 @@
 # Google Integration Setup Guide
 
-Complete setup instructions for Google services (Gmail, Docs, Sheets, Calendar).
+Complete setup instructions for Google services (Gmail, Docs, Sheets, Calendar, Drive, Tasks, Slides).
 
 ---
 
@@ -40,6 +40,8 @@ In Google Cloud Console:
    - **Google Sheets API**
    - **Google Calendar API**
    - **Google Drive API**
+   - **Google Tasks API**
+   - **Google Slides API**
 
 Click **Enable** for each one.
 
@@ -65,9 +67,14 @@ Click **Enable** for each one.
    https://www.googleapis.com/auth/gmail.labels
    https://www.googleapis.com/auth/documents
    https://www.googleapis.com/auth/drive
+   https://www.googleapis.com/auth/drive.file
+   https://www.googleapis.com/auth/drive.metadata.readonly
    https://www.googleapis.com/auth/spreadsheets
    https://www.googleapis.com/auth/calendar
    https://www.googleapis.com/auth/calendar.events
+   https://www.googleapis.com/auth/tasks
+   https://www.googleapis.com/auth/tasks.readonly
+   https://www.googleapis.com/auth/presentations
    ```
 8. Click **Save and Continue**
 9. On **Test users** page, click **Add Users**
@@ -83,15 +90,26 @@ Click **Enable** for each one.
 3. Application type: **Desktop app**
 4. Name: "Nexus Desktop"
 5. Click **Create**
-6. Click **Download JSON**
-7. Save the file as:
-   ```
-   00-system/google-credentials.json
-   ```
+6. Copy the **Client ID** and **Client Secret**
 
 ---
 
-## Step 6: Authenticate
+## Step 6: Add Credentials to .env
+
+Add these lines to your `.env` file (at Nexus root):
+
+```
+# Google Integration
+GOOGLE_CLIENT_ID=your-client-id-here.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-client-secret-here
+GOOGLE_PROJECT_ID=your-project-id
+```
+
+Replace with your actual values from Step 5.
+
+---
+
+## Step 7: Authenticate
 
 Run the authentication script:
 
@@ -107,7 +125,7 @@ This will:
 
 ---
 
-## Step 7: Verify Setup
+## Step 8: Verify Setup
 
 ```bash
 python 00-system/skills/google/google-master/scripts/check_google_config.py
@@ -116,7 +134,7 @@ python 00-system/skills/google/google-master/scripts/check_google_config.py
 Should output:
 ```
 ALL CHECKS PASSED
-Ready to use Google services (Gmail, Docs, Sheets, Calendar)
+Ready to use Google services (credentials from .env)
 ```
 
 ---
@@ -143,7 +161,6 @@ You're not listed as a test user:
 The credentials were created for a different app type:
 1. Delete the existing OAuth client
 2. Create new credentials as "Desktop app"
-3. Download the new JSON
 
 ### Token keeps expiring
 
@@ -162,11 +179,11 @@ pip install google-auth google-auth-oauthlib google-api-python-client
 
 ## Security Notes
 
-### Credentials File
+### Credentials in .env
 
-The `google-credentials.json` file contains your OAuth client ID and secret. This identifies your app, not your personal data.
+The `.env` file contains your OAuth client ID and secret. This identifies your app, not your personal data.
 
-- **Safe to include** in version control if the repo is private
+- **Already in `.gitignore`** - will not be committed
 - **Do NOT share** publicly (attackers could impersonate your app)
 
 ### Token File
@@ -195,10 +212,12 @@ python google_auth.py --logout
 
 | File | Path | Purpose |
 |------|------|---------|
-| OAuth credentials | `00-system/google-credentials.json` | App identity (client ID/secret) |
+| OAuth credentials | `.env` (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET) | App identity |
 | Access token | `01-memory/integrations/google-token.json` | Your authenticated session |
+
+Both files are in `.gitignore` and will not be committed.
 
 ---
 
-**Version**: 1.0
-**Updated**: 2025-12-17
+**Version**: 1.1
+**Updated**: 2025-12-18

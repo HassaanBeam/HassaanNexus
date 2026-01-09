@@ -27,7 +27,7 @@ Provides shared resources to eliminate duplication across:
 
 **Result:**
 - Single OAuth flow for all Google services
-- One credentials file (`google-credentials.json`)
+- One credentials source (`.env` file with GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_PROJECT_ID)
 - One unified token with all scopes
 - Consistent error handling across skills
 
@@ -86,7 +86,7 @@ python check_google_config.py [--json]
 - Creating Google Cloud project
 - Enabling APIs (Gmail, Docs, Sheets, Calendar)
 - Creating OAuth 2.0 credentials
-- Downloading credentials JSON
+- Adding credentials to `.env` file
 - First-time authentication flow
 
 **[error-handling.md](references/error-handling.md)** - Troubleshooting
@@ -123,7 +123,7 @@ The unified token requests all scopes on first login:
 
 | File | Location | Purpose |
 |------|----------|---------|
-| OAuth credentials | `00-system/google-credentials.json` | Client ID/secret from Google Cloud |
+| OAuth credentials | `.env` (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_PROJECT_ID) | App identity from Google Cloud |
 | Access token | `01-memory/integrations/google-token.json` | User's authenticated token |
 
 ---
@@ -175,8 +175,13 @@ python 00-system/skills/google/google-master/scripts/check_google_config.py --js
 
 If credentials missing:
 1. Direct user to: https://console.cloud.google.com/
-2. Guide through: APIs & Services > Credentials > Create OAuth Client ID
-3. Help download JSON and save to `00-system/google-credentials.json`
+2. Guide through: APIs & Services > Credentials > Create OAuth Client ID (Desktop app)
+3. Copy Client ID and Client Secret, add to `.env`:
+   ```
+   GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+   GOOGLE_CLIENT_SECRET=your-client-secret
+   GOOGLE_PROJECT_ID=your-project-id
+   ```
 4. Run `--login` to authenticate
 
 ---

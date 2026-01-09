@@ -70,6 +70,7 @@ desktop.ini
 **/google-token.json
 **/slack-token.json
 **/*-token.json
+google-credentials.json
 
 # User-specific memory (optional - uncomment if you want to keep private)
 # 01-memory/session-reports/

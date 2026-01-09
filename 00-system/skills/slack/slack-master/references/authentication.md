@@ -22,7 +22,7 @@ This integration uses **User OAuth 2.0** to authenticate individual users:
 **Used by this integration.**
 
 ```
-xoxp-XXXXXXXXXXXX-XXXXXXXXXXXX-XXXXXXXXXXXX-XXXXXXXXXXXXXXXX
+xoxp-XXXXXXXXXX-XXXXXXXXXX-XXXXXXXXXX-XXXXXXXXXXXX
 ```
 
 **Characteristics**:
@@ -36,7 +36,7 @@ xoxp-XXXXXXXXXXXX-XXXXXXXXXXXX-XXXXXXXXXXXX-XXXXXXXXXXXXXXXX
 **Not used by this integration.**
 
 ```
-xoxb-XXXXXXXXXXXX-XXXXXXXXXXXX-XXXXXXXXXXXX
+xoxb-XXXXXXXXXX-XXXXXXXXXX-XXXXXXXXXXXX
 ```
 
 **Characteristics**:
@@ -103,7 +103,7 @@ Response contains user token in `authed_user`:
   "authed_user": {
     "id": "U1234567",
     "scope": "channels:read,chat:write",
-    "access_token": "xoxp-YOUR-TOKEN-HERE",
+    "access_token": "xoxp-1234567890-...",
     "token_type": "user"
   },
   "team": {
@@ -246,7 +246,7 @@ team:read
 Store token in project's `.env`:
 
 ```bash
-SLACK_USER_TOKEN=xoxp-YOUR-TOKEN-HERE
+SLACK_USER_TOKEN=xoxp-1234567890-...
 ```
 
 ### Security Considerations
